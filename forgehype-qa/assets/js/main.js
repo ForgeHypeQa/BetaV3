@@ -250,24 +250,9 @@
   if ('ResizeObserver' in window) { let roT = null; new ResizeObserver(() => { clearTimeout(roT); roT = setTimeout(measureTheme, 120); }).observe(document.body); }
   measureTheme();
 
-  /* ================= 5. PROBLEM GRID GLOW ================= */
+  /* ================= 5. PROBLEM GRID ================= */
   const tiles = $$('#pgrid .tile');
-  let gi = 0, gridVis = false, gridHover = false, glowTimer = null;
-  function glowStep() {
-    if (RM.matches || !gridVis || gridHover || document.hidden) return;
-    const t = tiles[gi];
-    t.classList.add('warm');
-    setTimeout(() => { if (t.classList.contains('warm')) t.classList.add('lit'); }, 400);
-    setTimeout(() => t.classList.remove('warm', 'lit'), 1400);
-    gi = (gi + 1) % tiles.length;
-  }
   if (tiles.length) {
-    const grid = $('#pgrid');
-    new IntersectionObserver(([e]) => { gridVis = e.isIntersecting; if (gridVis && !glowTimer) { glowStep(); glowTimer = setInterval(glowStep, 1400); } else if (!gridVis && glowTimer) { clearInterval(glowTimer); glowTimer = null; } }, { threshold: 0.3 }).observe(grid);
-    grid.addEventListener('pointerenter', () => { gridHover = true; });
-    grid.addEventListener('pointerleave', () => { gridHover = false; });
-    grid.addEventListener('focusin', () => { gridHover = true; });
-    grid.addEventListener('focusout', () => { gridHover = false; });
     // the fix cards are sticky, so an anchor jump lands on the stuck position; scroll to the card's natural spot instead
     tiles.forEach(t => t.addEventListener('click', e => {
       const card = $(t.getAttribute('href')); if (!card) return;
@@ -472,31 +457,30 @@
   /* ================= 12. STORIES CAROUSEL ================= */
   const car = $('#carousel'), carTrack = $('#carTrack');
   if (car && carTrack && !RM.matches) {
-    const items = $$('li', carTrack);
+    const items = $$('li', carTrack), n = items.length;
     items.forEach(li => { const c = li.cloneNode(true); c.setAttribute('aria-hidden', 'true'); carTrack.appendChild(c); });
-    let W = 0, x = 0, raf = null, last = 0, hover = false, pressed = false, tapPaused = false, resumeAt = 0, vis = false;
-    let sx = 0, sy = 0, lx = 0, moved = 0, dragging = false, nudge = 0, step = 0, measured = false;
-    const SPEED = 26; // px per second, moving left to right
-    const measure = () => { const first = carTrack.children[0], clone = carTrack.children[items.length]; W = clone.offsetLeft - first.offsetLeft; step = items[1].offsetLeft - items[0].offsetLeft; if (!measured && W) { measured = true; x = -W; } };
-    const frame = now => {
-      const dt = Math.min(64, now - (last || now)); last = now;
-      const auto = vis && !hover && !pressed && !tapPaused && now > resumeAt && !document.hidden;
-      if (auto) x += SPEED * dt / 1000;
-      if (nudge) { const d = nudge * 0.12; x += d; nudge -= d; if (Math.abs(nudge) < 0.5) { x += nudge; nudge = 0; } }
-      if (W) { if (x > 0) x -= W; if (x < -W) x += W; }
-      carTrack.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,0)';
-      raf = vis ? requestAnimationFrame(frame) : null;
-    };
-    const start = () => { if (raf === null) { last = 0; raf = requestAnimationFrame(frame); } };
-    new IntersectionObserver(([e]) => { vis = e.isIntersecting; if (vis) { measure(); start(); } }, { threshold: 0 }).observe(car);
-    addEventListener('resize', measure);
+    let idx = 0, step = 0, x = 0, timer = 0, hover = false, pressed = false, tapPaused = false, vis = false;
+    let sx = 0, sy = 0, lx = 0, moved = 0, dragging = false;
+    const measure = () => { step = items[1].offsetLeft - items[0].offsetLeft; };
+    const setX = (v, ease) => { x = v; carTrack.classList.toggle('ease', ease); carTrack.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,0)'; };
+    const goTo = (i, ease = true) => { idx = i; setX(-idx * step, ease); };
+    // the clones let the last card slide into the first without a jump: once the eased move lands on a clone, reset silently
+    carTrack.addEventListener('transitionend', e => {
+      if (e.target !== carTrack || e.propertyName !== 'transform') return;
+      if (idx >= n) goTo(idx - n, false);
+    });
+    const next = () => goTo(idx + 1);
+    const prev = () => { if (idx <= 0) { goTo(n, false); void carTrack.offsetWidth; } goTo(idx - 1); };
+    const arm = () => { clearInterval(timer); timer = setInterval(() => { if (vis && !hover && !pressed && !tapPaused && !document.hidden) next(); }, 3000); };
+    new IntersectionObserver(([e]) => { vis = e.isIntersecting; if (vis) measure(); }, { threshold: 0 }).observe(car);
+    addEventListener('resize', () => { measure(); goTo(idx, false); });
     $$('img', carTrack).forEach(i => i.addEventListener('load', measure, { once: true }));
-    measure(); setTimeout(measure, 600);
+    measure(); setTimeout(measure, 600); arm();
     car.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hover = true; });
     car.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') hover = false; });
     car.addEventListener('pointerdown', e => {
       if (e.button !== 0) return;
-      pressed = true; dragging = false; moved = 0; sx = lx = e.clientX; sy = e.clientY; nudge = 0;
+      pressed = true; dragging = false; moved = 0; sx = lx = e.clientX; sy = e.clientY;
       car.setPointerCapture(e.pointerId);
     });
     car.addEventListener('pointermove', e => {
@@ -504,21 +488,23 @@
       const dx = e.clientX - lx; lx = e.clientX;
       moved = Math.max(moved, Math.abs(e.clientX - sx));
       if (!dragging && Math.abs(e.clientX - sx) > 6 && Math.abs(e.clientX - sx) > Math.abs(e.clientY - sy)) dragging = true;
-      if (dragging) { x += dx; car.classList.add('dragging'); }
+      if (dragging) { setX(x + dx, false); car.classList.add('dragging'); }
     });
     const release = e => {
       if (!pressed) return; pressed = false; car.classList.remove('dragging');
-      if (dragging) resumeAt = performance.now() + 2000;
-      else if (e.pointerType !== 'mouse' && moved < 6) tapPaused = !tapPaused;
+      if (dragging) {
+        const d = e.clientX - sx;
+        if (d < -step * 0.18) next(); else if (d > step * 0.18) prev(); else goTo(idx);
+        arm();
+      } else if (e.pointerType !== 'mouse' && moved < 6) { tapPaused = !tapPaused; car.classList.toggle('paused', tapPaused); }
       dragging = false;
     };
     car.addEventListener('pointerup', release);
     car.addEventListener('pointercancel', release);
     car.addEventListener('click', e => { if (moved > 6) e.preventDefault(); });
-    const go = dir => { nudge += dir * step; resumeAt = performance.now() + 2000; start(); };
-    $('#carPrev').addEventListener('click', () => go(1));
-    $('#carNext').addEventListener('click', () => go(-1));
-    car.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') { e.preventDefault(); go(1); } if (e.key === 'ArrowRight') { e.preventDefault(); go(-1); } if (e.key === ' ') { e.preventDefault(); tapPaused = !tapPaused; } });
+    $('#carPrev').addEventListener('click', () => { prev(); arm(); });
+    $('#carNext').addEventListener('click', () => { next(); arm(); });
+    car.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); arm(); } if (e.key === 'ArrowRight') { e.preventDefault(); next(); arm(); } if (e.key === ' ') { e.preventDefault(); tapPaused = !tapPaused; car.classList.toggle('paused', tapPaused); } });
     car.addEventListener('focusin', () => { hover = true; });
     car.addEventListener('focusout', () => { hover = false; });
   }
@@ -526,17 +512,14 @@
   /* ================= 13. WHY ROTATOR ================= */
   const cmp = $('#cmp');
   if (cmp && !RM.matches) {
-    const pairs = $$('.pair', cmp), count = $('#cmpCount'), dashes = $$('#cmpDashes i');
+    const pairs = $$('.pair', cmp);
     let ci = 0, timer = null, paused = false, hover = false, vis = false, outT = null;
-    const pad = n => String(n).padStart(2, '0');
     const show = n => {
       const old = ci; ci = (n + pairs.length) % pairs.length;
       if (old === ci) return;
       pairs[old].classList.remove('is-on'); pairs[old].classList.add('is-out');
       clearTimeout(outT); outT = setTimeout(() => pairs[old].classList.remove('is-out'), 700);
       pairs[ci].classList.add('is-on');
-      count.textContent = pad(ci + 1) + ' / ' + pad(pairs.length);
-      dashes.forEach((d, i) => d.classList.toggle('on', i === ci));
     };
     const arm = () => { clearInterval(timer); timer = setInterval(() => { if (vis && !paused && !hover && !document.hidden) show(ci + 1); }, 3000); };
     new IntersectionObserver(([e]) => { vis = e.isIntersecting; }, { threshold: 0.2 }).observe(cmp);
@@ -546,13 +529,10 @@
     let sx = 0, sy = 0, swiped = false;
     cmp.addEventListener('pointerdown', e => { sx = e.clientX; sy = e.clientY; swiped = false; });
     cmp.addEventListener('pointerup', e => {
-      if (e.target.closest('button')) return;
       const dx = e.clientX - sx, dy = e.clientY - sy;
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { swiped = true; show(dx < 0 ? ci + 1 : ci - 1); arm(); }
       else if (Math.abs(dx) < 8 && Math.abs(dy) < 8) { paused = !paused; cmp.classList.toggle('paused', paused); }
     });
-    $('#cmpPrev').addEventListener('click', () => { show(ci - 1); arm(); });
-    $('#cmpNext').addEventListener('click', () => { show(ci + 1); arm(); });
     cmp.addEventListener('keydown', e => {
       if (e.key === 'ArrowLeft') { e.preventDefault(); show(ci - 1); arm(); }
       if (e.key === 'ArrowRight') { e.preventDefault(); show(ci + 1); arm(); }
@@ -641,12 +621,10 @@
     if (phoneStage) phoneStage.classList.add('in');
     if (orbit && !forged) completeForge();
     if (cycleTimer) { clearInterval(cycleTimer); cycleTimer = null; }
-    if (glowTimer) { clearInterval(glowTimer); glowTimer = null; }
-    tiles.forEach(t => t.classList.remove('warm', 'lit'));
     stackCards.forEach(c => { c._p = 0; c.style.setProperty('--p', '0'); });
     if (statement) statement.style.setProperty('--p', '1');
     if (qatarMedia) qatarMedia.style.setProperty('--p', '1');
-    if (carTrack) carTrack.style.transform = '';
+    if (carTrack) { carTrack.style.transform = ''; carTrack.classList.remove('ease'); }
     if (embers) embers.stop();
     measureTheme();
   }
