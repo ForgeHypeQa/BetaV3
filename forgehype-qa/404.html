@@ -23,7 +23,8 @@ a{display:inline-flex;align-items:center;padding:.95rem 1.5rem;border-radius:999
 <main>
 <h1>Lost in <span>the haze.</span></h1>
 <p>That page is not here. The site is, and so are we.</p>
-<a href="/">Back to ForgeHype</a>
+<a href="/" id="home">Back to ForgeHype</a>
+<script>var p=location.pathname.split("/")[1];if(p==="forgehype.qa")document.getElementById("home").href="/forgehype.qa/";</script>
 </main>
 </body>
 </html>
