@@ -2,7 +2,7 @@
    1 hero scrub   2 nav + menu   3 reveals + living elements   4 theme mixer (dark ↔ light by scroll)
    5 problem grid glow   6 the stack   7 service image cycling   8 about (words, marquee, clock)
    9 qatar video   10 phone stage   11 hold to forge   12 stories carousel   13 why rotator
-   14 form → WhatsApp   15 embers   16 reduced motion, live in both directions */
+   14 form → Web3Forms + WhatsApp   15 embers   16 reduced motion, live in both directions */
 (() => {
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
@@ -542,7 +542,7 @@
     cmp.addEventListener('focusout', () => { hover = false; });
   }
 
-  /* ================= 14. FORM → WHATSAPP ================= */
+  /* ================= 14. FORM → WEB3FORMS + WHATSAPP ================= */
   const form = $('#bookForm');
   $$('[data-interest]').forEach(a => a.addEventListener('click', () => {
     const want = a.dataset.interest;
@@ -574,6 +574,19 @@
         d.get('message') ? 'Notes: ' + d.get('message') : null].filter(Boolean);
       const text = lines.join('\n');
       $('#mailFallback').href = 'mailto:info@forgehype.qa?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(text);
+      // Web3Forms emails the lead once the hidden access_key is filled in; the WhatsApp hand-off below runs either way.
+      const key = String(d.get('access_key') || '').trim();
+      if (key && !d.get('botcheck')) {
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST', keepalive: true,
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: key, subject: 'Free consultation request: ' + d.get('type'), from_name: 'ForgeHype website',
+            replyto: d.get('email') || undefined, business_type: d.get('type'), interests: interests.join(', ') || '-',
+            whatsapp: wa, email: d.get('email') || '-', message: d.get('message') || '-', summary: text
+          })
+        }).catch(() => {});
+      }
       const win = window.open('https://wa.me/97455879325?text=' + encodeURIComponent(text), '_blank', 'noopener');
       form.classList.add('sent');
       if (!win) $('#mailFallback').focus();
