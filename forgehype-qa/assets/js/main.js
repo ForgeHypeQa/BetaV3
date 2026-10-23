@@ -1,7 +1,7 @@
 /* ForgeHype · main.js
    1 hero scrub   2 nav + menu   3 reveals + living elements   4 theme mixer (dark ↔ light by scroll)
    5 problem grid glow   6 the stack   7 service image cycling   8 about (words, marquee, clock)
-   9 qatar video   10 phone pills   11 hold to forge   12 stories carousel   13 why rotator
+   9 qatar video   10 phone stage   11 hold to forge   12 stories carousel   13 why rotator
    14 form → WhatsApp   15 embers   16 reduced motion, live in both directions */
 (() => {
   'use strict';
@@ -213,7 +213,14 @@
   }
   function mixAt(y) {
     const vh = innerHeight; let m = 0;
-    for (const b of bounds) { const t = smoothstep(clamp((y + vh - b.y) / vh, 0, 1), 0.08, 0.92); m = lerp(m, b.to, t); }
+    for (const b of bounds) {
+      // rel: 0 = the boundary sits at the viewport bottom, 1 = at the top.
+      // light sections keep their own dark text, so the canvas must be light whenever their content shows:
+      // fade to light early (before the boundary scrolls in), fade back to dark late (once it nears the top)
+      const rel = (y + vh - b.y) / vh;
+      const t = b.to === 1 ? smoothstep(rel, -0.25, 0.08) : smoothstep(rel, 0.68, 0.98);
+      m = lerp(m, b.to, t);
+    }
     return m;
   }
   function applyTheme() {
@@ -396,7 +403,7 @@
     }, { rootMargin: '200px 0px' }).observe(v);
   });
 
-  /* ================= 10. PHONE PILLS ================= */
+  /* ================= 10. PHONE STAGE (reveal) ================= */
   const phoneStage = $('#phoneStage');
   if (phoneStage) new IntersectionObserver(([e]) => { if (e.isIntersecting) phoneStage.classList.add('in'); }, { threshold: 0.35 }).observe(phoneStage);
 
