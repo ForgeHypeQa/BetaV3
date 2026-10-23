@@ -188,7 +188,7 @@
   $$('[data-live]').forEach(el => liveIO.observe(el));
   document.addEventListener('visibilitychange', () => document.body.classList.toggle('paused', document.hidden));
   // marquees: tap toggles pause (hover and focus pause in CSS)
-  $$('.marquee, .tmarquee').forEach(m => {
+  $$('.marquee, .flipline').forEach(m => {
     m.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') m.classList.toggle('paused'); });
     m.addEventListener('keydown', e => { if (e.key === ' ') { e.preventDefault(); m.classList.toggle('paused'); } });
   });
@@ -346,6 +346,37 @@
     const tickClock = () => { if (!document.hidden) clock.textContent = 'DOH ' + fmt.format(new Date()); };
     tickClock(); setInterval(tickClock, 1000);
   }
+  // one line, flipping through everything we do
+  const flipline = $('#flipline'), flipWord = $('#flipWord');
+  if (flipline && flipWord) {
+    const items = (flipline.dataset.items || '').split('|').map(t => t.replace(/&amp;/g, '&'));
+    let fi = 0;
+    flipWord.addEventListener('animationiteration', () => { fi = (fi + 1) % items.length; flipWord.textContent = items[fi]; });
+    new IntersectionObserver(([e]) => flipline.classList.toggle('in', e.isIntersecting), { threshold: 0 }).observe(flipline);
+  }
+
+  /* ================= 8b. THE REEL IN THE PHONE ================= */
+  const reel = $('#reel'), reelToggle = $('#reelToggle'), reelStage = $('#reelStage');
+  if (reel) {
+    const slides = $$('.reel-slide', reel), bars = $$('.reel-bars span', reel), cap = $('#reelCaption');
+    let ri = 0, rTimer = 0, playing = !RM.matches, rVisible = false, hover = false;
+    const paint = () => {
+      slides.forEach((sl, j) => sl.classList.toggle('is-active', j === ri));
+      bars.forEach((b, j) => { b.classList.toggle('is-done', j < ri); b.classList.toggle('is-active', j === ri && playing && !hover); });
+      if (cap) cap.innerHTML = slides[ri].getAttribute('data-caption');
+      reelStage.classList.toggle('reel-paused', !playing || hover);
+    };
+    const tick = () => { clearTimeout(rTimer); if (playing && rVisible && !hover && !document.hidden) rTimer = setTimeout(() => { ri = (ri + 1) % slides.length; paint(); tick(); }, 4200); };
+    const setPlaying = v => { playing = v; reelToggle.textContent = playing ? 'Pause reel' : 'Play reel'; reelToggle.setAttribute('aria-pressed', String(!playing)); paint(); tick(); };
+    reelToggle.addEventListener('click', () => setPlaying(!playing));
+    reel.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { hover = true; paint(); tick(); } });
+    reel.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') { hover = false; paint(); tick(); } });
+    reel.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') setPlaying(!playing); });
+    new IntersectionObserver(([e]) => { rVisible = e.isIntersecting; tick(); }, { threshold: 0.2 }).observe(reel);
+    document.addEventListener('visibilitychange', tick);
+    if (RM.matches) reelToggle.textContent = 'Play reel';
+    paint(); tick();
+  }
 
   /* ================= 9. QATAR VIDEO: scroll scale + lazy play ================= */
   const qatarMedia = $('#qatarMedia');
@@ -418,23 +449,17 @@
     orbitCore.setAttribute('aria-label', 'Forged. Crafted to last. Seen to shine.');
     if (navigator.vibrate && holding) { try { navigator.vibrate([20, 40, 60]); } catch (e) {} }
   }
-  function holdStart(e) { if (forged) return; if (e.type === 'pointerdown' && e.button !== 0) return; if (e.type === 'pointerdown') e.preventDefault(); holding = true; orbit.classList.add('holding'); if (fRaf === null) fRaf = requestAnimationFrame(forgeTick); }
+  function holdStart(e) { if (forged) return; if (e.type === 'pointerdown' && e.button !== 0) return; if (e.type === 'pointerdown') { e.preventDefault(); try { orbitCore.setPointerCapture(e.pointerId); } catch (x) {} } holding = true; orbit.classList.add('holding'); if (fRaf === null) fRaf = requestAnimationFrame(forgeTick); }
   function holdEnd() { if (!holding) return; holding = false; orbit.classList.remove('holding'); if (fRaf === null && heat > 0) fRaf = requestAnimationFrame(forgeTick); }
   if (orbit && orbitCore) {
     setHint(); COARSE.addEventListener('change', setHint);
     if (RM.matches) completeForge();
     orbitCore.addEventListener('pointerdown', holdStart);
     orbitCore.addEventListener('pointerup', holdEnd);
-    orbitCore.addEventListener('pointerleave', holdEnd);
     orbitCore.addEventListener('pointercancel', holdEnd);
     orbitCore.addEventListener('contextmenu', e => e.preventDefault());
     orbitCore.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); holdStart(e); } });
     orbitCore.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') holdEnd(); });
-    // scrolled past without holding: finish the fill on its own
-    new IntersectionObserver(([e]) => {
-      if (forged || e.isIntersecting) return;
-      if (e.boundingClientRect.bottom < 0) { autoFill = true; orbit.classList.add('quiet'); if (fRaf === null) fRaf = requestAnimationFrame(forgeTick); }
-    }, { threshold: 0 }).observe(orbitSection);
   }
 
   /* ================= 12. STORIES CAROUSEL ================= */
