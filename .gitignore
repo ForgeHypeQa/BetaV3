@@ -13,3 +13,6 @@ __pycache__/
 
 # Personal Claude Code settings (launch.json is shared and kept)
 .claude/settings.local.json
+
+# Raw generations and review copies (never shipped)
+review/
