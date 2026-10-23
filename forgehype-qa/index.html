@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ForgeHype | Websites, media production and AI agents for brands in Qatar</title>
-<meta name="description" content="Seen. Remembered. ForgeHype is a Doha digital agency for websites, e-commerce, media production, search and AI visibility, AI agents and monthly support. Book a free audit.">
+<title>ForgeHype | Digital branding agency in Qatar</title>
+<meta name="description" content="Seen. Remembered. ForgeHype is a Qatar-based digital branding agency shaping how global brands are seen, trusted and remembered. Websites, content, search, brand, automation and growth. Book a free consultation.">
 <meta name="theme-color" content="#0b0908">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="dark light">
 <!-- DEPLOY STEP: replace og:url and og:image with the live absolute URLs -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ForgeHype">
 <meta property="og:title" content="ForgeHype | Seen. Remembered.">
-<meta property="og:description" content="Websites, e-commerce, media production and AI agents for brands in Qatar and the GCC. Digital presence, forged with intent.">
+<meta property="og:description" content="Qatar-based digital branding agency shaping how global brands are seen, trusted and remembered. Content that earns the pause. Digital presence, forged with intent.">
 <meta property="og:url" content="https://forgehypeqa.github.io/forgehype.qa/">
 <meta property="og:image" content="https://forgehypeqa.github.io/forgehype.qa/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -19,11 +19,11 @@
 <link rel="apple-touch-icon" href="assets/img/brand/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=20261023d">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css?v=20261023e">
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"ForgeHype","url":"https://forgehype.qa/","telephone":"+97455879325","email":"info@forgehype.qa","address":{"@type":"PostalAddress","addressLocality":"Doha","addressCountry":"QA"},"areaServed":[{"@type":"Country","name":"Qatar"},{"@type":"Country","name":"United Arab Emirates"}],"description":"Websites, e-commerce, media production, search and AI visibility, AI agents and monthly support for brands in Qatar and the GCC."}
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"ForgeHype","url":"https://forgehype.qa/","telephone":"+97455879325","email":"info@forgehype.qa","address":{"@type":"PostalAddress","addressLocality":"Doha","addressCountry":"QA"},"areaServed":[{"@type":"Country","name":"Qatar"},{"@type":"Country","name":"United Arab Emirates"}],"description":"Qatar-based digital branding agency: websites, content, search and AI visibility, brand identity, automation and long-term growth support."}
 </script>
 </head>
 <body>
@@ -31,6 +31,7 @@
 
 <div class="env" aria-hidden="true">
   <div class="env-glow"></div>
+  <div class="env-peach"></div>
   <canvas id="embers"></canvas>
   <div class="env-grain"></div>
 </div>
@@ -38,55 +39,43 @@
 <header class="nav" id="nav">
   <div class="wrap">
     <div class="nav-inner">
-      <a class="brand" href="#top" aria-label="ForgeHype home"><img src="assets/img/brand/logo.png" alt="ForgeHype" width="720" height="134"></a>
+      <a class="brand" href="#top" aria-label="ForgeHype home"><img class="lg-dark" src="assets/img/brand/logo.png" alt="ForgeHype" width="720" height="134"><img class="lg-light" src="assets/img/brand/logo-light.png" alt="" width="720" height="134" aria-hidden="true"></a>
       <nav class="nav-links" aria-label="Primary">
         <a href="#services">Services</a>
-        <a href="#work">Work</a>
+        <a href="#work">Stories</a>
         <a href="#process">Process</a>
-        <a href="#faq">FAQ</a>
+        <a href="#about">About</a>
       </nav>
-      <a class="btn btn-primary" href="#book">Book a free audit</a>
+      <a class="btn btn-primary" href="#book">Book a Free Audit</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
 <div class="menu" id="menu" aria-hidden="true">
   <a href="#services">Services</a>
-  <a href="#work">Work</a>
+  <a href="#work">Stories</a>
   <a href="#process">Process</a>
-  <a href="#faq">FAQ</a>
-  <a class="btn btn-primary" href="#book">Book a free audit</a>
+  <a href="#about">About</a>
+  <a class="btn btn-primary" href="#book">Book a Free Audit</a>
 </div>
 
 <main id="main" tabindex="-1">
 <span id="top"></span>
 
-<!-- ============ HERO: the glass descent ============ -->
-<section class="hero" id="hero" aria-label="Introduction">
+<!-- ============ 1. HERO (dark): the glass descent ============ -->
+<section class="hero" id="hero" data-theme="dark" aria-label="Introduction">
   <div class="stage" id="stage">
     <div class="poster" aria-hidden="true"></div>
     <video id="heroVideo" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
     <div class="scrim" aria-hidden="true"></div>
 
-    <div class="band band-1" data-band data-a="0" data-b="0.30" data-ramp="0.05" style="--k:0">
+    <div class="band band-1" data-band data-a="0" data-b="1" data-ramp="1" style="--k:0;--kl:0">
       <div class="inner">
-        <h1 class="hero-words"><span class="sr-only">Seen. Remembered.</span><span aria-hidden="true" class="w" style="--th:0">Seen.</span><span aria-hidden="true" class="w em" style="--th:.3">Remembered.</span></h1>
-      </div>
-    </div>
-
-    <div class="band band-2" data-band data-a="0.335" data-b="0.645" style="--k:0">
-      <div class="inner">
-        <p class="line"><span class="soft" aria-hidden="true">Doha moves fast. <span class="em">Your brand should move first.</span></span><span class="sharp">Doha moves fast. <span class="em">Your brand should move first.</span></span></p>
-      </div>
-    </div>
-
-    <div class="band band-3" data-band data-a="0.68" data-b="1" data-ramp="0.06" style="--k:0">
-      <div class="inner">
-        <h2 class="t-display"><span class="sr-only">Digital presence, forged with intent.</span><span aria-hidden="true" class="w" style="--th:0">Digital</span><span aria-hidden="true" class="w" style="--th:.08">presence,</span><span aria-hidden="true" class="w em" style="--th:.18">forged</span><span aria-hidden="true" class="w" style="--th:.28">with</span><span aria-hidden="true" class="w" style="--th:.36">intent.</span></h2>
-        <p class="sub">Websites, e-commerce, media production and AI agents for brands in Qatar and the GCC.</p>
+        <h1 class="hero-words"><span class="sr-only">Seen. Remembered.</span><span aria-hidden="true" class="w" style="--th:0">Seen.</span><span aria-hidden="true" class="w em" style="--th:.08">Remembered.</span></h1>
+        <p class="sub"><span class="l1">Content that earns the pause.</span><span class="l2">Digital presence, forged with intent.</span></p>
         <div class="btn-row">
-          <a class="btn btn-primary" href="#book">Book a free audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn btn-ghost" href="#work">See the work</a>
+          <a class="btn btn-primary" href="#book">Book a Free Audit</a>
+          <a class="btn btn-ghost" href="#work">Success Stories</a>
         </div>
       </div>
     </div>
@@ -101,265 +90,260 @@
 </section>
 
 <!-- static hero: phones, portrait tablets, reduced motion -->
-<section class="hero-static wrap" aria-label="Introduction">
+<section class="hero-static wrap" data-theme="dark" aria-label="Introduction">
   <div class="bg" aria-hidden="true"></div>
   <p class="kicker">Doha · Qatar</p>
-  <h1 class="t-display">Seen. <span class="em">Remembered.</span></h1>
-  <p class="lead">Digital presence, forged with intent. Websites, e-commerce, media production and AI agents for brands in Qatar.</p>
+  <h1 class="t-display">Seen.<br><span class="em">Remembered.</span></h1>
+  <p class="sub"><span class="l1">Content that earns the pause.</span><span class="l2">Digital presence, forged with intent.</span></p>
   <div class="btn-row">
-    <a class="btn btn-primary" href="#book">Book a free audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    <a class="btn btn-ghost" href="#work">See the work</a>
+    <a class="btn btn-primary" href="#book">Book a Free Audit</a>
+    <a class="btn btn-ghost" href="#work">Success Stories</a>
   </div>
 </section>
 
-<!-- ============ TRUST ============ -->
-<section class="trust" id="trust" aria-label="Brands and sectors we work with">
-  <p class="label">Built for brands in Doha, Dubai and beyond</p>
-  <div class="marquee" data-live>
+<!-- ============ TRUST (dark, unchanged) ============ -->
+<section class="trust" id="trust" data-theme="dark" aria-label="Brands and sectors we work with">
+  <p class="label">Built for brands in GCC and beyond.</p>
+  <div class="marquee" id="trustMarquee" data-live tabindex="0" aria-label="Clients and sectors. Hover, focus or tap to pause.">
     <ul class="marquee-track">
       <li><img src="assets/img/clients/farmers-garden.jpg" alt="" width="200" height="200" loading="lazy">Farmer’s Garden</li>
       <li><span class="dot"></span>Luxury retail</li>
       <li><img src="assets/img/clients/tetrahost-bd.jpg" alt="" width="200" height="200" loading="lazy">Tetrahost BD</li>
-      <li><span class="dot"></span>Fine dining</li>
+      <li><span class="dot"></span>Restaurants</li>
       <li><img src="assets/img/clients/veggify.jpg" alt="" width="200" height="200" loading="lazy">Veggify</li>
       <li><span class="dot"></span>Automotive</li>
       <li><img src="assets/img/clients/bujhle-easy.jpg" alt="" width="200" height="200" loading="lazy">Bujhle Easy</li>
       <li><span class="dot"></span>Exhibitions</li>
       <li><span class="dot"></span>Hospitality</li>
       <li><span class="dot"></span>E-commerce</li>
-      <li><img src="assets/img/clients/farmers-garden.jpg" alt="" width="200" height="200" loading="lazy">Farmer’s Garden</li>
-      <li><span class="dot"></span>Luxury retail</li>
-      <li><img src="assets/img/clients/tetrahost-bd.jpg" alt="" width="200" height="200" loading="lazy">Tetrahost BD</li>
-      <li><span class="dot"></span>Fine dining</li>
-      <li><img src="assets/img/clients/veggify.jpg" alt="" width="200" height="200" loading="lazy">Veggify</li>
-      <li><span class="dot"></span>Automotive</li>
-      <li><img src="assets/img/clients/bujhle-easy.jpg" alt="" width="200" height="200" loading="lazy">Bujhle Easy</li>
-      <li><span class="dot"></span>Exhibitions</li>
-      <li><span class="dot"></span>Hospitality</li>
-      <li><span class="dot"></span>E-commerce</li>
+      <li aria-hidden="true"><img src="assets/img/clients/farmers-garden.jpg" alt="" width="200" height="200" loading="lazy">Farmer’s Garden</li>
+      <li aria-hidden="true"><span class="dot"></span>Luxury retail</li>
+      <li aria-hidden="true"><img src="assets/img/clients/tetrahost-bd.jpg" alt="" width="200" height="200" loading="lazy">Tetrahost BD</li>
+      <li aria-hidden="true"><span class="dot"></span>Restaurants</li>
+      <li aria-hidden="true"><img src="assets/img/clients/veggify.jpg" alt="" width="200" height="200" loading="lazy">Veggify</li>
+      <li aria-hidden="true"><span class="dot"></span>Automotive</li>
+      <li aria-hidden="true"><img src="assets/img/clients/bujhle-easy.jpg" alt="" width="200" height="200" loading="lazy">Bujhle Easy</li>
+      <li aria-hidden="true"><span class="dot"></span>Exhibitions</li>
+      <li aria-hidden="true"><span class="dot"></span>Hospitality</li>
+      <li aria-hidden="true"><span class="dot"></span>E-commerce</li>
     </ul>
   </div>
 </section>
 
-<!-- ============ PAINS: the stack ============ -->
-<section class="section" id="pains" aria-labelledby="pains-title">
+<!-- ============ 2. WHICH ONE SOUNDS LIKE YOU? (dark) ============ -->
+<section class="section gap-out" id="pains" data-theme="dark" aria-labelledby="pains-title">
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="kicker">the problem</p>
-      <h2 class="t-display t-h2" id="pains-title">Which sounds <span class="em">like you?</span></h2>
-      <p class="lead">Six problems we hear in the first call. Keep scrolling, each one has a fix.</p>
+    <div class="section-head center reveal">
+      <h2 class="t-display t-h2 lines" id="pains-title"><span class="ln">Which one sounds like you?</span></h2>
     </div>
+    <ul class="pgrid" id="pgrid" aria-label="Six business problems">
+      <li><a class="tile" href="#fix-1" data-interest="Fixing my website"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M6.5 6.6h.01M9.5 6.6h.01M9 14l2 2 4-4"/></svg><span>Website isn’t working</span></a></li>
+      <li><a class="tile" href="#fix-2" data-interest="Getting content noticed"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10 7.5h4M10 11h4M10 14.5h4M12 18.5h.01M20 7l2 2-2 2M20 13l2 2-2 2"/></svg><span>Content gets scrolled past</span></a></li>
+      <li><a class="tile" href="#fix-3" data-interest="Getting found online"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20.5 20.5l-5.2-5.2M10.5 7.5v6M7.5 10.5h6"/></svg><span>Nobody finds you</span></a></li>
+      <li><a class="tile" href="#fix-4" data-interest="Building a memorable brand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A10 10 0 0 1 12 5c5 0 9 7 9 7a16 16 0 0 1-3 3.6M6.6 6.6A16 16 0 0 0 3 12s4 7 9 7a10 10 0 0 0 3.4-.6"/></svg><span>Nobody remembers you</span></a></li>
+      <li><a class="tile" href="#fix-5" data-interest="Automating my operations"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0M18.5 3.5a3 3 0 0 1 0 4.5M20.5 2a5.5 5.5 0 0 1 0 7.5"/></svg><span>Everything depends on you</span></a></li>
+      <li><a class="tile" href="#fix-6"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l5.5 5.5 4-4L21 17M21 11v6h-6"/></svg><span>Falling behind</span></a></li>
+    </ul>
+    <p class="scroll-hint reveal">Scroll to see the fix ↓</p>
   </div>
+
   <div class="stack wrap" id="stack">
-    <article class="stack-card" style="--i:0;--tint:#141110" aria-label="Your website isn’t working">
+    <article class="stack-card" id="fix-1" style="--i:0;--tint:#141110" aria-label="Your website isn’t working">
       <div class="stack-inner">
+        <figure class="stack-media"><img src="assets/img/problems/website.jpg" alt="A cracked frosted glass browser window with an unfinished orange loading bar" width="1000" height="1250" loading="lazy"></figure>
         <div class="stack-text">
           <span class="n">01 / 06</span>
           <p class="problem">Your website isn’t working</p>
           <h3 class="fix t-display">A fast, custom site that turns visits into sales.</h3>
-          <p class="how-label">How we help</p>
-          <ul class="how"><li>Custom design, no templates</li><li>Shopify and headless stores</li><li>Arabic ready, right to left</li><li>Fast on the phones your customers use</li></ul>
-          <div class="btn-row"><a class="btn btn-primary" href="#book" data-need="Website & e-commerce">Get a free audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="link" href="#services">See the service</a></div>
+          <span class="tag">Website &amp; e-commerce</span>
+          <div class="btn-row"><a class="btn btn-primary" href="#book" data-interest="Fixing my website">Fix my website</a></div>
         </div>
-        <figure class="stack-media"><img src="assets/img/problems/website.jpg" alt="A cracked frosted glass browser window with an unfinished orange loading bar" width="1000" height="1250" loading="lazy"><figcaption class="chip">Website & e-commerce</figcaption></figure>
       </div>
     </article>
-    <article class="stack-card" style="--i:1;--tint:#111418" aria-label="Your content gets scrolled past">
+    <article class="stack-card" id="fix-2" style="--i:1;--tint:#111418" aria-label="Your content gets scrolled past">
       <div class="stack-inner">
+        <figure class="stack-media"><img src="assets/img/problems/scroll.jpg" alt="A stack of glass social feed cards streaking past, one glowing orange" width="1000" height="1250" loading="lazy"></figure>
         <div class="stack-text">
           <span class="n">02 / 06</span>
           <p class="problem">Your content gets scrolled past</p>
-          <h3 class="fix t-display">Reels, UGC and demos people watch. As many as you need, every month.</h3>
-          <p class="how-label">How we help</p>
-          <ul class="how"><li>Reels and UGC</li><li>Product demos and brand films</li><li>Shot to one standard</li><li>From 10 to 60 videos a month</li></ul>
-          <div class="btn-row"><a class="btn btn-primary" href="#book" data-need="Media production">Get a free audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="link" href="#services">See the service</a></div>
+          <h3 class="fix t-display">Content that stops the thumb and starts the conversation.</h3>
+          <span class="tag">Content &amp; social media</span>
+          <div class="btn-row"><a class="btn btn-primary" href="#book" data-interest="Getting content noticed">Fix my content</a></div>
         </div>
-        <figure class="stack-media"><img src="assets/img/problems/scroll.jpg" alt="A stack of glass social feed cards streaking past, one glowing orange" width="1000" height="1250" loading="lazy"><figcaption class="chip">Media production</figcaption></figure>
       </div>
     </article>
-    <article class="stack-card" style="--i:2;--tint:#151311" aria-label="Nobody finds you">
+    <article class="stack-card" id="fix-3" style="--i:2;--tint:#151311" aria-label="Nobody finds you">
       <div class="stack-inner">
+        <figure class="stack-media"><img src="assets/img/problems/search.jpg" alt="A glass magnifying lens over a dark city map with a glowing orange pin" width="1000" height="1250" loading="lazy"></figure>
         <div class="stack-text">
           <span class="n">03 / 06</span>
           <p class="problem">Nobody finds you</p>
-          <h3 class="fix t-display">Be found when customers search.</h3>
-          <p class="how-label">How we help</p>
-          <ul class="how"><li>Local SEO for Doha and the GCC</li><li>Cited by ChatGPT, Gemini and Copilot</li><li>Google Business profile</li><li>Content that ranks and converts</li></ul>
-          <div class="btn-row"><a class="btn btn-primary" href="#book" data-need="Search & AI visibility">Get a free audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="link" href="#services">See the service</a></div>
+          <h3 class="fix t-display">Show up first when customers search for what you sell.</h3>
+          <span class="tag">SEO &amp; local search</span>
+          <div class="btn-row"><a class="btn btn-primary" href="#book" data-interest="Getting found online">Get found</a></div>
         </div>
-        <figure class="stack-media"><img src="assets/img/problems/search.jpg" alt="A glass magnifying lens over a dark city map with a glowing orange pin" width="1000" height="1250" loading="lazy"><figcaption class="chip">Search & AI visibility</figcaption></figure>
       </div>
     </article>
-    <article class="stack-card" style="--i:3;--tint:#101513" aria-label="Nobody remembers you">
+    <article class="stack-card" id="fix-4" style="--i:3;--tint:#101513" aria-label="Nobody remembers you">
       <div class="stack-inner">
+        <figure class="stack-media"><img src="assets/img/problems/brand.jpg" alt="One polished black cube glowing orange above a grid of grey cubes" width="1000" height="1250" loading="lazy"></figure>
         <div class="stack-text">
           <span class="n">04 / 06</span>
           <p class="problem">Nobody remembers you</p>
-          <h3 class="fix t-display">Logo, menus, catalogs and packaging that stick.</h3>
-          <p class="how-label">How we help</p>
-          <ul class="how"><li>Logo and identity system</li><li>Menus, catalogs and decks</li><li>Packaging and print</li><li>Social templates your team can use</li></ul>
-          <div class="btn-row"><a class="btn btn-primary" href="#book" data-need="Brand & media kit">Get a free audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="link" href="#services">See the service</a></div>
+          <h3 class="fix t-display">A brand identity people recognize at a glance.</h3>
+          <span class="tag">Branding &amp; identity</span>
+          <div class="btn-row"><a class="btn btn-primary" href="#book" data-interest="Building a memorable brand">Build my brand</a></div>
         </div>
-        <figure class="stack-media"><img src="assets/img/problems/brand.jpg" alt="One polished black cube glowing orange above a grid of grey cubes" width="1000" height="1250" loading="lazy"><figcaption class="chip">Brand & media kit</figcaption></figure>
       </div>
     </article>
-    <article class="stack-card" style="--i:4;--tint:#16110e" aria-label="Everything depends on you">
+    <article class="stack-card" id="fix-5" style="--i:4;--tint:#16110e" aria-label="Everything depends on you">
       <div class="stack-inner">
+        <figure class="stack-media"><img src="assets/img/problems/automation.jpg" alt="A glass sphere linked by orange light to a chat bubble, calendar, invoice and chart" width="1000" height="1250" loading="lazy"></figure>
         <div class="stack-text">
           <span class="n">05 / 06</span>
           <p class="problem">Everything depends on you</p>
-          <h3 class="fix t-display">AI, automation and apps. Your routines, handled.</h3>
-          <p class="how-label">How we help</p>
-          <ul class="how"><li>WhatsApp agents that answer and book</li><li>Orders, invoices and reports</li><li>Digital menus and customer apps</li><li>Custom apps when off the shelf won’t do</li></ul>
-          <div class="btn-row"><a class="btn btn-primary" href="#book" data-need="AI agents & automation">Get a free audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="link" href="#services">See the service</a></div>
+          <h3 class="fix t-display">Systems and automation that keep running without you.</h3>
+          <span class="tag">Automation &amp; workflows</span>
+          <div class="btn-row"><a class="btn btn-primary" href="#book" data-interest="Automating my operations">Free up my time</a></div>
         </div>
-        <figure class="stack-media"><img src="assets/img/problems/automation.jpg" alt="A glass sphere linked by orange light to a chat bubble, calendar, invoice and chart" width="1000" height="1250" loading="lazy"><figcaption class="chip">AI agents & automation</figcaption></figure>
       </div>
     </article>
-    <article class="stack-card" style="--i:5;--tint:#121216" aria-label="You’re falling behind">
+    <article class="stack-card" id="fix-6" style="--i:5;--tint:#121216" aria-label="You’re falling behind">
       <div class="stack-inner">
+        <figure class="stack-media"><img src="assets/img/problems/growth.jpg" alt="A staircase of glass bars rising like a chart beside a glass clock" width="1000" height="1250" loading="lazy"></figure>
         <div class="stack-text">
           <span class="n">06 / 06</span>
           <p class="problem">You’re falling behind</p>
-          <h3 class="fix t-display">Backend experts beside your team. Always.</h3>
-          <p class="how-label">How we help</p>
-          <ul class="how"><li>Updates and fixes</li><li>Training until your team owns it</li><li>Monthly optimisation</li><li>Expert guidance on call</li></ul>
-          <div class="btn-row"><a class="btn btn-primary" href="#book" data-need="Monthly support">Get a free audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="link" href="#services">See the service</a></div>
+          <h3 class="fix t-display">A clear growth plan that keeps you ahead of competitors.</h3>
+          <span class="tag">Strategy &amp; growth</span>
+          <div class="btn-row"><a class="btn btn-primary" href="#book">Plan my growth</a></div>
         </div>
-        <figure class="stack-media"><img src="assets/img/problems/growth.jpg" alt="A staircase of glass bars rising like a chart beside a glass clock" width="1000" height="1250" loading="lazy"><figcaption class="chip">Monthly support</figcaption></figure>
       </div>
     </article>
   </div>
+  <div class="wrap stack-cta reveal">
+    <a class="btn btn-primary" href="#book">Book a Demo Call</a>
+    <a class="link-soft" href="#about">Discover More →</a>
+  </div>
 </section>
 
-<!-- ============ SERVICES: the index ============ -->
-<section class="section" id="services" aria-labelledby="svc-title">
+<!-- ============ 3. ABOUT (light) ============ -->
+<section class="section light gap-in about" id="about" data-theme="light" aria-label="About ForgeHype">
+  <div class="wrap">
+    <div class="about-top reveal">
+      <span class="mono-label">[ ABOUT ]</span>
+      <span class="mono-label clock" id="dohaClock" aria-label="Current time in Doha">DOH 00:00:00</span>
+    </div>
+    <p class="statement" id="statement">Qatar-based digital branding agency shaping how global brands are seen, trusted and remembered.</p>
+    <div class="btn-row reveal"><a class="btn btn-primary" href="#talk">Let’s Talk</a></div>
+  </div>
+  <div class="tmarquee" id="tmarquee" data-live tabindex="0" aria-label="What we do. Hover, focus or tap to pause.">
+    <div class="tmarquee-track">
+      <span>Websites that convert</span><i>✦</i><span>360 digital marketing</span><i>✦</i><span>Creative strategy</span><i>✦</i><span>Content production</span><i>✦</i><span>SEO, Maps &amp; AI search</span><i>✦</i><span>AI integration &amp; web/app</span><i>✦</i><span>Modern business growth</span><i>✦</i><span>Digital automation</span><i>✦</i><span>14 years of GCC experience</span><i>✦</i><span>Be impossible to ignore</span><i>✦</i>
+      <span aria-hidden="true">Websites that convert</span><i aria-hidden="true">✦</i><span aria-hidden="true">360 digital marketing</span><i aria-hidden="true">✦</i><span aria-hidden="true">Creative strategy</span><i aria-hidden="true">✦</i><span aria-hidden="true">Content production</span><i aria-hidden="true">✦</i><span aria-hidden="true">SEO, Maps &amp; AI search</span><i aria-hidden="true">✦</i><span aria-hidden="true">AI integration &amp; web/app</span><i aria-hidden="true">✦</i><span aria-hidden="true">Modern business growth</span><i aria-hidden="true">✦</i><span aria-hidden="true">Digital automation</span><i aria-hidden="true">✦</i><span aria-hidden="true">14 years of GCC experience</span><i aria-hidden="true">✦</i><span aria-hidden="true">Be impossible to ignore</span><i aria-hidden="true">✦</i>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. QATAR (light) ============ -->
+<section class="section light gap-out qatar" id="qatar" data-theme="light" aria-labelledby="qatar-title">
+  <div class="wrap qatar-grid">
+    <div class="qatar-text reveal">
+      <span class="mono-label">[ QATAR ]</span>
+      <h2 class="t-display t-h2 lines" id="qatar-title"><span class="ln">Doha moves fast.</span></h2>
+      <p class="lead">Qatar is putting billions into digital. Government runs on apps, payments are contactless, and your customers expect the same from every brand they touch. Standing still is falling behind.</p>
+    </div>
+    <!-- TODO: video file not supplied yet. Drop assets/video/qatar-digital.mp4 and .webm (each under ~8MB) next to the poster; the component plays them automatically. -->
+    <div class="qatar-media" id="qatarMedia">
+      <video class="qvid" muted loop playsinline preload="none" poster="assets/video/qatar-digital-poster.jpg" aria-label="Doha’s West Bay skyline at dusk">
+        <source src="assets/video/qatar-digital.webm" type="video/webm">
+        <source src="assets/video/qatar-digital.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. SERVICES (dark) ============ -->
+<section class="section gap-in" id="services" data-theme="dark" aria-labelledby="svc-title">
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="kicker">services</p>
-      <h2 class="t-display t-h2" id="svc-title">Six services. <span class="em">One team.</span></h2>
-      <p class="lead">Pick one or all six. We shape the scope around your business.</p>
+      <h2 class="t-display t-h2 lines" id="svc-title"><span class="ln">Every business is different.</span><span class="ln">So is every solution.</span><span class="ln">Six services. <span class="em">One team.</span></span></h2>
+      <p class="lowkey">Pick what your business demands. We shape the scope to fit your needs.</p>
     </div>
-    <ol class="svc-list reveal" id="svcList">
-      <li class="svc-row" data-imgs="assets/img/work/watch.jpg,assets/img/work/bags.jpg,assets/img/work/dining.jpg,assets/img/svc/web-cafe.jpg,assets/img/svc/web-realestate.jpg" data-labels="Watch reseller|Luxury boutique|Restaurant|Cafe|Real estate">
-        <a href="#book" data-need="Website & e-commerce">
-          <span class="idx">01</span>
-          <span class="thumb" aria-hidden="true"><img src="assets/img/work/watch.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/work/bags.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/work/dining.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/web-cafe.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/web-realestate.jpg" alt="" width="800" height="1000" loading="lazy"></span>
-          <span class="name"><h3 class="t-display">Website & e-commerce</h3><p>Fast, custom, built to convert.</p><span class="now" aria-hidden="true">Watch reseller</span></span>
-          <span class="tags"><span>Custom design</span><span>Shopify & headless</span><span>Arabic ready</span></span>
-          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+    <ol class="svc-grid" id="svcList">
+      <li class="svc-card reveal" data-labels="Watch reseller|Luxury boutique|Restaurant|Cafe|Real estate">
+        <a href="#book" data-interest="Fixing my website">
+          <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/work/watch.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/work/bags.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/work/dining.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/web-cafe.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/web-realestate.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Watch reseller</span></span>
+          <span class="svc-body"><span class="idx">01</span><h3 class="t-display">Website &amp; e-commerce</h3><p>Fast, custom, built to convert.</p><span class="tags"><span>Custom design</span><span>Shopify &amp; headless</span><span>Arabic ready</span></span></span>
         </a>
       </li>
-      <li class="svc-row" data-imgs="assets/img/svc/media-shoot.jpg,assets/img/svc/media-edit.jpg,assets/img/svc/media-render.jpg,assets/img/svc/media-billboard.jpg" data-labels="The shoot|Editing suite|Rendering|Billboard">
-        <a href="#book" data-need="Media production">
-          <span class="idx">02</span>
-          <span class="thumb" aria-hidden="true"><img src="assets/img/svc/media-shoot.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/media-edit.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/media-render.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/media-billboard.jpg" alt="" width="800" height="1000" loading="lazy"></span>
-          <span class="name"><h3 class="t-display">Media production</h3><p>Reels people actually watch.</p><span class="now" aria-hidden="true">The shoot</span></span>
-          <span class="tags"><span>Reels & UGC</span><span>Product films</span><span>Brand films</span></span>
-          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+      <li class="svc-card reveal" data-labels="The shoot|Editing suite|Rendering|Billboard">
+        <a href="#book" data-interest="Getting content noticed">
+          <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/svc/media-shoot.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/media-edit.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/media-render.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/media-billboard.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">The shoot</span></span>
+          <span class="svc-body"><span class="idx">02</span><h3 class="t-display">Media production</h3><p>Reels people actually watch.</p><span class="tags"><span>Reels &amp; UGC</span><span>Product films</span><span>Brand films</span></span></span>
         </a>
       </li>
-      <li class="svc-row" data-imgs="assets/img/svc/ai-chatbot.jpg,assets/img/svc/ai-crm.jpg,assets/img/svc/ai-finance.jpg,assets/img/svc/ai-dashboards.jpg" data-labels="Chatbot|CRM|Finance tracker|Dashboards">
-        <a href="#book" data-need="AI agents & automation">
-          <span class="idx">03</span>
-          <span class="thumb" aria-hidden="true"><img src="assets/img/svc/ai-chatbot.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/ai-crm.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/ai-finance.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/ai-dashboards.jpg" alt="" width="800" height="1000" loading="lazy"></span>
-          <span class="name"><h3 class="t-display">AI agents & automation</h3><p>Routines gone. Time back.</p><span class="now" aria-hidden="true">Chatbot</span></span>
-          <span class="tags"><span>WhatsApp agents</span><span>Bookings & orders</span><span>Custom apps</span></span>
-          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+      <li class="svc-card reveal" data-labels="Chatbot|CRM|Finance tracker|Dashboards">
+        <a href="#book" data-interest="AI agents">
+          <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/svc/ai-chatbot.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/ai-crm.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/ai-finance.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/ai-dashboards.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Chatbot</span></span>
+          <span class="svc-body"><span class="idx">03</span><h3 class="t-display">AI agents &amp; automation</h3><p>Routines gone. Time back.</p><span class="tags"><span>WhatsApp agents</span><span>Bookings &amp; orders</span><span>Custom apps</span></span></span>
         </a>
       </li>
-      <li class="svc-row" data-imgs="assets/img/svc/seo-map.jpg,assets/img/svc/seo-aichat.jpg,assets/img/svc/seo-search.jpg" data-labels="Maps|AI assistants|Search">
-        <a href="#book" data-need="Search & AI visibility">
-          <span class="idx">04</span>
-          <span class="thumb" aria-hidden="true"><img src="assets/img/svc/seo-map.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/seo-aichat.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/seo-search.jpg" alt="" width="800" height="1000" loading="lazy"></span>
-          <span class="name"><h3 class="t-display">Search & AI visibility</h3><p>Found on Google. Cited by AI.</p><span class="now" aria-hidden="true">Maps</span></span>
-          <span class="tags"><span>Local SEO</span><span>AI search</span><span>Content</span></span>
-          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+      <li class="svc-card reveal" data-labels="Maps|AI assistants|Search">
+        <a href="#book" data-interest="Getting found online">
+          <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/svc/seo-map.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/seo-aichat.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/seo-search.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Maps</span></span>
+          <span class="svc-body"><span class="idx">04</span><h3 class="t-display">Search &amp; AI visibility</h3><p>Found on Google. Cited by AI.</p><span class="tags"><span>Local SEO</span><span>AI search</span><span>Content</span></span></span>
         </a>
       </li>
-      <li class="svc-row" data-imgs="assets/img/svc/brand-logo.jpg,assets/img/svc/brand-menu.jpg,assets/img/svc/brand-packaging.jpg,assets/img/svc/brand-guideline.jpg" data-labels="Logo|Digital menu|Packaging|Brand guideline">
-        <a href="#book" data-need="Brand & media kit">
-          <span class="idx">05</span>
-          <span class="thumb" aria-hidden="true"><img src="assets/img/svc/brand-logo.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/brand-menu.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/brand-packaging.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/brand-guideline.jpg" alt="" width="800" height="1000" loading="lazy"></span>
-          <span class="name"><h3 class="t-display">Brand & media kit</h3><p>One identity, everywhere.</p><span class="now" aria-hidden="true">Logo</span></span>
-          <span class="tags"><span>Logo & system</span><span>Menus & catalogs</span><span>Packaging</span></span>
-          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+      <li class="svc-card reveal" data-labels="Logo|Digital menu|Packaging|Brand guideline">
+        <a href="#book" data-interest="Building a memorable brand">
+          <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/svc/brand-logo.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/brand-menu.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/brand-packaging.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/brand-guideline.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Logo</span></span>
+          <span class="svc-body"><span class="idx">05</span><h3 class="t-display">Brand &amp; media kit</h3><p>One identity, everywhere.</p><span class="tags"><span>Logo &amp; system</span><span>Menus &amp; catalogs</span><span>Packaging</span></span></span>
         </a>
       </li>
-      <li class="svc-row" data-imgs="assets/img/svc/support-deliverables.jpg,assets/img/svc/support-review.jpg,assets/img/svc/support-growth.jpg,assets/img/svc/support-consult.jpg" data-labels="Weekly deliverables|Weekly growth review|Organic growth|Consultancy">
-        <a href="#book" data-need="Monthly support">
-          <span class="idx">06</span>
-          <span class="thumb" aria-hidden="true"><img src="assets/img/svc/support-deliverables.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/support-review.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/support-growth.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/support-consult.jpg" alt="" width="800" height="1000" loading="lazy"></span>
-          <span class="name"><h3 class="t-display">Monthly support</h3><p>Your backend team, on call.</p><span class="now" aria-hidden="true">Weekly deliverables</span></span>
-          <span class="tags"><span>Updates</span><span>Training</span><span>Optimisation</span></span>
-          <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+      <li class="svc-card reveal" data-labels="Weekly deliverables|Weekly growth review|Organic growth|Consultancy">
+        <a href="#book">
+          <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/svc/support-deliverables.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/support-review.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/support-growth.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/support-consult.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Weekly deliverables</span></span>
+          <span class="svc-body"><span class="idx">06</span><h3 class="t-display">Monthly support</h3><p>Your backend team, on call.</p><span class="tags"><span>Updates</span><span>Training</span><span>Optimisation</span></span></span>
         </a>
       </li>
     </ol>
   </div>
-  <div class="svc-preview" id="svcPreview" aria-hidden="true"><img class="a on" src="assets/img/work/watch.jpg" alt="" width="800" height="1000"><img class="b" src="assets/img/work/bags.jpg" alt="" width="800" height="1000"><span class="chip" id="svcPreviewLabel">Watch reseller</span></div>
 </section>
 
-<!-- ============ WORK: pinned horizontal rail ============ -->
-<section class="work" id="work" aria-labelledby="work-title">
-  <div class="work-pin" id="workPin">
-    <div class="work-sticky">
-      <div class="wrap work-head reveal">
-        <div class="section-head" style="margin:0">
-          <p class="kicker">media production</p>
-          <h2 class="t-display t-h2" id="work-title">Made for brands that <span class="em">can’t look ordinary.</span></h2>
+<!-- ============ 6. FULL-SCREEN PHONE (dark) ============ -->
+<section class="phone-sec" id="ugc" data-theme="dark" aria-labelledby="ugc-title">
+  <div class="phone-stage" id="phoneStage">
+    <div class="wrap phone-wrap">
+      <div class="phone" aria-hidden="true">
+        <div class="phone-screen">
+          <!-- TODO: UGC reel not supplied yet. Expected: assets/video/ugc-reel.mp4 (9:16, muted loop, under ~6MB). The poster below is a stand-in from the influencer sector still. -->
+          <video class="pvid" muted loop playsinline preload="none" poster="assets/img/work/influencer.jpg"><source src="assets/video/ugc-reel.mp4" type="video/mp4"></video>
+          <span class="phone-ui"></span>
         </div>
-        <a class="link" href="#book" data-need="Media production">Book a free audit <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <span class="phone-notch"></span>
       </div>
-      <ul class="work-track" id="workTrack">
-        <li class="work-card tilt"><img src="assets/img/work/bags.jpg" alt="A charcoal leather handbag lit by an orange edge light on a dark stone plinth" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">01 / 08</span><div class="meta"><span class="tag">Luxury retail</span><h3 class="t-display">Luxury retail</h3><p>Campaign films and reels for luxury boutiques.</p></div></li>
-        <li class="work-card tilt"><img src="assets/img/work/watch.jpg" alt="A steel wristwatch with a dark dial standing on black glass with an orange rim light" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">02 / 08</span><div class="meta"><span class="tag">E-commerce</span><h3 class="t-display">E-commerce</h3><p>Launch content and stores for resellers moving six-figure pieces.</p></div></li>
-        <li class="work-card tilt"><img src="assets/img/work/car.jpg" alt="Water beads on freshly coated black car paint reflecting an orange light strip" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">03 / 08</span><div class="meta"><span class="tag">Automotive</span><h3 class="t-display">Car detailing</h3><p>Before and after reels that sell the finish.</p></div></li>
-        <li class="work-card tilt"><img src="assets/img/work/dining.jpg" alt="A plated dish by candlelight with the Doha skyline blurred through the window" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">04 / 08</span><div class="meta"><span class="tag">Hospitality</span><h3 class="t-display">Fine dining</h3><p>Menus, apps and films for restaurants that live on atmosphere.</p></div></li>
-        <li class="work-card tilt"><img src="assets/img/work/hotel.jpg" alt="A hotel suite at night with a warm lamp and the Doha skyline through the window" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">05 / 08</span><div class="meta"><span class="tag">Hospitality</span><h3 class="t-display">Hotels &amp; hospitality</h3><p>Suites, service and skyline, shot to make people book.</p></div></li>
-        <li class="work-card tilt"><img src="assets/img/work/realestate.jpg" alt="A modern villa at dusk with warm light inside and a still reflecting pool" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">06 / 08</span><div class="meta"><span class="tag">Property</span><h3 class="t-display">Real estate</h3><p>Towers, villas and lobbies, filmed to sell the view.</p></div></li>
-        <li class="work-card tilt"><img src="assets/img/work/influencer.jpg" alt="A camera on a tripod facing an empty stool in a dark creator studio with a warm light panel" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">07 / 08</span><div class="meta"><span class="tag">Creators</span><h3 class="t-display">Influencer media</h3><p>Creator shoots, UGC and edits that keep feeds alive.</p></div></li>
-        <li class="work-card tilt"><img src="assets/img/work/health.jpg" alt="A clean treatment chair in a dark modern clinic with an orange light line on frosted glass" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">08 / 08</span><div class="meta"><span class="tag">Healthcare</span><h3 class="t-display">Healthcare</h3><p>Clinics and specialists, presented with calm and trust.</p></div></li>
-      </ul>
-      <div class="work-progress" aria-hidden="true"><i id="workProgress"></i></div>
+      <div class="pills" aria-hidden="true">
+        <div class="pill p1"><i class="dot"></i><span>Delivered in <s class="strike">days</s><b class="swap">hours</b></span></div>
+        <div class="pill p2"><i class="dot"></i><span>Delivery in <s class="strike">months</s><b class="swap">days</b></span></div>
+        <div class="pill p3 split"><span class="before"><i class="dot"></i>Before</span><span class="after">→ After: visibility</span></div>
+        <div class="pill p4"><i class="dot"></i><span>Result-driven strategy</span></div>
+      </div>
+      <h2 class="phone-cap t-display" id="ugc-title">Real voices. <span class="em">Real trust.</span><span class="sr-only"> Delivered in hours, not days. Delivery in days, not months. Before and after visibility. Result-driven strategy.</span></h2>
     </div>
   </div>
 </section>
 
-<!-- ============ WHY NOW ============ -->
-<section class="section" id="why" aria-labelledby="why-title">
-  <div class="wrap why">
-    <div class="reveal">
-      <p class="kicker">qatar</p>
-      <h2 class="t-display t-h2" id="why-title" style="margin-block-start:var(--s-4)">Doha moves <span class="em">fast.</span></h2>
-      <p class="lead" style="margin-block-start:var(--s-5)">Qatar is putting billions into digital. Government runs on apps, payments are contactless, and your customers expect the same from every brand they touch. Standing still is falling behind.</p>
-      <div class="stats stagger">
-        <div class="glass stat reveal"><div class="v"><small>$</small><span data-count="5.7" data-decimals="1">5.7</span><small>bn</small></div><p>Digital investment expected in Qatar in 2026</p></div>
-        <div class="glass stat reveal"><div class="v"><small>Top</small> <span data-count="10">10</span></div><p>Worldwide for everyday AI use</p></div>
-        <div class="glass stat reveal"><div class="v"><span data-count="14">14</span></div><p>Years in the GCC market</p></div>
-        <div class="glass stat reveal"><div class="v"><span data-count="60">60</span></div><p>Videos a month at full volume</p></div>
-      </div>
-      <p class="source">Sources: Invest Qatar, Microsoft Q1 2026.</p>
-    </div>
-    <div class="frame reveal scale" id="whyFrame">
-      <img src="assets/img/hero-ending.jpg" alt="Doha’s West Bay skyline at dusk above a layer of haze, a glass pane glowing orange at its edge" width="1912" height="1080" loading="lazy">
-      <span class="chip">WEST BAY · 25.32° N</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROCESS: the orbit ============ -->
-<section class="section" id="process" aria-labelledby="process-title">
+<!-- ============ 7. HOW WE WORK (dark) ============ -->
+<section class="section" id="process" data-theme="dark" aria-labelledby="process-title">
   <div class="wrap orbit-wrap" id="orbitSection">
     <div class="orbit-text reveal">
-      <p class="kicker">how it works</p>
-      <h2 class="t-display t-h2" id="process-title" style="margin-block-start:var(--s-4)">We build. We guide. <span class="em">We stay.</span></h2>
-      <p class="lead" style="margin-block-start:var(--s-5)">Press and hold the core. Every step lights as you hold. Let go early and it cools.</p>
-      <ol class="osteps"><li class="ostep" data-i="0"><span class="n">01</span><div><strong>Discover</strong><p>Your goals, your customers, your numbers.</p></div></li><li class="ostep" data-i="1"><span class="n">02</span><div><strong>Build</strong><p>Site, brand, content, agents.</p></div></li><li class="ostep" data-i="2"><span class="n">03</span><div><strong>Launch</strong><p>Live where your customers look.</p></div></li><li class="ostep" data-i="3"><span class="n">04</span><div><strong>Guide</strong><p>We stay until your team owns it.</p></div></li><li class="ostep" data-i="4"><span class="n">05</span><div><strong>Measure</strong><p>Before and after. Then again.</p></div></li></ol>
+      <h2 class="t-display t-h2 lines" id="process-title"><span class="ln">We build.</span><span class="ln">We guide.</span><span class="ln thin">We stay.</span></h2>
+      <p class="lead hold-hint">Hold the core until the ring is full. Let go early and it cools.</p>
       <div class="orbit-done" aria-live="polite">
-        <p class="t-display tagline">Crafted to Last.<br><span class="em">Seen to Shine.</span></p>
+        <p class="t-display tagline">Crafted to last.<br><span class="em">Seen to shine.</span></p>
         <p class="muted">Month by month, we forge your business to last a lifetime. Long-term support is the model we recommend.</p>
-        <div class="btn-row"><a class="btn btn-primary" href="#book" data-need="Monthly support">Start the long game <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        <div class="btn-row"><a class="btn btn-primary" href="#book">Start the long game →</a></div>
       </div>
     </div>
     <div class="orbit reveal scale" id="orbit" style="--heat:0">
@@ -370,80 +354,104 @@
         <g class="node" data-i="0" transform="translate(200.0,50.0)"><circle r="24"/><text class="num" y="1">01</text></g><text class="lbl" data-i="0" x="200.0" y="10.0" text-anchor="middle">Discover</text><g class="node" data-i="1" transform="translate(342.7,153.6)"><circle r="24"/><text class="num" y="1">02</text></g><text class="lbl" data-i="1" x="380.7" y="141.3" text-anchor="start">Build</text><g class="node" data-i="2" transform="translate(288.2,321.4)"><circle r="24"/><text class="num" y="1">03</text></g><text class="lbl" data-i="2" x="311.7" y="353.7" text-anchor="start">Launch</text><g class="node" data-i="3" transform="translate(111.8,321.4)"><circle r="24"/><text class="num" y="1">04</text></g><text class="lbl" data-i="3" x="88.3" y="353.7" text-anchor="end">Guide</text><g class="node" data-i="4" transform="translate(57.3,153.6)"><circle r="24"/><text class="num" y="1">05</text></g><text class="lbl" data-i="4" x="19.3" y="141.3" text-anchor="end">Measure</text>
       </svg>
       <button class="core" id="orbitCore" type="button" aria-label="Press and hold to forge" aria-pressed="false">
+        <span class="core-burst" aria-hidden="true"></span>
         <span class="core-glow" aria-hidden="true"></span>
-        <span class="core-hint">Hold</span>
+        <span class="core-hint" id="coreHint">Click &amp; hold</span>
+        <span class="core-step" id="coreStep" aria-hidden="true"></span>
         <span class="core-done" aria-hidden="true">Crafted<br>to last</span>
       </button>
     </div>
   </div>
 </section>
 
-<!-- ============ ABOUT / COMPARE ============ -->
-<section class="section" id="about" aria-labelledby="about-title">
-  <div class="wrap about">
-    <div class="reveal">
-      <p class="kicker">not a typical agency</p>
-      <h2 class="t-display t-h2" id="about-title" style="margin-block-start:var(--s-4)">Operators, <span class="em">not consultants.</span></h2>
-      <p class="lead" style="margin-block-start:var(--s-5)">We have run startups, online stores and operations ourselves. So we talk in orders, bookings and hours saved.</p>
+<!-- ============ 8. SUCCESS STORIES (dark) ============ -->
+<section class="section work" id="work" data-theme="dark" aria-labelledby="work-title">
+  <div class="wrap work-head reveal">
+    <h2 class="t-display t-h2 lines" id="work-title"><span class="ln">Made for brands that</span><span class="ln em">can’t look ordinary.</span></h2>
+    <div class="work-tools">
+      <a class="link-u" href="#book">Book a free audit ↗</a>
+      <div class="car-nav"><button type="button" class="car-btn" id="carPrev" aria-label="Previous story">←</button><button type="button" class="car-btn" id="carNext" aria-label="Next story">→</button></div>
     </div>
-    <div class="glass compare reveal" role="table" aria-label="Typical agency compared with ForgeHype">
-      <div class="row" role="row"><div role="columnheader">Typical agency</div><div role="columnheader">ForgeHype</div></div>
-      <div class="row" role="row"><div role="cell"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Builds it, then leaves</div><div role="cell"><svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Stays until your team owns it</div></div>
-      <div class="row" role="row"><div role="cell"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Standard packages</div><div role="cell"><svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>A scope built around you</div></div>
-      <div class="row" role="row"><div role="cell"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Trial and error</div><div role="cell"><svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Proven playbooks</div></div>
-      <div class="row" role="row"><div role="cell"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Several vendors</div><div role="cell"><svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>One team, every service</div></div>
-      <div class="row" role="row"><div role="cell"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Reports activity</div><div role="cell"><svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Measures before and after</div></div>
-      <div class="row" role="row"><div role="cell"><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Tech talk</div><div role="cell"><svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Plain business language</div></div>
+  </div>
+  <div class="carousel" id="carousel" tabindex="0" aria-roledescription="carousel" aria-label="Sectors we work in. Hover or tap to pause, swipe to move.">
+    <ul class="car-track" id="carTrack">
+      <li class="work-card"><img src="assets/img/work/bags.jpg" alt="A charcoal leather handbag lit by an orange edge light on a dark stone plinth" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">01 / 08</span><div class="meta"><span class="tag">Luxury retail</span><h3 class="t-display">Luxury retail</h3><p>Campaign films and reels for luxury boutiques.</p></div></li>
+      <li class="work-card"><img src="assets/img/work/watch.jpg" alt="A steel wristwatch with a dark dial standing on black glass with an orange rim light" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">02 / 08</span><div class="meta"><span class="tag">E-commerce</span><h3 class="t-display">E-commerce</h3><p>Launch content and stores for resellers moving six-figure pieces.</p></div></li>
+      <li class="work-card"><img src="assets/img/work/car.jpg" alt="Water beads on freshly coated black car paint reflecting an orange light strip" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">03 / 08</span><div class="meta"><span class="tag">Automotive</span><h3 class="t-display">Car detailing</h3><p>Before and after reels that sell the finish.</p></div></li>
+      <li class="work-card"><img src="assets/img/work/dining.jpg" alt="A plated dish by candlelight with the Doha skyline blurred through the window" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">04 / 08</span><div class="meta"><span class="tag">Restaurants</span><h3 class="t-display">Restaurants</h3><p>Menus, apps and films for restaurants that live on atmosphere.</p></div></li>
+      <li class="work-card"><img src="assets/img/work/hotel.jpg" alt="A rooftop infinity pool at dusk reflecting the Doha skyline, lit by a thin orange light strip" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">05 / 08</span><div class="meta"><span class="tag">Hospitality</span><h3 class="t-display">Hotels &amp; hospitality</h3><p>Suites, service and skyline, shot to make people book.</p></div></li>
+      <li class="work-card"><img src="assets/img/work/realestate.jpg" alt="A modern villa at dusk with warm light inside and a still reflecting pool" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">06 / 08</span><div class="meta"><span class="tag">Property</span><h3 class="t-display">Real estate</h3><p>Towers, villas and lobbies, filmed to sell the view.</p></div></li>
+      <li class="work-card"><img src="assets/img/work/influencer.jpg" alt="A camera on a tripod facing an empty stool in a dark creator studio with a warm light panel" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">07 / 08</span><div class="meta"><span class="tag">Creators</span><h3 class="t-display">Influencer media</h3><p>Creator shoots, UGC and edits that keep feeds alive.</p></div></li>
+      <li class="work-card"><img src="assets/img/work/health.jpg" alt="A clean treatment chair in a dark modern clinic with an orange light line on frosted glass" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">08 / 08</span><div class="meta"><span class="tag">Healthcare</span><h3 class="t-display">Healthcare</h3><p>Clinics and specialists, presented with calm and trust.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 9. WHY OTHERS CHOOSE US (dark) ============ -->
+<section class="section gap-out" id="why" data-theme="dark" aria-labelledby="why-title">
+  <div class="wrap why-wrap">
+    <div class="section-head reveal"><h2 class="t-display t-h2 lines" id="why-title"><span class="ln">Why others <span class="em">choose us.</span></span></h2></div>
+    <div class="cmp reveal" id="cmp" tabindex="0" aria-roledescription="carousel" aria-label="ForgeHype compared with a typical agency. Tap to pause, swipe or use the arrow keys to move.">
+      <div class="cmp-stage" aria-live="polite">
+        <div class="pair is-on"><p class="yes"><i class="ck" aria-hidden="true"></i>We stay until your team owns it.</p><p class="no"><i class="x" aria-hidden="true"></i><s>Build, sell, leave.</s></p></div>
+        <div class="pair"><p class="yes"><i class="ck" aria-hidden="true"></i>A solution built around you.</p><p class="no"><i class="x" aria-hidden="true"></i><s>One template for everyone.</s></p></div>
+        <div class="pair"><p class="yes"><i class="ck" aria-hidden="true"></i>Proven playbooks.</p><p class="no"><i class="x" aria-hidden="true"></i><s>Guesswork on your budget.</s></p></div>
+        <div class="pair"><p class="yes"><i class="ck" aria-hidden="true"></i>One team, every service.</p><p class="no"><i class="x" aria-hidden="true"></i><s>Five vendors, nobody in charge.</s></p></div>
+        <div class="pair"><p class="yes"><i class="ck" aria-hidden="true"></i>We measure before vs after.</p><p class="no"><i class="x" aria-hidden="true"></i><s>Reports likes, not results.</s></p></div>
+        <div class="pair"><p class="yes"><i class="ck" aria-hidden="true"></i>Plain business language.</p><p class="no"><i class="x" aria-hidden="true"></i><s>Jargon you can’t act on.</s></p></div>
+      </div>
+      <div class="cmp-foot">
+        <span class="cmp-count" id="cmpCount">01 / 06</span>
+        <span class="dashes" id="cmpDashes" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="cmp-btns"><button type="button" class="car-btn" id="cmpPrev" aria-label="Previous">←</button><button type="button" class="car-btn" id="cmpNext" aria-label="Next">→</button></span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ FAQ ============ -->
-<section class="section" id="faq" aria-labelledby="faq-title">
-  <div class="wrap faq">
-    <div class="reveal">
-      <p class="kicker">faq</p>
-      <h2 class="t-display t-h2" id="faq-title" style="margin-block-start:var(--s-4)">Quick <span class="em">answers.</span></h2>
-      <p class="lead" style="margin-block-start:var(--s-5)">Still unsure? <a class="link" href="https://wa.me/97455879325" target="_blank" rel="noopener">Ask us on WhatsApp</a></p>
-    </div>
-    <div class="faq-list reveal">
-      <details class="faq-item"><summary>What does ForgeHype do?<i aria-hidden="true"></i></summary><div class="ans"><p>Websites, e-commerce, media production, search and AI visibility, AI agents and monthly support. One team, and we stay beside yours.</p></div></details>
-      <details class="faq-item"><summary>How much does it cost?<i aria-hidden="true"></i></summary><div class="ans"><p>Every scope is built around your business, so we quote after the free audit. No standard packages.</p></div></details>
-      <details class="faq-item"><summary>How fast can you deliver content?<i aria-hidden="true"></i></summary><div class="ans"><p>Days from brief to delivery, not weeks. From 10 to 60 videos a month.</p></div></details>
-      <details class="faq-item"><summary>What does the free audit cover?<i aria-hidden="true"></i></summary><div class="ans"><p>Your website, search presence, content and brand. You get a clear list of what to fix first.</p></div></details>
-      <details class="faq-item"><summary>Do you work outside Qatar?<i aria-hidden="true"></i></summary><div class="ans"><p>Yes. Based in Doha, working across the UAE and with clients worldwide on Teams and WhatsApp.</p></div></details>
-      <details class="faq-item"><summary>Can you automate bookings and replies?<i aria-hidden="true"></i></summary><div class="ans"><p>Yes. AI agents on WhatsApp and your site that answer, book, take orders and follow up.</p></div></details>
-      <details class="faq-item"><summary>Do you work in Arabic?<i aria-hidden="true"></i></summary><div class="ans"><p>Yes. Bilingual sites, menus and content, built right to left where it matters.</p></div></details>
-    </div>
-  </div>
-</section>
-
-<!-- ============ BOOK ============ -->
-<section class="section" id="book" aria-labelledby="book-title">
+<!-- ============ 10. BOOK A FREE CONSULTATION + LET'S TALK (light) ============ -->
+<section class="section light gap-in book-sec" id="book" data-theme="light" aria-labelledby="book-title">
   <div class="wrap book">
     <div class="book-side reveal">
-      <p class="kicker">free audit</p>
-      <h2 class="t-display t-h1" id="book-title">Forge your business <span class="em">hype.</span></h2>
-      <p class="lead">A free audit or consultation, on Microsoft Teams.</p>
-      <ul class="channels">
-        <li><a href="https://wa.me/97455879325" target="_blank" rel="noopener"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.6A9 9 0 1 1 21 12z"/></svg></span>WhatsApp us</a></li>
-        <li><a href="tel:+97455879325"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>+974 5587 9325</a></li>
-        <li><a href="mailto:info@forgehype.qa"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>info@forgehype.qa</a></li>
-      </ul>
+      <span class="mono-label">[ FREE CONSULTATION ]</span>
+      <h2 class="t-display t-h2 lines" id="book-title"><span class="ln">Book a Free</span><span class="ln">Consultation</span></h2>
+      <p class="lead">Tell us about your business. We reply on WhatsApp with a Teams invite within one working day.</p>
     </div>
-    <form class="glass form reveal scale" id="bookForm" novalidate>
+    <form class="form card-light reveal scale" id="bookForm" novalidate>
       <div class="form-fields">
-        <div class="two">
-          <div class="field"><label for="f-name">Your name <span class="req" aria-hidden="true">*</span></label><input class="input" id="f-name" name="name" type="text" autocomplete="name" required><p class="err">Please add your name.</p></div>
-          <div class="field"><label for="f-email">Work email <span class="req" aria-hidden="true">*</span></label><input class="input" id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required><p class="err">Please add a valid email.</p></div>
+        <div class="field">
+          <label for="f-type">Business type <span class="req" aria-hidden="true">*</span></label>
+          <select class="input" id="f-type" name="type" required>
+            <option value="" disabled selected>Select your sector</option>
+            <option>Luxury retail</option><option>E-commerce</option><option>Car detailing</option><option>Restaurants</option><option>Hotels &amp; hospitality</option><option>Real estate</option><option>Influencer media</option><option>Healthcare</option><option>Other</option>
+          </select>
+          <p class="err">Please choose your business type.</p>
         </div>
-        <div class="two">
-          <div class="field"><label for="f-phone">WhatsApp or phone</label><input class="input" id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+974"></div>
-          <div class="field"><label for="f-need">What do you need?</label><select class="input" id="f-need" name="need"><option>Not sure yet</option><option>Website &amp; e-commerce</option><option>Media production</option><option>AI agents &amp; automation</option><option>Search &amp; AI visibility</option><option>Brand &amp; media kit</option><option>Monthly support</option></select></div>
+        <fieldset class="field interests">
+          <legend>What are you interested in?</legend>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="interest" value="Fixing my website"><span>Fixing my website</span></label>
+            <label class="check"><input type="checkbox" name="interest" value="Getting content noticed"><span>Getting content noticed</span></label>
+            <label class="check"><input type="checkbox" name="interest" value="Getting found online"><span>Getting found online</span></label>
+            <label class="check"><input type="checkbox" name="interest" value="Building a memorable brand"><span>Building a memorable brand</span></label>
+            <label class="check"><input type="checkbox" name="interest" value="Automating my operations"><span>Automating my operations</span></label>
+            <label class="check"><input type="checkbox" name="interest" value="AI agents"><span>AI agents</span></label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="f-wa">WhatsApp <span class="req" aria-hidden="true">*</span></label>
+          <div class="phone-row">
+            <select class="input" id="f-cc" name="cc" aria-label="Country code">
+              <option value="+974" selected>+974 QA</option><option value="+971">+971 AE</option><option value="+966">+966 SA</option><option value="+973">+973 BH</option><option value="+965">+965 KW</option><option value="+968">+968 OM</option><option value="+962">+962 JO</option><option value="+961">+961 LB</option><option value="+20">+20 EG</option><option value="+90">+90 TR</option><option value="+91">+91 IN</option><option value="+92">+92 PK</option><option value="+880">+880 BD</option><option value="+94">+94 LK</option><option value="+977">+977 NP</option><option value="+63">+63 PH</option><option value="+60">+60 MY</option><option value="+44">+44 UK</option><option value="+49">+49 DE</option><option value="+33">+33 FR</option><option value="+1">+1 US</option>
+            </select>
+            <input class="input" id="f-wa" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="5555 5555" required>
+          </div>
+          <p class="err">Please add your WhatsApp number.</p>
         </div>
+        <div class="field"><label for="f-email">Email</label><input class="input" id="f-email" name="email" type="email" inputmode="email" autocomplete="email"><p class="err">Please check the email address.</p></div>
         <div class="field"><label for="f-msg">Anything else?</label><textarea class="input" id="f-msg" name="message" rows="3"></textarea></div>
-        <button class="btn btn-primary" type="submit">Book a free audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        <p class="form-note">Opens WhatsApp with your details filled in. We reply with a Teams invite.</p>
+        <button class="btn btn-primary" type="submit">Book a Free Consultation →</button>
+        <p class="form-note">Opens WhatsApp with your details filled in.</p>
       </div>
       <div class="form-success" role="status" aria-live="polite">
         <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="20"/><path d="M15 24l6 6 12-12"/></svg>
@@ -452,19 +460,46 @@
       </div>
     </form>
   </div>
+
+  <div class="wrap talk" id="talk">
+    <div class="section-head reveal"><h2 class="t-display t-h2 lines" id="talk-title"><span class="ln">Let’s Talk</span></h2></div>
+    <div class="talk-grid">
+      <ul class="contact-rows reveal" aria-labelledby="talk-title">
+        <li><a href="https://wa.me/97455879325" target="_blank" rel="noopener"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.6A9 9 0 1 1 21 12z"/></svg></span><span class="txt"><strong>WhatsApp</strong><small>+974 5587 9325</small></span><span class="arr" aria-hidden="true">↗</span></a></li>
+        <li><a href="mailto:info@forgehype.qa"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span class="txt"><strong>Email</strong><small>info@forgehype.qa</small></span><span class="arr" aria-hidden="true">↗</span></a></li>
+        <!-- TODO: Instagram profile URL not found in the repo. Replace href. -->
+        <li><a href="#talk" class="todo-link" aria-describedby="ig-note"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></span><span class="txt"><strong>Instagram</strong><small id="ig-note">Profile link coming soon</small></span><span class="arr" aria-hidden="true">↗</span></a></li>
+        <!-- TODO: LinkedIn page URL not found in the repo. Replace href. -->
+        <li><a href="#talk" class="todo-link" aria-describedby="li-note"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7h.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></span><span class="txt"><strong>LinkedIn</strong><small id="li-note">Page link coming soon</small></span><span class="arr" aria-hidden="true">↗</span></a></li>
+      </ul>
+      <div class="map reveal scale" id="map" role="img" aria-label="Map of the Gulf with pins on Doha, Qatar and Dubai, United Arab Emirates">
+        <svg viewBox="0 0 560 440" aria-hidden="true">
+          <defs><pattern id="dots" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="1.5" fill="#cfc6bd"/></pattern></defs>
+          <path class="land" d="M19.3 86.1 L48.3 153.0 L86.9 200.9 L100.4 239.1 L125.5 277.4 L154.5 334.8 L173.8 401.7 L212.4 405.6 L280.0 382.6 L347.6 334.8 L395.9 325.2 L434.5 306.1 L459.6 277.4 L492.4 220.0 L473.1 195.1 L432.6 147.3 L424.8 172.2 L411.3 166.4 L386.2 187.5 L347.6 191.3 L339.9 172.2 L337.9 151.1 L328.3 160.7 L324.4 176.0 L312.8 147.3 L305.1 124.3 L285.8 105.2 L266.5 76.5 L202.8 28.7 L135.2 9.6 L77.2 19.1 L29.0 47.8 Z"/>
+          <path class="land" d="M280.0 72.7 L312.8 95.7 L328.3 118.6 L357.2 128.2 L395.9 141.6 L430.6 133.9 L444.1 156.9 L473.1 162.6 L531.0 168.3 L531.0 105.2 L463.4 67.0 L386.2 47.8 L309.0 38.3 Z"/>
+          <path class="arc" pathLength="1" d="M338.5 166.6 Q374.6 118 410.7 168.3"/>
+          <g class="pin" transform="translate(338.5 166.6)"><circle class="halo" r="12"/><circle class="halo h2" r="12"/><circle class="pt" r="5"/><text x="0" y="30" text-anchor="middle">DOHA</text></g>
+          <!-- TODO: UAE city not confirmed; defaulting to Dubai -->
+          <g class="pin" transform="translate(410.7 168.3)"><circle class="halo" r="12"/><circle class="halo h2" r="12"/><circle class="pt" r="5"/><text x="0" y="30" text-anchor="middle">DUBAI</text></g>
+        </svg>
+        <span class="mono-label map-label">[ GCC ]</span>
+      </div>
+    </div>
+    <p class="closing t-display reveal"><span class="ln">Forge your</span><span class="ln em">business hype.</span></p>
+  </div>
 </section>
 </main>
 
-<footer class="footer">
+<footer class="footer light" data-theme="light">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <img src="assets/img/brand/logo.png" alt="ForgeHype" width="720" height="134">
+        <img src="assets/img/brand/logo-light.png" alt="ForgeHype" width="720" height="134">
         <p>Doha, Qatar. Working across the UAE and worldwide.</p>
       </div>
       <div>
         <h2>Explore</h2>
-        <ul><li><a href="#services">Services</a></li><li><a href="#work">Work</a></li><li><a href="#process">Process</a></li><li><a href="#faq">FAQ</a></li><li><a href="#book">Book a free audit</a></li></ul>
+        <ul><li><a href="#services">Services</a></li><li><a href="#work">Success stories</a></li><li><a href="#process">How we work</a></li><li><a href="#about">About</a></li><li><a href="#book">Book a free consultation</a></li></ul>
       </div>
       <div>
         <h2>Contact</h2>
@@ -480,6 +515,6 @@
 
 <a class="wa-float" id="waFloat" href="https://wa.me/97455879325" target="_blank" rel="noopener" aria-label="WhatsApp us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.6A9 9 0 1 1 21 12z"/></svg><span class="lbl">WhatsApp us</span></a>
 
-<script src="assets/js/main.js?v=20261023c" defer></script>
+<script src="assets/js/main.js?v=20261023e" defer></script>
 </body>
 </html>
