@@ -209,7 +209,9 @@ body.menu-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-
 .hero-static{display:none;position:relative;min-height:100svh;align-content:end;padding-block:calc(var(--s-10) + 2rem) var(--s-9);isolation:isolate;color:#f4efe9}
 .hero-static .bg{position:absolute;inset:0;z-index:-1;background:#0b0908 center/cover no-repeat;background-image:url("../img/hero-poster.jpg");background-position:60% 40%}
 .hero-static .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(11,9,8,.96) 0%,rgba(11,9,8,.72) 40%,rgba(11,9,8,.2) 75%,rgba(11,9,8,.5) 100%)}
-.hero-static h1{font-size:clamp(3.2rem,16vw,6rem);line-height:.92;letter-spacing:-.045em}
+.hero-static .hero-title{font-size:clamp(3.2rem,16vw,6rem);line-height:.92;letter-spacing:-.045em;margin-block-start:var(--s-3)}
+h1.kicker{font-weight:500;line-height:1.4}
+.hero-eyebrow{margin-block-end:var(--s-4)}
 .hero-static .btn-row{margin-block-start:var(--s-6)}
 @media (max-width:720px),(orientation:portrait) and (max-width:1024px),(orientation:portrait) and (pointer:coarse),(orientation:landscape) and (pointer:coarse) and (max-height:560px),(prefers-reduced-motion:reduce){
   .hero{display:none}
