@@ -579,12 +579,12 @@ textarea.input{min-height:6.5rem;resize:vertical}
 @media (max-width:560px){.features,.steps{grid-template-columns:1fr}}
 
 /* ---------- 17. Reveal choreography ---------- */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity var(--t-slow) var(--ease),transform var(--t-slow) var(--ease)}
-.reveal.in{opacity:1;transform:none}
-.reveal.scale{transform:scale(.96) translateY(14px)}
-.reveal.scale.in{transform:none}
-.reveal .ln{opacity:0;transform:translateY(.55em);transition:opacity .95s var(--ease),transform .95s var(--ease)}
-.reveal.in .ln{opacity:1;transform:none}
+html.js .reveal{opacity:0;transform:translateY(22px);transition:opacity var(--t-slow) var(--ease),transform var(--t-slow) var(--ease)}
+html.js .reveal.in{opacity:1;transform:none}
+html.js .reveal.scale{transform:scale(.96) translateY(14px)}
+html.js .reveal.scale.in{transform:none}
+html.js .reveal .ln{opacity:0;transform:translateY(.55em);transition:opacity .95s var(--ease),transform .95s var(--ease)}
+html.js .reveal.in .ln{opacity:1;transform:none}
 .reveal.in .ln:nth-child(2){transition-delay:.12s}.reveal.in .ln:nth-child(3){transition-delay:.24s}.reveal.in .ln:nth-child(4){transition-delay:.36s}
 .svc-grid > .reveal:nth-child(2n){transition-delay:.1s}
 
@@ -596,7 +596,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;transition-delay:0s!important;scroll-behavior:auto!important}
   body{opacity:1}
-  .reveal,.reveal .ln{opacity:1;transform:none}
+  html.js .reveal,html.js .reveal .ln{opacity:1;transform:none}
   .stack-card{transform:none}
   .stack-inner::after{opacity:0}
   .statement .w{opacity:1}
