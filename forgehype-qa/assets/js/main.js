@@ -651,3 +651,19 @@
   RM.addEventListener('change', e => { if (e.matches) pinToFinalStates(); else applyHeroMode(); });
   if (RM.matches) pinToFinalStates();
 })();
+
+/* problem cards: one-line answers that expand on tap */
+(() => {
+  document.querySelectorAll('.stack-text .answer').forEach(p => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'answer-more';
+    b.setAttribute('aria-controls', p.id); b.setAttribute('aria-expanded', 'false');
+    b.textContent = 'Read more';
+    b.addEventListener('click', () => {
+      const open = p.classList.toggle('open');
+      b.setAttribute('aria-expanded', String(open));
+      b.textContent = open ? 'Show less' : 'Read more';
+    });
+    p.after(b);
+  });
+})();
