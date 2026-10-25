@@ -794,3 +794,20 @@
   layout();
 })();
 
+/* booking journey: stop 1 lights, line runs to 2, then 3 */
+(() => {
+  const j = document.getElementById('journey');
+  if (!j) return;
+  const items = [...j.querySelectorAll('li')];
+  const show = () => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { items.forEach(li => li.classList.add('on')); j.style.setProperty('--p', 1); return; }
+    const t = [0, 1300, 2600];
+    items.forEach((li, i) => setTimeout(() => {
+      if (i) j.style.setProperty('--p', i / (items.length - 1));
+      setTimeout(() => li.classList.add('on'), i ? 700 : 0);
+    }, t[i]));
+  };
+  const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); show(); } }, { threshold: .6 });
+  io.observe(j);
+})();
+
