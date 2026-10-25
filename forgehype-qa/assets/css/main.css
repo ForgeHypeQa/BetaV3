@@ -1046,3 +1046,7 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .price-wrap .section-head{max-width:44rem;margin-inline:auto}
 @media (min-width:900px){.price-deck{--cw:min(44vw,560px)}.price-deck.stacked .deck-track>[data-pos="1"]{--x:12%;--r:3deg;--s:.92}}
 .price-cta-lead{text-align:center;margin:var(--s-6) 0 0;font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,1.1rem + .9vw,1.8rem);letter-spacing:-.015em;color:var(--accent)}.price-cta-lead+.btn-row.center{margin-block-start:var(--s-3)}
+.price-wrap .section-head{margin-block-end:var(--s-3)}
+.pricing-sec{padding-block-start:var(--s-6)}
+.price-cta-lead{color:#14110f;font-family:var(--font-body);font-weight:500;font-size:var(--fs-body);margin-block-start:var(--s-4)}
+.price-cta{color:#14110f;font-weight:800;font-size:1.2rem;padding:1rem 2rem}
