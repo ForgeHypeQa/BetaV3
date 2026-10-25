@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=20261026b">
+<link rel="stylesheet" href="assets/css/main.css?v=20261026c">
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "ProfessionalService", "@id": "https://forgehype.qa/#business", "name": "ForgeHype", "legalName": "ForgeHype website and Management consultancy W.L.L.", "url": "https://forgehype.qa/", "logo": "https://forgehype.qa/assets/img/brand/logo.png", "image": "https://forgehype.qa/assets/img/og.jpg", "description": "Website design and digital growth consultancy in Doha, Qatar: websites and e-commerce, website content and brand media, SEO and AI visibility audits, automation and AI consultancy, brand identity and monthly growth advisory.", "telephone": "+97455879325", "email": "info@forgehype.qa", "foundingDate": "2026-10-12", "address": {"@type": "PostalAddress", "streetAddress": "Building 66, Street 950, Zone 24", "addressLocality": "Doha", "addressCountry": "QA"}, "areaServed": {"@type": "Country", "name": "Qatar"}, "sameAs": ["https://www.instagram.com/forgehypeqatar/"], "knowsLanguage": ["en", "ar"]}
@@ -147,7 +147,11 @@
     <p class="scroll-hint reveal">Tap a problem to see its fix ↓</p>
   </div>
 
-  <div class="deck ans-deck" id="answersDeck" aria-roledescription="carousel" aria-label="Six fixes"><div class="deck-track">
+  </section>
+
+<!-- ============ 2b. THE FIXES (light) ============ -->
+<section class="section light fixes-sec" id="fixes" data-theme="light" aria-label="The fixes">
+  <div class="deck ans-deck" id="answersDeck" data-auto="5000" aria-roledescription="carousel" aria-label="Six fixes"><div class="deck-track">
     <article class="ans-card" id="fix-1" style="--i:0;--tint:#141110" aria-label="Your website isn’t working">
       <div class="stack-inner">
         <figure class="stack-media"><img src="assets/img/problems/website.jpg" alt="A cracked frosted glass browser window with an unfinished orange loading bar" width="1000" height="1250" loading="lazy"><span class="n">01 / 06</span></figure>
@@ -281,7 +285,7 @@
 </section>
 
 <!-- ============ 4. QATAR (light) ============ -->
-<section class="section light gap-out qatar" id="qatar" data-theme="light" aria-labelledby="qatar-title">
+<section class="section gap-out qatar" id="qatar" data-theme="dark" aria-labelledby="qatar-title">
   <div class="wrap qatar-grid">
     <div class="qatar-text reveal">
       <span class="mono-label sec-label">[ Qatar ]</span>
@@ -299,14 +303,14 @@
 </section>
 
 <!-- ============ 5. SERVICES (dark) ============ -->
-<section class="section gap-in" id="services" data-theme="dark" aria-labelledby="svc-title">
+<section class="section light gap-in" id="services" data-theme="light" aria-labelledby="svc-title">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="mono-label sec-label">[ Our services ]</span>
       <h2 class="t-display t-h2 lines" id="svc-title"><span class="ln">Every business is different.</span><span class="ln">So is every solution.</span><span class="ln">Six services. <span class="em">One team.</span></span></h2>
       <p class="lowkey">Pick what your business demands. We shape the scope to fit your needs.</p>
     </div>
-    <div class="deck svc-deck" id="svcDeck" data-auto="3000" data-start-desktop="1" aria-roledescription="carousel" aria-label="Six services"><ol class="deck-track" id="svcList">
+    <div class="deck svc-deck" id="svcDeck" data-auto="3000" data-spread aria-roledescription="carousel" aria-label="Six services"><ol class="deck-track" id="svcList">
       <li class="svc-card" data-labels="Watch reseller|Luxury boutique|Restaurant|Cafe|Real estate">
         <a href="services/website-ecommerce.html">
           <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/work/watch.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/work/bags.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/work/dining.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/web-cafe.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/web-realestate.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Watch reseller</span></span>
@@ -379,16 +383,15 @@
 </section>
 
 <!-- ============ 8. SUCCESS STORIES (dark) ============ -->
-<section class="section work" id="work" data-theme="dark" aria-labelledby="work-title">
+<section class="section light work" id="work" data-theme="light" aria-labelledby="work-title">
   <div class="wrap work-head reveal">
     <div class="work-title"><span class="mono-label sec-label">[ Success stories ]</span><h2 class="t-display t-h2 lines" id="work-title"><span class="ln">Made for brands that</span><span class="ln em">can’t look ordinary.</span></h2></div>
     <div class="work-tools">
       <a class="link-u" href="#book">Book a free audit ↗</a>
-      <div class="car-nav"><button type="button" class="car-btn" id="carPrev" aria-label="Previous story">←</button><button type="button" class="car-btn" id="carNext" aria-label="Next story">→</button></div>
+      
     </div>
   </div>
-  <div class="carousel" id="carousel" tabindex="0" aria-roledescription="carousel" aria-label="Sectors we work in. Hover or tap to pause, swipe to move.">
-    <ul class="car-track" id="carTrack">
+  <div class="deck work-deck" id="workDeck" data-auto="3000" data-spread aria-roledescription="carousel" aria-label="Sectors we work in"><ul class="deck-track">
       <li class="work-card"><img src="assets/img/work/bags.jpg" alt="A charcoal leather handbag lit by an orange edge light on a dark stone plinth" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">01 / 08</span><div class="meta"><span class="tag">Luxury retail</span><h3 class="t-display">Luxury retail</h3><p>Campaign films and reels for luxury boutiques.</p></div></li>
       <li class="work-card"><img src="assets/img/work/watch.jpg" alt="A steel wristwatch with a dark dial standing on black glass with an orange rim light" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">02 / 08</span><div class="meta"><span class="tag">E-commerce</span><h3 class="t-display">E-commerce</h3><p>Launch content and stores for resellers moving six-figure pieces.</p></div></li>
       <li class="work-card"><img src="assets/img/work/car.jpg" alt="Water beads on freshly coated black car paint reflecting an orange light strip" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">03 / 08</span><div class="meta"><span class="tag">Automotive</span><h3 class="t-display">Car detailing</h3><p>Before and after reels that sell the finish.</p></div></li>
@@ -397,8 +400,7 @@
       <li class="work-card"><img src="assets/img/work/realestate.jpg" alt="A modern villa at dusk with warm light inside and a still reflecting pool" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">06 / 08</span><div class="meta"><span class="tag">Property</span><h3 class="t-display">Real estate</h3><p>Towers, villas and lobbies, filmed to sell the view.</p></div></li>
       <li class="work-card"><img src="assets/img/work/influencer.jpg" alt="A camera on a tripod facing an empty stool in a dark creator studio with a warm light panel" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">07 / 08</span><div class="meta"><span class="tag">Creators</span><h3 class="t-display">Influencer media</h3><p>Creator shoots, UGC and edits that keep feeds alive.</p></div></li>
       <li class="work-card"><img src="assets/img/work/health.jpg" alt="A clean treatment chair in a dark modern clinic with an orange light line on frosted glass" width="1400" height="1750" loading="lazy"><div class="fade"></div><span class="idx">08 / 08</span><div class="meta"><span class="tag">Healthcare</span><h3 class="t-display">Healthcare</h3><p>Clinics and specialists, presented with calm and trust.</p></div></li>
-    </ul>
-  </div>
+    </ul><div class="deck-nav"><button type="button" class="deck-arrow" data-dir="-1" aria-label="Previous story">←</button><div class="deck-dots"></div><button type="button" class="deck-arrow" data-dir="1" aria-label="Next story">→</button></div></div>
 </section>
 
 <!-- ============ 9. WHY OTHERS CHOOSE US (dark) ============ -->
@@ -501,8 +503,8 @@
 
 <a class="wa-float" id="waFloat" href="https://wa.me/97455879325" target="_blank" rel="noopener" aria-label="WhatsApp us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.6A9 9 0 1 1 21 12z"/></svg><span class="lbl">WhatsApp us</span></a>
 
-<script src="assets/js/main.js?v=20261026a" defer></script>
-<script src="assets/js/deck.js?v=2" defer></script>
+<script src="assets/js/main.js?v=20261026b" defer></script>
+<script src="assets/js/deck.js?v=3" defer></script>
 <script src="assets/js/glide.js?v=1" defer></script>
 <script src="assets/js/analytics.js?v=1" defer></script>
 </body>

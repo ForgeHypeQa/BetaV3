@@ -148,7 +148,7 @@
 
   /* ================= 2. NAV + MENU ================= */
   const nav = $('#nav'), menu = $('#menu'), toggle = $('.nav-toggle');
-  /* navbar: shows while scrolling or after a tap, hides after 2 s of no movement;
+  /* navbar: shows while scrolling or after a tap, hides after 1 s of no movement;
      always shown at the top and the bottom of the page, while the menu is open, or while hovered/focused */
   let navTick = false, navTimer = 0, navHover = false;
   const navEdge = () => scrollY < 40 || scrollY + innerHeight >= document.documentElement.scrollHeight - 40;
@@ -156,7 +156,7 @@
   const navWake = () => {
     nav.classList.remove('hide');
     clearTimeout(navTimer);
-    navTimer = setTimeout(() => { if (!navKeep()) nav.classList.add('hide'); }, 2000);
+    navTimer = setTimeout(() => { if (!navKeep()) nav.classList.add('hide'); }, 1000);
   };
   nav.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { navHover = true; nav.classList.remove('hide'); } });
   nav.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') { navHover = false; navWake(); } });
