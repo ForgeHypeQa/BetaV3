@@ -1177,9 +1177,3 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .nav.mini .nav-toggle span{background:#f4efe9}
 .nav.mini .nav-toggle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
 .nav.mini .nav-toggle{position:fixed;top:10px;right:10px;margin:0}@media (min-width:1024px){.nav.mini .nav-toggle{top:16px;right:16px}}
-/* floating FH badge */
-.fh-mini{position:fixed;top:10px;left:10px;width:44px;height:44px;border-radius:50%;display:grid;grid-auto-flow:column;place-content:center;gap:0;background:rgba(20,17,15,.85);border:1px solid rgba(255,255,255,.18);font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:-.02em;text-decoration:none;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s}
-.fh-mini .f{color:var(--accent)}.fh-mini .h{color:#f4efe9}
-.nav.mini .fh-mini{opacity:.5;visibility:visible;pointer-events:auto}
-.nav.mini .fh-mini:hover,.nav.mini .fh-mini:focus-visible{opacity:1}
-@media (min-width:1024px){.fh-mini{top:16px;left:16px}}

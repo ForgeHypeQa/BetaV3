@@ -942,13 +942,3 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   new MutationObserver(upd).observe(document.body, { attributes: true, attributeFilter: ['class'] });
   upd();
 })();
-
-/* floating FH badge (left), shown with the floating menu button */
-(() => {
-  const nav = document.getElementById('nav'), brand = nav && nav.querySelector('.brand');
-  if (!nav || !brand) return;
-  const a = document.createElement('a');
-  a.className = 'fh-mini'; a.href = brand.getAttribute('href') || '#top'; a.setAttribute('aria-label', 'ForgeHype home');
-  a.innerHTML = '<span class="f">F</span><span class="h">H</span>';
-  nav.appendChild(a);
-})();
