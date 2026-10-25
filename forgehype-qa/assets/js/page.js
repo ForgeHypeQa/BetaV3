@@ -10,18 +10,29 @@
   setTimeout(showPage, 400);
 
   const nav = $('#nav'), menu = $('#menu'), toggle = $('.nav-toggle');
-  let lastY = scrollY, navTick = false;
+  /* navbar: shows while scrolling or after a tap, hides after 2 s of no movement;
+     always shown at the top and the bottom of the page, while the menu is open, or while hovered/focused */
+  let navTick = false, navTimer = 0, navHover = false;
+  const navEdge = () => scrollY < 40 || scrollY + innerHeight >= document.documentElement.scrollHeight - 40;
+  const navKeep = () => navEdge() || navHover || document.body.classList.contains('menu-open') || nav.contains(document.activeElement);
+  const navWake = () => {
+    nav.classList.remove('hide');
+    clearTimeout(navTimer);
+    navTimer = setTimeout(() => { if (!navKeep()) nav.classList.add('hide'); }, 2000);
+  };
+  nav.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { navHover = true; nav.classList.remove('hide'); } });
+  nav.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') { navHover = false; navWake(); } });
+  addEventListener('pointerdown', navWake, { passive: true });
+  addEventListener('keydown', navWake);
   addEventListener('scroll', () => {
     if (navTick) return; navTick = true;
     requestAnimationFrame(() => {
-      const y = scrollY;
-      nav.classList.toggle('scrolled', y > 40);
-      const hide = y > lastY + 6 && y > innerHeight * 0.6 && !document.body.classList.contains('menu-open');
-      if (hide !== nav.classList.contains('hide')) nav.classList.toggle('hide', hide);
-      if (Math.abs(y - lastY) > 6) lastY = y;
+      nav.classList.toggle('scrolled', scrollY > 40);
+      navWake();
       navTick = false;
     });
   }, { passive: true });
+  navWake();
   function setMenu(open) {
     document.body.classList.toggle('menu-open', open);
     menu.classList.toggle('open', open);
