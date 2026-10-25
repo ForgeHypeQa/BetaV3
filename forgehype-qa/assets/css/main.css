@@ -1137,3 +1137,14 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 /* muted accent: softer glows */
 .btn-primary{box-shadow:0 8px 22px -14px rgba(217,104,46,.35)}
 .orbit .arc{filter:drop-shadow(0 0 4px rgba(217,104,46,.35))}
+/* client cards: logo + what we did (replaces the scrolling strip) */
+.client-cards{list-style:none;margin:0 auto;padding:0 var(--gutter);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--s-4);max-width:var(--max)}
+.cc{display:flex;gap:var(--s-3);align-items:flex-start;padding:var(--s-4);border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.03)}
+.cc img{flex:none;width:52px;height:52px;border-radius:12px;object-fit:contain;background:#fff}
+.cc-txt{display:grid;gap:.15rem;min-width:0;line-height:1.3}
+.cc strong{font-family:var(--font-display);font-weight:600;font-size:1rem;color:var(--text-primary)}
+.cc-svc{color:var(--accent);font-size:var(--fs-sm);font-weight:500}
+.cc-det{color:var(--text-secondary);font-size:var(--fs-xs)}
+.cc-since{color:var(--text-tertiary);font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;margin-block-start:.15rem}
+@media (max-width:1100px){.client-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-block:2px}.client-cards::-webkit-scrollbar{display:none}.cc{flex:0 0 min(72vw,280px);scroll-snap-align:start}}
+@media (max-width:1100px){.client-cards{scroll-padding-inline:var(--gutter)}.client-cards::after{content:"";flex:0 0 1px}}
