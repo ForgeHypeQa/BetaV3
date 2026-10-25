@@ -238,6 +238,7 @@ h1.kicker{font-weight:500;line-height:1.4}
 .tile svg{width:40%;height:auto;max-width:72px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s var(--ease)}
 .tile:hover,.tile:focus-visible{transform:translateY(-3px);background:rgba(255,255,255,.085);border-color:rgba(255,255,255,.5);box-shadow:0 26px 50px -26px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.16);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .tile:hover svg{transform:scale(1.06)}
+.tile>span{color:var(--accent);font-size:clamp(1rem,.9rem + .4vw,1.15rem);font-weight:600;line-height:1.25;letter-spacing:-.005em;max-width:14ch}
 .tile-tag{display:block;font-family:var(--font-mono);font-size:.68rem;font-weight:500;letter-spacing:.04em;line-height:1.35;color:var(--accent);max-width:16ch}
 .pains-intro .pct{color:var(--accent);font-weight:700}
 .pains-intro .six{display:block;color:var(--accent);margin-block-start:var(--s-3)}
