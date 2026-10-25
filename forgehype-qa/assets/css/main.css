@@ -1045,3 +1045,4 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .price-wrap{max-width:none}
 .price-wrap .section-head{max-width:44rem;margin-inline:auto}
 @media (min-width:900px){.price-deck{--cw:min(44vw,560px)}.price-deck.stacked .deck-track>[data-pos="1"]{--x:12%;--r:3deg;--s:.92}}
+.price-cta-lead{text-align:center;margin:var(--s-6) 0 0;font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,1.1rem + .9vw,1.8rem);letter-spacing:-.015em;color:var(--accent)}.price-cta-lead+.btn-row.center{margin-block-start:var(--s-3)}
