@@ -1057,3 +1057,7 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .sa svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .scroll-arrows.at-top .sa-up,.scroll-arrows.at-end .sa-down{opacity:0;visibility:hidden;transform:scale(.8)}
 @media (min-width:1024px){.scroll-arrows{left:24px;bottom:28px}}
+/* swap: WhatsApp bottom-left, arrows bottom-right */
+.wa-float{inset-inline-end:auto;inset-inline-start:var(--s-5)}
+.scroll-arrows{left:auto;right:16px}
+@media (min-width:1024px){.scroll-arrows{left:auto;right:24px}}
