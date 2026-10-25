@@ -968,3 +968,4 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 #bookForm button[type=submit]{margin-block-start:var(--s-2)}
 .book-side .journey{margin-block:var(--s-5) 0}
 @media (max-width:900px){.book{gap:var(--s-6)}}
+#bookForm textarea.input{min-height:2.9rem;height:2.9rem;resize:vertical}
