@@ -258,7 +258,7 @@ h1.kicker{font-weight:500;line-height:1.4}
 .stack-text .tag{display:inline-block;padding:.4rem .8rem;border-radius:var(--r-pill);font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.08em;color:#f4efe9;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.18);margin-block-start:var(--s-2)}
 .stack-text .btn-row{margin-block-start:var(--s-2)}
 .stack-text .answer{color:#c9c0b7;font-size:var(--fs-sm);line-height:1.6;max-width:46ch}
-a.tag{text-decoration:none}a.tag:hover,a.tag:focus-visible{border-color:var(--accent);color:var(--accent)}
+a.tag{text-decoration:none;white-space:nowrap;margin-block-start:0}a.tag:hover,a.tag:focus-visible{border-color:var(--accent);color:var(--accent)}
 .trust .label.industries{margin-block:var(--s-5) 0;text-transform:none;letter-spacing:.04em}
 .stack-cta{display:flex;flex-wrap:wrap;gap:var(--s-5);align-items:center;justify-content:center;padding-block-start:var(--s-8)}
 @media (max-width:900px){
