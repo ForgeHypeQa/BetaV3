@@ -1050,3 +1050,10 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .pricing-sec{padding-block-start:var(--s-6)}
 .price-cta-lead{color:#14110f;font-family:var(--font-body);font-weight:500;font-size:var(--fs-body);margin-block-start:var(--s-4)}
 .price-cta{color:#14110f;font-weight:800;font-size:1.2rem;padding:1rem 2rem}
+/* scroll arrows (bottom-left) */
+.scroll-arrows{position:fixed;left:16px;bottom:20px;z-index:55;display:grid;gap:10px}
+.sa{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;padding:0;cursor:pointer;border:1px solid rgba(255,255,255,.18);background:rgba(20,17,15,.45);color:#f4efe9;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 10px 24px -10px rgba(0,0,0,.55);opacity:.7;transition:opacity .3s,transform .3s,visibility .3s}
+.sa:hover,.sa:focus-visible{opacity:1;border-color:var(--accent)}
+.sa svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.scroll-arrows.at-top .sa-up,.scroll-arrows.at-end .sa-down{opacity:0;visibility:hidden;transform:scale(.8)}
+@media (min-width:1024px){.scroll-arrows{left:24px;bottom:28px}}

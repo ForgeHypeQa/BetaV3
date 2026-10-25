@@ -845,3 +845,21 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   b.textContent = open ? b.dataset.labelLess : b.dataset.labelMore;
   b.setAttribute('aria-expanded', String(open));
 }));
+
+/* scroll arrows: up = to the very top, down = one screen further */
+(() => {
+  const wrap = document.createElement('div');
+  wrap.className = 'scroll-arrows';
+  wrap.innerHTML = '<button type="button" class="sa sa-up" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg></button>' +
+                   '<button type="button" class="sa sa-down" aria-label="Scroll down one screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10l6 6 6-6"/></svg></button>';
+  document.body.appendChild(wrap);
+  const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  wrap.querySelector('.sa-up').addEventListener('click', () => scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' }));
+  wrap.querySelector('.sa-down').addEventListener('click', () => scrollBy({ top: Math.round(innerHeight * 0.85), behavior: smooth ? 'smooth' : 'auto' }));
+  const upd = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    wrap.classList.toggle('at-top', scrollY < 200);
+    wrap.classList.toggle('at-end', scrollY > max - 40);
+  };
+  addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
+})();
