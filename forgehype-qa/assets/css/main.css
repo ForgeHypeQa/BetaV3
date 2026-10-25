@@ -969,3 +969,32 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .book-side .journey{margin-block:var(--s-5) 0}
 @media (max-width:900px){.book{gap:var(--s-6)}}
 #bookForm textarea.input{min-height:2.9rem;height:2.9rem;resize:vertical}
+
+/* ===== desktop scale: everything ~20-25% smaller at 100% browser zoom ===== */
+@media (min-width:1024px){
+  html{font-size:13px}
+  :root{
+    --fs-hero:clamp(3.4rem,1rem + 7.5vw,9rem);
+    --fs-h1:clamp(2.6rem,1.2rem + 3.4vw,5rem);
+    --fs-h2:clamp(2.1rem,1.1rem + 2.3vw,3.7rem);
+    --fs-h3:clamp(1.3rem,1.1rem + .6vw,1.7rem);
+    --fs-lead:clamp(1.1rem,1rem + .3vw,1.3rem);
+    --gutter:clamp(1.25rem,.6rem + 3vw,3.5rem);
+  }
+  .closing{font-size:clamp(3rem,1rem + 6vw,7rem)}
+  .orbit-done .tagline{font-size:clamp(2rem,1.2rem + 2vw,3rem)}
+  .reel-stage{--cw:clamp(220px,18vw,300px)}
+  .team-track{--cw:250px}
+  .svc-deck{--cw:min(24vw,340px)}
+  .work-deck{--cw:min(20vw,300px)}
+  .ans-deck{--cw:min(54vw,780px)}
+  .ans-card .stack-media{max-height:360px}
+  .orbit{width:min(100%,430px)}
+  .talk-grid{grid-template-columns:1fr minmax(0,380px);justify-content:space-between}
+  .map{max-width:380px;justify-self:end}
+  .qatar-grid{gap:var(--s-7)}
+  .pair .yes{font-size:clamp(1.6rem,1rem + 1.8vw,2.6rem)}
+  .stack-text .fix,.ans-card .stack-text .fix{font-size:clamp(1.45rem,1.1rem + 1vw,2rem)}
+  .tile svg{width:38px;max-width:38px}
+}
+#pains{background:#0b0908;--text-primary:#f4efe9;--text-secondary:#a89f96;--text-tertiary:#7d756d;--line:rgba(255,255,255,.08);--line-strong:rgba(255,255,255,.18);color:var(--text-primary)}
