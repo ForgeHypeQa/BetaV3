@@ -80,11 +80,11 @@
 (() => {
   const mq = matchMedia('(max-width: 560px)');
   const folds = [...document.querySelectorAll('.footer-grid > div')].filter(d => {
-    const h = d.querySelector('h2'); return h && d.querySelector('ul') && !/contact/i.test(h.textContent);
+    const h = d.querySelector('h2'); return h && d.querySelector('ul, .fbody') && !/contact/i.test(h.textContent);
   });
   folds.forEach(d => {
     const h = d.querySelector('h2');
-    d.classList.add('fold');
+    d.classList.add('fold'); if (d.dataset.open === '1') d.classList.add('open');
     const toggle = () => { if (!mq.matches) return; const o = d.classList.toggle('open'); h.setAttribute('aria-expanded', String(o)); };
     h.addEventListener('click', toggle);
     h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
@@ -96,3 +96,10 @@
   });
   mq.addEventListener('change', apply); apply();
 })();
+
+/* footer FAQ: three questions, then "Show 3 more" */
+document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', () => {
+  const box = b.closest('.fbody'), open = box.classList.toggle('more');
+  b.textContent = open ? b.dataset.labelLess : b.dataset.labelMore;
+  b.setAttribute('aria-expanded', String(open));
+}));
