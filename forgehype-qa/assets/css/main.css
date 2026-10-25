@@ -793,3 +793,22 @@ html:not(.js) .journey li .j-lbl{opacity:1;transform:none}
 .tile{aspect-ratio:4/3;padding:var(--s-3);gap:var(--s-2)}
 .tile svg{width:36px;max-width:36px}
 @media (min-width:900px){.tile{aspect-ratio:16/10}.tile svg{width:44px;max-width:44px}}
+/* orbit: tap to step — glowing core and stops */
+.orbit .core{touch-action:manipulation}
+.orbit .core::before,.orbit .core::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:1.5px solid var(--accent);opacity:0;pointer-events:none}
+.orbit:not(.forged) .core{animation:coreglow 2.6s ease-in-out infinite}
+.orbit:not(.forged) .core::before{animation:corehalo 2.6s ease-out infinite}
+.orbit:not(.forged) .core::after{animation:corehalo 2.6s ease-out infinite 1.3s}
+@keyframes corehalo{0%{opacity:.75;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.32)}}
+@keyframes coreglow{0%,100%{filter:drop-shadow(0 0 6px rgba(254,93,2,.25))}50%{filter:drop-shadow(0 0 26px rgba(254,93,2,.6))}}
+.orbit .core:active{transform:translate(-50%,-50%) scale(.95)}
+.orbit .node.lit circle{animation:nodelit 2.6s ease-in-out infinite}
+.orbit .node.next circle{stroke:var(--accent);animation:nodenext 1.6s ease-in-out infinite}
+.orbit .node.next text{fill:var(--accent)}
+@keyframes nodelit{0%,100%{filter:drop-shadow(0 0 8px rgba(254,93,2,.55))}50%{filter:drop-shadow(0 0 18px rgba(254,93,2,.95))}}
+@keyframes nodenext{0%,100%{filter:drop-shadow(0 0 0 rgba(254,93,2,0));stroke-width:1.5}50%{filter:drop-shadow(0 0 12px rgba(254,93,2,.85));stroke-width:2.5}}
+.orbit.tapped .core-hint{opacity:0;animation:none}
+.orbit.tapped .core-step{opacity:1;transform:none}
+.orbit .core-step.pop{animation:steppop .45s cubic-bezier(.34,1.56,.64,1)}
+@keyframes steppop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
+.orbit .core-hint{font-size:var(--fs-sm);letter-spacing:.22em}

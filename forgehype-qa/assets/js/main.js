@@ -402,56 +402,54 @@
   addEventListener('resize', ambient);
   ambient();
 
-  /* ================= 11. THE ORBIT: HOLD TO FORGE ================= */
+  /* ================= 11. THE ORBIT: TAP TO FORGE ================= */
+  /* Each tap lights the next stop (01-05) and fills the ring to it; the fifth tap forges and shows "Seen to shine". */
   const orbit = $('#orbit'), orbitCore = $('#orbitCore'), orbitSection = $('#orbitSection');
   const coreHint = $('#coreHint'), coreStep = $('#coreStep');
   const onodes = orbit ? $$('.node', orbit) : [], olabels = orbit ? $$('.lbl', orbit) : [];
-  const STEPS = ['We build.', 'We guide.', 'We stay. Until your team owns it.'];
-  let heat = 0, holding = false, autoFill = false, fRaf = null, fLast = 0, forged = false, litCount = -1, stepIdx = -1;
-  function setHint() { if (coreHint) coreHint.textContent = COARSE.matches ? 'Tap & hold' : 'Click & hold'; }
+  const STAGES = olabels.map(l => l.textContent.trim());
+  let heat = 0, lit = 0, forged = false, hRaf = null;
   function setLit(n) {
-    if (n === litCount) return;
-    if (n > litCount && litCount >= 0 && holding && navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
-    litCount = n;
-    onodes.forEach((el, i) => el.classList.toggle('lit', i < n));
+    lit = n;
+    onodes.forEach((el, i) => { el.classList.toggle('lit', i < n); el.classList.toggle('next', i === n && !forged); });
     olabels.forEach((el, i) => el.classList.toggle('lit', i < n));
   }
-  function setStep(h) {
-    const i = h <= 0 ? -1 : h < 0.34 ? 0 : h < 0.67 ? 1 : 2;
-    if (i === stepIdx) return; stepIdx = i;
-    if (coreStep) coreStep.textContent = i < 0 ? '' : STEPS[i];
-  }
-  function forgeTick(now) {
-    const dt = Math.min(100, now - (fLast || now)); fLast = now;
-    const filling = holding || autoFill;
-    heat = clamp(heat + (filling ? dt / (autoFill ? 1600 : 3000) : -dt / 1200), 0, 1);
-    orbit.style.setProperty('--heat', heat.toFixed(3));
-    setLit(heat > 0.02 ? Math.min(5, Math.floor(heat * 5) + 1) : 0);
-    setStep(heat);
-    if (heat >= 1 && !forged) completeForge();
-    const keepGoing = (filling && heat < 1) || (!filling && heat > 0 && !forged);
-    if (!filling && heat > 0 && !forged) orbit.classList.add('cooling'); else orbit.classList.remove('cooling');
-    if (keepGoing) fRaf = requestAnimationFrame(forgeTick); else { fRaf = null; fLast = 0; }
+  function heatTo(target, done) {
+    if (hRaf) cancelAnimationFrame(hRaf);
+    const from = heat, t0 = performance.now(), dur = 520;
+    const tick = now => {
+      const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      heat = from + (target - from) * e;
+      orbit.style.setProperty('--heat', heat.toFixed(3));
+      if (k < 1) hRaf = requestAnimationFrame(tick); else { hRaf = null; if (done) done(); }
+    };
+    hRaf = requestAnimationFrame(tick);
   }
   function completeForge() {
-    forged = true; holding = false; autoFill = false; heat = 1;
+    forged = true; heat = 1;
     orbit.style.setProperty('--heat', '1'); setLit(5);
-    orbit.classList.add('forged'); orbit.classList.remove('holding', 'cooling'); orbitSection.classList.add('forged');
+    orbit.classList.add('forged'); orbit.classList.remove('tapped'); orbitSection.classList.add('forged');
     orbitCore.setAttribute('aria-pressed', 'true');
     orbitCore.setAttribute('aria-label', 'Forged. Crafted to last. Seen to shine.');
-    if (navigator.vibrate && holding) { try { navigator.vibrate([20, 40, 60]); } catch (e) {} }
+    if (navigator.vibrate) { try { navigator.vibrate([20, 40, 60]); } catch (e) {} }
   }
-  function holdStart(e) { if (forged) return; if (e.type === 'pointerdown' && e.button !== 0) return; if (e.type === 'pointerdown') { e.preventDefault(); try { orbitCore.setPointerCapture(e.pointerId); } catch (x) {} } holding = true; orbit.classList.add('holding'); if (fRaf === null) fRaf = requestAnimationFrame(forgeTick); }
-  function holdEnd() { if (!holding) return; holding = false; orbit.classList.remove('holding'); if (fRaf === null && heat > 0) fRaf = requestAnimationFrame(forgeTick); }
+  function tapStep() {
+    if (forged || !orbit) return;
+    const n = Math.min(5, lit + 1);
+    setLit(n);
+    orbit.classList.add('tapped');
+    if (coreStep) { coreStep.textContent = STAGES[n - 1] || ''; coreStep.classList.remove('pop'); void coreStep.offsetWidth; coreStep.classList.add('pop'); }
+    orbitCore.setAttribute('aria-label', 'Stage ' + n + ' of 5: ' + (STAGES[n - 1] || '') + (n < 5 ? '. Tap for the next stage.' : ''));
+    if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
+    heatTo(n / 5, n === 5 ? () => setTimeout(completeForge, 250) : null);
+  }
   if (orbit && orbitCore) {
-    setHint(); COARSE.addEventListener('change', setHint);
+    if (coreHint) coreHint.textContent = 'Tap';
+    orbitCore.setAttribute('aria-label', 'Tap to move through the five stages');
+    setLit(0);
     if (RM.matches) completeForge();
-    orbitCore.addEventListener('pointerdown', holdStart);
-    orbitCore.addEventListener('pointerup', holdEnd);
-    orbitCore.addEventListener('pointercancel', holdEnd);
+    orbitCore.addEventListener('click', tapStep);
     orbitCore.addEventListener('contextmenu', e => e.preventDefault());
-    orbitCore.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); holdStart(e); } });
-    orbitCore.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') holdEnd(); });
   }
 
   /* ================= 12. STORIES CAROUSEL ================= */
