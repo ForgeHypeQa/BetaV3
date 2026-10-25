@@ -949,3 +949,4 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .book-sec:not(.light) .j-dot{background:#0b0908;border-color:rgba(255,255,255,.45);color:var(--text-secondary)}
 .book-sec:not(.light) .journey li.on .j-dot{background:var(--accent);border-color:var(--accent);color:#140600}
 .hero-static{background:#0b0908;box-shadow:0 0 0 100vmax #0b0908;clip-path:inset(0 -100vmax)}
+.svc-card .thumb img{transition:opacity .45s var(--ease)}

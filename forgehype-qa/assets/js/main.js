@@ -312,15 +312,12 @@
   }
   function cycleTick() {
     if (RM.matches || document.hidden) return;
-    const visible = svcRows.filter(r => r.vis);
-    if (!visible.length) return;
-    const r = visible[cyclePos % visible.length]; cyclePos++;
-    showRowImage(r, r.i + 1);
+    svcRows.filter(r => r.vis).forEach(r => showRowImage(r, r.i + 1));   // every visible card changes image each second
   }
   if (svcRows.length) {
     const rowIO = new IntersectionObserver(es => es.forEach(e => { const r = svcRows.find(x => x.row === e.target); if (r) r.vis = e.isIntersecting; }), { threshold: 0.2 });
     svcRows.forEach(r => rowIO.observe(r.row));
-    if (!RM.matches) cycleTimer = setInterval(cycleTick, 1400);
+    if (!RM.matches) cycleTimer = setInterval(cycleTick, 1000);
   }
 
   /* ================= 8. ABOUT: statement words, clock ================= */
@@ -658,7 +655,7 @@
   function unpinFinalStates() {
     if (!pinned) return; pinned = false;
     ambient(); stackUpdate();
-    if (svcRows.length && !cycleTimer) cycleTimer = setInterval(cycleTick, 1400);
+    if (svcRows.length && !cycleTimer) cycleTimer = setInterval(cycleTick, 1000);
     if (embers) embers.resume(); else startEmbers();
     measureTheme();
   }
