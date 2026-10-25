@@ -1085,3 +1085,14 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 /* only the numbered tile is orange; the rest follow the theme text colour */
 .tile>span,.tile svg,.light .tile svg{color:var(--text-primary);transition:color .35s var(--ease)}
 .tile.num-on>span,.tile.num-on svg{color:var(--accent)}
+/* pricing cards, compact */
+.price-deck{--cw:min(84vw,460px)}
+.price-deck .price-card{padding:1.2rem 1.2rem 1.3rem}
+.price-deck .pc-head{margin-block-end:var(--s-4);gap:var(--s-3)}
+.price-deck .pc-num{width:2.7rem;height:2.7rem;font-size:1.15rem}
+.price-deck .pc-head h3{font-size:clamp(1.4rem,1.1rem + 1vw,1.9rem)}
+.price-deck .pc-head p{font-size:var(--fs-body)}
+.price-deck .pc-list{gap:.45rem}
+.price-deck .pc-list li{font-size:var(--fs-body)}
+.price-deck .pc-grid{gap:var(--s-2)}
+.price-deck .pc-grid li{padding:.7rem .8rem;font-size:var(--fs-sm)}
