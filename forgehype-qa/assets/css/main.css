@@ -1111,3 +1111,11 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 @media (prefers-reduced-motion:reduce){.hero-static .bg video{display:none}.hero-static .bg{background:#050505 url("../video/hero-mobile.jpg") 50% 0/100% auto no-repeat}}
 .hero-static .bg video{height:56%;object-position:50% 30%}
 .hero-static .bg::after{background:linear-gradient(to bottom,rgba(5,5,5,.35) 0%,rgba(5,5,5,0) 14%,rgba(5,5,5,0) 30%,rgba(5,5,5,.8) 46%,#050505 55%)}
+/* stacked fix cards: never wider than the column, centred */
+.stack{grid-template-columns:minmax(0,1fr)}
+.stack-card,.stack-inner,.stack-text{min-width:0}
+.stack-text .tag{max-width:100%;white-space:normal}
+/* client strip shares the hero/page black and glow (no separate block) */
+.trust{background:transparent;border-block-color:transparent}
+.hero-static .bg{background-color:transparent}.hero-static .bg::after{background:linear-gradient(to bottom,rgba(5,5,5,.35) 0%,rgba(5,5,5,0) 14%,rgba(5,5,5,0) 30%,rgba(5,5,5,.85) 46%,rgba(5,5,5,.6) 75%,rgba(5,5,5,0) 100%)}
+.hero-static .kicker,.hero .kicker,.hero-eyebrow{color:#f4efe9}.hero-static .kicker::before{background:#f4efe9}
