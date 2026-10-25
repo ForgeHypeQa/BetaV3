@@ -7,7 +7,7 @@
   if (!ON || /[?&]noglide\b/.test(location.search)) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const FREE = new Set(['hero', 'trust', 'pains', 'fixes', 'ugc']);       // native scrolling only
+  const FREE = new Set(['hero', 'trust', 'pains', 'ugc']);       // native scrolling only
   const secs = [...document.querySelectorAll('main > section[id]')].filter(s => getComputedStyle(s).display !== 'none');
   if (secs.length < 3) return;
 
@@ -45,8 +45,30 @@
   };
 
   /* decide what a gesture in direction dir (1 = down, -1 = up) should do: a target y, or null for native */
+  /* the sticky fix cards: each swipe lands the next card at its stacked position */
+  const stackTargets = () => {
+    const st = document.getElementById('stack'); if (!st) return [];
+    const cards = [...st.children], cs = getComputedStyle(st);
+    const gap = parseFloat(cs.rowGap) || 0, navH = parseFloat(cs.getPropertyValue('--nav-h')) || 88, step = parseFloat(cs.getPropertyValue('--step')) || 14;
+    const prevSticky = cards.map(c => c.style.position); cards.forEach(c => { c.style.position = 'relative'; });
+    let top = st.getBoundingClientRect().top + scrollY; const out = [];
+    cards.forEach((c, k) => { out.push(Math.round(top - navH - k * step + 8)); top += c.offsetHeight + gap; });
+    cards.forEach((c, k) => { c.style.position = prevSticky[k]; });
+    return out;
+  };
   const plan = dir => {
     const cur = current(), i = secs.indexOf(cur);
+    if (cur.id === 'fixes') {
+      const t = stackTargets(); if (!t.length) return null;
+      let k = 0; t.forEach((y, n) => { if (y <= scrollY + 8) k = n; });
+      if (dir > 0) {
+        if (scrollY < t[k] - 8) return t[k];
+        if (k + 1 < t.length) return t[k + 1];
+        const next = secs[i + 1]; return next && !FREE.has(next.id) ? anchorTop(next) : null;
+      }
+      if (Math.abs(scrollY - t[k]) > 8) return t[k];
+      return k > 0 ? t[k - 1] : null;
+    }
     if (FREE.has(cur.id)) return null;
     const r = cur.getBoundingClientRect();
     if (dir > 0) {
