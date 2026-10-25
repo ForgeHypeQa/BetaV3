@@ -793,9 +793,3 @@ html:not(.js) .journey li .j-lbl{opacity:1;transform:none}
 .tile{aspect-ratio:4/3;padding:var(--s-3);gap:var(--s-2)}
 .tile svg{width:36px;max-width:36px}
 @media (min-width:900px){.tile{aspect-ratio:16/10}.tile svg{width:44px;max-width:44px}}
-/* homepage: gentle scroll snapping — sections settle just below the navbar.
-   Hero video, the stacking problem cards and the phone section keep their own scroll animations (no snap points there). */
-html:has(#pains){scroll-snap-type:y proximity}
-#pains>.wrap,#about>.wrap,#reels>.wrap,#team>.wrap,#qatar>.wrap,#services>.wrap,#process>.wrap,#work>.wrap,#why>.wrap,#book>.wrap,#closing>.wrap{scroll-snap-align:start;scroll-margin-top:112px}
-@media (prefers-reduced-motion:reduce){html:has(#pains){scroll-snap-type:none}}
-@media (max-width:900px){#pains>.wrap,#about>.wrap,#reels>.wrap,#team>.wrap,#qatar>.wrap,#services>.wrap,#process>.wrap,#work>.wrap,#why>.wrap,#book>.wrap,#closing>.wrap{scroll-margin-top:28px}}
