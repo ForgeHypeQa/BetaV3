@@ -863,3 +863,24 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   };
   addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
 })();
+
+/* discount code request: email -> Web3Forms (when its key is set) and a WhatsApp hand-off */
+(() => {
+  const f = document.getElementById('codeForm');
+  if (!f) return;
+  const inp = f.querySelector('#codeEmail'), msg = f.querySelector('.code-msg');
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const email = inp.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { f.classList.add('bad'); msg.textContent = 'Please enter a valid email.'; inp.focus(); return; }
+    f.classList.remove('bad');
+    const text = 'Hi ForgeHype, I would like my 10% discount code.\nEmail: ' + email + '\nMy challenge: ';
+    const keyEl = document.querySelector('#bookForm input[name="access_key"]');
+    const key = keyEl ? keyEl.value.trim() : '';
+    if (key) fetch('https://api.web3forms.com/submit', { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ access_key: key, subject: '10% discount code request', from_name: 'ForgeHype website', replyto: email, email }) }).catch(() => {});
+    window.open('https://wa.me/97455879325?text=' + encodeURIComponent(text), '_blank', 'noopener');
+    msg.textContent = 'Thanks! Tell us your challenge in WhatsApp and we will send your code.';
+    f.reset();
+  });
+})();
