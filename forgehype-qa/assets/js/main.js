@@ -667,3 +667,78 @@
     p.after(b);
   });
 })();
+
+/* reels: swipeable stack, muted by default, sound only on the front video */
+(() => {
+  const stage = document.getElementById('reelStage');
+  if (!stage) return;
+  const reels = [...stage.querySelectorAll('.reel')], n = reels.length;
+  const dots = [...document.querySelectorAll('#reels .reel-dot')];
+  const RM = matchMedia('(prefers-reduced-motion: reduce)');
+  let cur = 0, soundOn = false, inView = false;
+
+  const layout = () => {
+    reels.forEach((el, i) => {
+      let d = (i - cur + n) % n; if (d > n / 2) d -= n;
+      el.dataset.pos = d;
+      const on = d === 0, v = el.querySelector('video'), b = el.querySelector('.sound-toggle');
+      el.classList.toggle('is-active', on);
+      b.tabIndex = on ? 0 : -1;
+      b.setAttribute('aria-pressed', String(on && soundOn));
+      b.setAttribute('aria-label', soundOn ? 'Turn sound off' : 'Turn sound on');
+      if (on) {
+        v.muted = !soundOn;
+        if (inView && (!RM.matches || soundOn)) v.play().catch(() => {});
+      } else { v.muted = true; v.pause(); }
+    });
+    dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+  };
+  const go = k => { cur = (cur + k + n) % n; layout(); };
+
+  reels.forEach((el, i) => {
+    el.querySelector('.sound-toggle').addEventListener('click', e => {
+      e.stopPropagation();
+      if (i !== cur) return;
+      soundOn = !soundOn;
+      const v = el.querySelector('video');
+      v.muted = !soundOn; v.volume = 1;
+      if (soundOn) v.play().catch(() => {});
+      layout();
+    });
+    el.addEventListener('click', () => {
+      if (moved) return;
+      if (i !== cur) { cur = i; layout(); }
+    });
+  });
+  dots.forEach((d, i) => d.addEventListener('click', () => { cur = i; layout(); }));
+  document.querySelectorAll('#reels .reel-arrow').forEach(b => b.addEventListener('click', () => go(+b.dataset.dir)));
+  stage.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+  });
+
+  /* swipe: finger left shows the next reel, right the previous */
+  let sx = 0, sy = 0, down = false, moved = false;
+  stage.addEventListener('pointerdown', e => { down = true; moved = false; sx = e.clientX; sy = e.clientY; });
+  stage.addEventListener('pointermove', e => {
+    if (down && Math.abs(e.clientX - sx) > 8 && Math.abs(e.clientX - sx) > Math.abs(e.clientY - sy)) moved = true;
+  });
+  const end = e => {
+    if (!down) return; down = false;
+    const dx = e.clientX - sx, dy = e.clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+    setTimeout(() => { moved = false; }, 0);
+  };
+  stage.addEventListener('pointerup', end);
+  stage.addEventListener('pointercancel', () => { down = false; });
+
+  new IntersectionObserver(([en]) => {
+    inView = en.isIntersecting;
+    if (inView) layout(); else reels.forEach(el => el.querySelector('video').pause());
+  }, { threshold: .35 }).observe(stage);
+  document.addEventListener('visibilitychange', () => {
+    const v = reels[cur].querySelector('video');
+    if (document.hidden) v.pause(); else if (inView) layout();
+  });
+  layout();
+})();
