@@ -654,3 +654,7 @@ html.js .stack-text .answer:not(.open){display:-webkit-box;-webkit-line-clamp:1;
 .member .m-role{font-size:var(--fs-sm);color:var(--text-secondary);line-height:1.35}
 
 @media (max-width:900px){.video-first{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s-5)}.video-first .page-text{display:contents}.video-first .page-text>*{order:4}.video-first .crumbs{order:1}.video-first .sec-label{order:2;display:block}.video-first .page-media{order:3;align-self:center}}
+.sound-toggle{position:absolute;inset-inline-end:var(--s-3);inset-block-end:var(--s-4);z-index:3;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;background:rgba(11,9,8,.62);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);cursor:pointer;transition:background .2s,border-color .2s}
+.sound-toggle svg{width:22px;height:22px}.sound-toggle .waves{opacity:.35}
+.sound-toggle[aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}.sound-toggle[aria-pressed="true"] .slash{display:none}.sound-toggle[aria-pressed="true"] .waves{opacity:1}
+.sound-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}

@@ -50,3 +50,17 @@
     }, 4200);
   }
 })();
+
+/* video sound toggle: muted by default, tap to hear */
+(() => {
+  document.querySelectorAll('.sound-toggle').forEach(b => {
+    const v = b.parentElement.querySelector('video');
+    if (!v) return;
+    b.addEventListener('click', () => {
+      v.muted = !v.muted;
+      if (!v.muted) { v.volume = 1; v.play().catch(() => {}); }
+      b.setAttribute('aria-pressed', String(!v.muted));
+      b.setAttribute('aria-label', v.muted ? 'Turn sound on' : 'Turn sound off');
+    });
+  });
+})();
