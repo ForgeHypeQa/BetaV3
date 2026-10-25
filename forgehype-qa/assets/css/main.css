@@ -769,3 +769,16 @@ html:not(.js) .journey li .j-lbl{opacity:1;transform:none}
 #bookForm button[type=submit]{justify-self:center}
 .book-side .journey{width:100%;max-width:34rem;justify-self:stretch}.j-lbl{max-width:11ch}
 .journey li{align-content:start}
+/* journey: slow glow passes 1 → 2 → 3 and loops, like the map pins */
+.j-dot{position:relative}
+.j-dot::before,.j-dot::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:1.5px solid var(--accent);opacity:0;pointer-events:none}
+.journey.loop .j-dot{animation:jglow 4.8s ease-in-out infinite}
+.journey.loop .j-dot::before{animation:jhalo 4.8s ease-out infinite}
+.journey.loop .j-dot::after{animation:jhalo 4.8s ease-out infinite .5s}
+.journey.loop li:nth-child(3) .j-dot,.journey.loop li:nth-child(3) .j-dot::before{animation-delay:1.6s}
+.journey.loop li:nth-child(3) .j-dot::after{animation-delay:2.1s}
+.journey.loop li:nth-child(4) .j-dot,.journey.loop li:nth-child(4) .j-dot::before{animation-delay:3.2s}
+.journey.loop li:nth-child(4) .j-dot::after{animation-delay:3.7s}
+@keyframes jhalo{0%{opacity:.8;transform:scale(1)}30%{opacity:0;transform:scale(1.9)}100%{opacity:0;transform:scale(1.9)}}
+@keyframes jglow{0%,40%,100%{box-shadow:0 0 0 0 rgba(254,93,2,0);transform:scale(1.12)}15%{box-shadow:0 0 22px 6px rgba(254,93,2,.45);transform:scale(1.2)}}
+@media (prefers-reduced-motion:reduce){.journey.loop .j-dot,.journey.loop .j-dot::before,.journey.loop .j-dot::after{animation:none}}

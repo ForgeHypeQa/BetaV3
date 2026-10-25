@@ -806,6 +806,8 @@
       if (i) j.style.setProperty('--p', i / (items.length - 1));
       setTimeout(() => li.classList.add('on'), i ? 700 : 0);
     }, t[i]));
+
+    setTimeout(() => j.classList.add('loop'), 3800);
   };
   const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); show(); } }, { threshold: .6 });
   io.observe(j);
