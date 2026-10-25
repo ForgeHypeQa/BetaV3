@@ -959,3 +959,12 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 #closing{padding-block-start:var(--s-6);padding-block-end:var(--s-7)}
 .closing-cta{display:inline-block;margin-block-start:var(--s-5);font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,1.1rem + .9vw,1.8rem);letter-spacing:-.015em;color:var(--accent);text-decoration:none}
 .closing-cta:hover{text-decoration:underline;text-underline-offset:.2em}
+/* tighter booking form */
+#bookForm{padding:var(--s-5)}
+#bookForm .form-fields{gap:var(--s-3)}
+#bookForm .field{gap:.3rem}
+#bookForm .input{padding:.7rem .95rem}
+#bookForm textarea.input{min-height:3.4rem;height:3.4rem}
+#bookForm button[type=submit]{margin-block-start:var(--s-2)}
+.book-side .journey{margin-block:var(--s-5) 0}
+@media (max-width:900px){.book{gap:var(--s-6)}}
