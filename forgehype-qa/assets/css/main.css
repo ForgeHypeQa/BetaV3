@@ -1187,3 +1187,16 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .se-text{margin:0;color:#e9e3dc;font-size:var(--fs-lead);line-height:1.45}
 .orbit-wrap.forged .hold-hint{opacity:1;max-height:none;overflow:visible}
 .orbit-wrap:not(.forged) .orbit-done{display:none}
+/* How we work: no orange blow-out at the end; explanation and offer after the circle */
+.orbit.forged:not(.quiet) .core-burst{animation:none}
+.orbit.forged .core{background:radial-gradient(circle at 40% 35%,#2a1c14,#14110f 70%);box-shadow:0 0 0 2px var(--accent),0 20px 50px -25px rgba(0,0,0,.9)}
+.orbit .core-done{color:#f4efe9}
+.orbit-after{grid-column:1/-1;display:grid;gap:var(--s-4);max-width:44rem;margin-block-start:var(--s-6)}
+.oa-title{font-size:clamp(1.6rem,1.2rem + 1.6vw,2.4rem);line-height:1.08;letter-spacing:-.03em;color:#fff}
+.oa-text{color:#e3ddd6;font-size:var(--fs-lead);line-height:1.55;margin:0}
+.oa-offer{margin:0;color:#e3ddd6}
+.oa-offer strong{color:var(--accent)}
+.code-label{display:block;width:100%;margin-block-end:.3rem;font-size:var(--fs-sm);font-weight:600;color:#f4efe9}
+.orbit-after .code-form{margin-block-start:0}
+.orbit-after .code-label{margin-block-end:-.4rem}
+.orbit-done .tagline{font-size:clamp(1.6rem,1.1rem + 2vw,2.6rem);line-height:1.08}.orbit-after{margin-block-start:0}#process .orbit-wrap{row-gap:var(--s-6)}
