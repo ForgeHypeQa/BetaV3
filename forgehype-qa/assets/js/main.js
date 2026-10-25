@@ -884,3 +884,14 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
     f.reset();
   });
 })();
+
+/* problem tiles: one numbered badge travels 1 → 6, every 2 s */
+(() => {
+  const tiles = [...document.querySelectorAll('#pgrid .tile')];
+  if (!tiles.length) return;
+  let i = 0;
+  const show = () => tiles.forEach((t, k) => t.classList.toggle('num-on', k === i));
+  show();
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(() => { if (document.hidden) return; i = (i + 1) % tiles.length; show(); }, 2000);
+})();
