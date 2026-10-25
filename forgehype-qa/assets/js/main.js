@@ -550,16 +550,17 @@
     if (box) box.checked = true;
   }));
   if (form) {
-    const fType = $('#f-type'), fWa = $('#f-wa'), fEmail = $('#f-email');
+    const fName = $('#f-name'), fType = $('#f-type'), fWa = $('#f-wa'), fEmail = $('#f-email');
     const mark = (el, bad) => el.closest('.field').classList.toggle('invalid', bad);
     const validate = () => {
+      const badName = !fName.value.trim();
       const badType = !fType.value;
       const badWa = fWa.value.replace(/\D/g, '').length < 6;
       const badEmail = fEmail.value.trim() !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fEmail.value.trim());
-      mark(fType, badType); mark(fWa, badWa); mark(fEmail, badEmail);
-      return !(badType || badWa || badEmail);
+      mark(fName, badName); mark(fType, badType); mark(fWa, badWa); mark(fEmail, badEmail);
+      return !(badName || badType || badWa || badEmail);
     };
-    [fType, fWa, fEmail].forEach(el => el.addEventListener('input', () => mark(el, false)));
+    [fName, fType, fWa, fEmail].forEach(el => el.addEventListener('input', () => mark(el, false)));
     form.addEventListener('submit', e => {
       e.preventDefault();
       if (!validate()) { const bad = $('.field.invalid .input', form); if (bad) bad.focus(); return; }
@@ -567,6 +568,8 @@
       const interests = d.getAll('interest');
       const wa = d.get('cc') + ' ' + String(d.get('whatsapp')).trim();
       const lines = ['Hi ForgeHype, I would like a free consultation.',
+        'Name: ' + String(d.get('name')).trim(),
+        d.get('company') ? 'Company: ' + d.get('company') : null,
         'Business type: ' + d.get('type'),
         interests.length ? 'Interested in: ' + interests.join(', ') : null,
         'WhatsApp: ' + wa,
@@ -582,7 +585,7 @@
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             access_key: key, subject: 'Free consultation request: ' + d.get('type'), from_name: 'ForgeHype website',
-            replyto: d.get('email') || undefined, business_type: d.get('type'), interests: interests.join(', ') || '-',
+            name: d.get('name'), company: d.get('company') || '-', replyto: d.get('email') || undefined, business_type: d.get('type'), interests: interests.join(', ') || '-',
             whatsapp: wa, email: d.get('email') || '-', message: d.get('message') || '-', summary: text
           })
         }).catch(() => {});

@@ -730,3 +730,8 @@ html.js .stack-text .answer:not(.open){display:-webkit-box;-webkit-line-clamp:1;
 .consent-btns{display:flex;gap:var(--s-3);justify-content:flex-end}
 .consent .btn{padding-block:.6rem;min-height:0}
 @media (max-width:700px){.consent{bottom:88px}}
+.next-steps{list-style:none;counter-reset:st;margin:var(--s-6) 0 0;padding:0;display:grid;gap:var(--s-4);max-width:34ch}
+.next-steps li{counter-increment:st;display:grid;grid-template-columns:auto 1fr;column-gap:var(--s-3);row-gap:.15rem}
+.next-steps li::before{content:"0" counter(st);grid-row:1/3;font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--accent);padding-top:.2em}
+.next-steps strong{font-weight:600}
+.next-steps span{font-size:var(--fs-sm);color:var(--text-secondary);line-height:1.45}
