@@ -52,12 +52,16 @@
     const gap = parseFloat(cs.rowGap) || 0, navH = parseFloat(cs.getPropertyValue('--nav-h')) || 88, step = parseFloat(cs.getPropertyValue('--step')) || 14;
     const prevSticky = cards.map(c => c.style.position); cards.forEach(c => { c.style.position = 'relative'; });
     let top = st.getBoundingClientRect().top + scrollY; const out = [];
-    cards.forEach((c, k) => { out.push(Math.round(top - navH - k * step + 8)); top += c.offsetHeight + gap; });
+    cards.forEach((c, k) => { out.push(Math.round(top - navH - k * step + 16)); top += c.offsetHeight + gap; });
     cards.forEach((c, k) => { c.style.position = prevSticky[k]; });
     return out;
   };
   const plan = dir => {
     const cur = current(), i = secs.indexOf(cur);
+    if (cur.id === 'pains' && dir > 0) {                              // end of the problem tiles: glide onto card 1
+      const r0 = cur.getBoundingClientRect(), t = stackTargets();
+      if (t.length && r0.bottom - innerHeight <= 60) return t[0];
+    }
     if (cur.id === 'fixes') {
       const t = stackTargets(); if (!t.length) return null;
       let k = 0; t.forEach((y, n) => { if (y <= scrollY + 8) k = n; });
@@ -88,6 +92,21 @@
 
   const typing = () => /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '') ||
     !!document.querySelector('.ms-panel:not([hidden])');
+
+  /* settle: if scrolling stops between two fix cards, glide to the nearest one */
+  let touching = false, settleT = 0;
+  const settle = () => {
+    if (busy || touching) return;
+    const t = stackTargets(); if (!t.length) return;
+    const y = scrollY;
+    if (y < t[0] - innerHeight * 0.45 || y > t[t.length - 1] + 8) return;
+    if (t.some(v => Math.abs(v - y) <= 8)) return;
+    let best = t[0]; t.forEach(v => { if (Math.abs(v - y) < Math.abs(best - y)) best = v; });
+    glideTo(best);
+  };
+  addEventListener('scroll', () => { clearTimeout(settleT); settleT = setTimeout(settle, 140); }, { passive: true });
+  addEventListener('touchstart', () => { touching = true; clearTimeout(settleT); }, { passive: true });
+  addEventListener('touchend', () => { touching = false; clearTimeout(settleT); settleT = setTimeout(settle, 220); }, { passive: true });
 
   /* wheel and trackpad */
   let wheelLock = 0;
