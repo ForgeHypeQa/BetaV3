@@ -1082,3 +1082,6 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .tile-n{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--accent);display:grid;place-items:center;font-family:var(--font-mono);font-size:.8rem;font-weight:500;color:var(--accent);opacity:0;transform:scale(.6);transition:opacity .35s var(--ease),transform .45s cubic-bezier(.34,1.56,.64,1)}
 .tile.num-on .tile-n{opacity:1;transform:none;box-shadow:0 0 14px -2px rgba(254,93,2,.55)}
 .tile.num-on{border-color:rgba(254,93,2,.55)}
+/* only the numbered tile is orange; the rest follow the theme text colour */
+.tile>span,.tile svg,.light .tile svg{color:var(--text-primary);transition:color .35s var(--ease)}
+.tile.num-on>span,.tile.num-on svg{color:var(--accent)}
