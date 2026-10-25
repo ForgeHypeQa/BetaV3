@@ -37,10 +37,11 @@
 
     /* height = tallest card, so the stack never clips */
     const measure = () => {
-      const h = Math.max(...cards.map(c => c.offsetHeight));
+      const h = Math.max(...cards.map(c => Math.max(c.offsetHeight, c.firstElementChild ? c.firstElementChild.scrollHeight : 0)));
       track.style.setProperty('--h', Math.ceil(h) + 'px');
     };
-    if ('ResizeObserver' in window) { const ro = new ResizeObserver(measure); cards.forEach(c => ro.observe(c)); }
+    if ('ResizeObserver' in window) { const ro = new ResizeObserver(measure); cards.forEach(c => { ro.observe(c); if (c.firstElementChild) ro.observe(c.firstElementChild); }); }
+    if (document.fonts) document.fonts.ready.then(measure);
     addEventListener('resize', measure); addEventListener('load', measure);
 
     /* swipe */

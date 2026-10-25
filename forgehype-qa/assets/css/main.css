@@ -1065,3 +1065,4 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .sa svg{width:30px;height:30px;stroke-width:3}
 .sa:hover,.sa:focus-visible{opacity:1;color:var(--accent);border:0}
 .scroll-arrows{gap:2px}
+.price-deck.stacked .deck-track>*{height:var(--h)}.price-deck .price-card{height:100%;box-sizing:border-box;display:flex;flex-direction:column}.price-deck .run .pc-foot{margin-top:auto;padding-top:var(--s-5)}
