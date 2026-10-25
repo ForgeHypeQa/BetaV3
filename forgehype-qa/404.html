@@ -24,7 +24,7 @@ a{display:inline-flex;align-items:center;padding:.95rem 1.5rem;border-radius:999
 <h1>Lost in <span>the haze.</span></h1>
 <p>That page is not here. The site is, and so are we.</p>
 <a href="/" id="home">Back to ForgeHype</a>
-<script>var p=location.pathname.split("/")[1];if(p==="forgehype.qa")document.getElementById("home").href="/forgehype.qa/";</script>
+<script>if(/github\.io$/.test(location.hostname)){var p=location.pathname.split("/")[1];if(p)document.getElementById("home").href="/"+p+"/";}</script>
 </main>
 </body>
 </html>
