@@ -782,3 +782,10 @@ html:not(.js) .journey li .j-lbl{opacity:1;transform:none}
 @keyframes jhalo{0%{opacity:.8;transform:scale(1)}30%{opacity:0;transform:scale(1.9)}100%{opacity:0;transform:scale(1.9)}}
 @keyframes jglow{0%,40%,100%{box-shadow:0 0 0 0 rgba(254,93,2,0);transform:scale(1.12)}15%{box-shadow:0 0 22px 6px rgba(254,93,2,.45);transform:scale(1.2)}}
 @media (prefers-reduced-motion:reduce){.journey.loop .j-dot,.journey.loop .j-dot::before,.journey.loop .j-dot::after{animation:none}}
+/* labels: two lines each; bold travels with the glow */
+.j-lbl{max-width:none;font-weight:400;color:var(--text-secondary)}
+.journey.loop .j-lbl{animation:jbold 4.8s steps(1,end) infinite}
+.journey.loop li:nth-child(3) .j-lbl{animation-delay:1.6s}
+.journey.loop li:nth-child(4) .j-lbl{animation-delay:3.2s}
+@keyframes jbold{0%{font-weight:700;color:var(--text-primary)}33%{font-weight:400;color:var(--text-secondary)}}
+@media (prefers-reduced-motion:reduce){.journey.loop .j-lbl{animation:none;font-weight:600;color:var(--text-primary)}}
