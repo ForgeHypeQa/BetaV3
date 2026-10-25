@@ -1038,3 +1038,10 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 #captain{scroll-margin-top:110px}
 @media (max-width:420px){.pc-grid li{padding:var(--s-3);font-size:var(--fs-sm)}}
 @media (prefers-reduced-motion:reduce){.pc-skip b{animation:none}}
+/* pricing as a two-card stacked carousel */
+.price-deck{--cw:min(86vw,520px)}
+.price-deck .price-card{height:auto}
+.price-deck.stacked .deck-track>*>*{box-shadow:none}
+.price-wrap{max-width:none}
+.price-wrap .section-head{max-width:44rem;margin-inline:auto}
+@media (min-width:900px){.price-deck{--cw:min(44vw,560px)}.price-deck.stacked .deck-track>[data-pos="1"]{--x:12%;--r:3deg;--s:.92}}
