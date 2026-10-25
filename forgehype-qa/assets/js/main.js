@@ -742,3 +742,49 @@
   });
   layout();
 })();
+
+/* team: glides one card every 3 s, swipe to move, pauses while touched or hovered */
+(() => {
+  const track = document.getElementById('teamTrack');
+  if (!track) return;
+  const cards = [...track.querySelectorAll('.tcard')], n = cards.length;
+  const dots = [...document.querySelectorAll('#team .team-dot')];
+  const RM = matchMedia('(prefers-reduced-motion: reduce)');
+  let cur = 0, inView = false, hold = false, resumeAt = 0;
+  const layout = () => {
+    cards.forEach((el, i) => {
+      let d = (i - cur + n) % n; if (d > n - 2) d -= n;
+      el.dataset.pos = d < -1 ? -1 : d > 2 ? 2 : d;
+      el.setAttribute('aria-hidden', String(d !== 0));
+    });
+    dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+  };
+  const go = k => { cur = (cur + k + n) % n; layout(); };
+  const pause = () => { resumeAt = Date.now() + 6000; };
+  setInterval(() => {
+    if (RM.matches || !inView || hold || document.hidden || Date.now() < resumeAt) return;
+    go(1);
+  }, 3000);
+  track.addEventListener('mouseenter', () => { hold = true; });
+  track.addEventListener('mouseleave', () => { hold = false; });
+  track.addEventListener('focusin', () => { hold = true; });
+  track.addEventListener('focusout', () => { hold = false; });
+  track.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+  });
+  dots.forEach((d, i) => d.addEventListener('click', () => { cur = i; layout(); pause(); }));
+  cards.forEach((el, i) => el.addEventListener('click', () => { if (el.dataset.pos === '1') { go(1); pause(); } }));
+  let sx = 0, sy = 0, down = false;
+  track.addEventListener('pointerdown', e => { down = true; sx = e.clientX; sy = e.clientY; pause(); });
+  track.addEventListener('pointerup', e => {
+    if (!down) return; down = false;
+    const dx = e.clientX - sx, dy = e.clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
+    pause();
+  });
+  track.addEventListener('pointercancel', () => { down = false; });
+  new IntersectionObserver(([en]) => { inView = en.isIntersecting; }, { threshold: .4 }).observe(track);
+  layout();
+})();
+
