@@ -743,7 +743,7 @@
   layout();
 })();
 
-/* team: glides one card every 3 s, swipe to move, pauses while touched or hovered */
+/* team: centred stack, glides one card every 3 s, swipe to move, pauses while touched or hovered */
 (() => {
   const track = document.getElementById('teamTrack');
   if (!track) return;
@@ -753,8 +753,8 @@
   let cur = 0, inView = false, hold = false, resumeAt = 0;
   const layout = () => {
     cards.forEach((el, i) => {
-      let d = (i - cur + n) % n; if (d > n - 2) d -= n;
-      el.dataset.pos = d < -1 ? -1 : d > 2 ? 2 : d;
+      let d = (i - cur + n) % n; if (d > n / 2) d -= n;
+      el.dataset.pos = Math.max(-2, Math.min(2, d));
       el.setAttribute('aria-hidden', String(d !== 0));
     });
     dots.forEach((d, i) => d.classList.toggle('on', i === cur));
@@ -774,7 +774,7 @@
     if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
   });
   dots.forEach((d, i) => d.addEventListener('click', () => { cur = i; layout(); pause(); }));
-  cards.forEach((el, i) => el.addEventListener('click', () => { if (el.dataset.pos === '1') { go(1); pause(); } }));
+  cards.forEach(el => el.addEventListener('click', () => { const d = +el.dataset.pos; if (d === 1 || d === -1) { go(d); pause(); } }));
   let sx = 0, sy = 0, down = false;
   track.addEventListener('pointerdown', e => { down = true; sx = e.clientX; sy = e.clientY; pause(); });
   track.addEventListener('pointerup', e => {
