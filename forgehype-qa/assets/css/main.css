@@ -812,3 +812,13 @@ html:not(.js) .journey li .j-lbl{opacity:1;transform:none}
 .orbit .core-step.pop{animation:steppop .45s cubic-bezier(.34,1.56,.64,1)}
 @keyframes steppop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
 .orbit .core-hint{font-size:var(--fs-sm);letter-spacing:.22em}
+/* orbit: larger, readable text; stops stay dull until tapped */
+.orbit .node text{font-size:17px}
+.orbit .lbl{font-size:16px;letter-spacing:.08em;font-weight:500}
+@media (max-width:900px){.orbit .node text{font-size:19px}.orbit .lbl{font-size:19px}.orbit{padding-inline:3.2rem}}
+.orbit .node circle{r:27px}
+.orbit .core-step{font-size:clamp(1.1rem,.8rem + 1.4vw,1.4rem)}
+.orbit .core-done{font-size:clamp(1.15rem,.8rem + 1.5vw,1.5rem)}
+.orbit .node.next circle{stroke:var(--line-strong);animation:none}
+.orbit .node.next text{fill:var(--text-secondary)}
+@media (max-width:900px){.orbit{width:calc(100% + 32px);max-width:480px;margin-inline:-16px;padding-inline:3.6rem;justify-self:center}}

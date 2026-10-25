@@ -411,7 +411,7 @@
   let heat = 0, lit = 0, forged = false, hRaf = null;
   function setLit(n) {
     lit = n;
-    onodes.forEach((el, i) => { el.classList.toggle('lit', i < n); el.classList.toggle('next', i === n && !forged); });
+    onodes.forEach((el, i) => { el.classList.toggle('lit', i < n); });
     olabels.forEach((el, i) => el.classList.toggle('lit', i < n));
   }
   function heatTo(target, done) {
@@ -441,7 +441,7 @@
     if (coreStep) { coreStep.textContent = STAGES[n - 1] || ''; coreStep.classList.remove('pop'); void coreStep.offsetWidth; coreStep.classList.add('pop'); }
     orbitCore.setAttribute('aria-label', 'Stage ' + n + ' of 5: ' + (STAGES[n - 1] || '') + (n < 5 ? '. Tap for the next stage.' : ''));
     if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
-    heatTo(n / 5, n === 5 ? () => setTimeout(completeForge, 250) : null);
+    heatTo((n - 1) / 5, n === 5 ? () => setTimeout(() => heatTo(1, completeForge), 450) : null);
   }
   if (orbit && orbitCore) {
     if (coreHint) coreHint.textContent = 'Tap';
