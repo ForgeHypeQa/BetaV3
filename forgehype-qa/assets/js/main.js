@@ -926,3 +926,19 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   sel.classList.add('sr-only'); sel.tabIndex = -1; sel.setAttribute('aria-hidden', 'true');
   wrap.append(btn, panel); sel.after(wrap);
 })();
+
+/* navbar: full bar only at the very top and the very bottom; in between just a floating menu button */
+(() => {
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  let t = false;
+  const upd = () => {
+    t = false;
+    const edge = scrollY < 40 || scrollY + innerHeight >= document.documentElement.scrollHeight - 40;
+    nav.classList.toggle('mini', !edge && !document.body.classList.contains('menu-open'));
+  };
+  addEventListener('scroll', () => { if (!t) { t = true; requestAnimationFrame(upd); } }, { passive: true });
+  addEventListener('resize', upd);
+  new MutationObserver(upd).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  upd();
+})();

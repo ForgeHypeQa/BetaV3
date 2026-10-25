@@ -1165,3 +1165,14 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 #bookForm .form-success{color:#f4efe9}
 #bookForm select.input,#bookForm .ms-btn{background-repeat:no-repeat;background-position:right 1rem center;background-size:16px 16px}#bookForm .ms-btn{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23b8b0a8' stroke-width='1.5'><path d='M4 6l4 4 4-4'/></svg>")}
 .ms-pick{width:100%;border:0;background:none;text-align:start;font:inherit;font-size:var(--fs-sm);font-weight:500;cursor:pointer}.ms-pick[aria-selected="true"]{color:var(--accent)}#bookForm .ms-pick{color:#f4efe9}#bookForm .ms-pick[aria-selected="true"]{color:var(--accent)}
+/* mini navbar: only a floating, half-transparent menu button while scrolling */
+.nav.hide{transform:none}
+.nav-inner{transition:background .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease)}
+.nav.mini{pointer-events:none}
+.nav.mini .nav-inner{background:transparent!important;border-color:transparent!important;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav .brand,.nav .nav-links,.nav .nav-inner>.btn{transition:opacity .35s var(--ease)}
+.nav.mini .brand,.nav.mini .nav-links,.nav.mini .nav-inner>.btn{opacity:0;visibility:hidden}
+.nav.mini .nav-toggle{display:grid;pointer-events:auto;margin-inline-start:auto;opacity:.5;background:rgba(20,17,15,.85);border:1px solid rgba(255,255,255,.18);color:#f4efe9;transition:opacity .25s}
+.nav.mini .nav-toggle:hover,.nav.mini .nav-toggle:focus-visible{opacity:1}
+.nav.mini .nav-toggle span{background:#f4efe9}
+.nav.mini .nav-toggle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
