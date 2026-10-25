@@ -543,41 +543,46 @@
   }
 
   /* ================= 14. FORM → WEB3FORMS + WHATSAPP ================= */
-  const form = $('#bookForm');
+  /* interests: dropdown with checkboxes */
+  const msBtn = $('#intBtn'), msPanel = $('#intPanel'), msSum = $('#intSum');
+  const boxes = $$('#bookForm input[name="interest"]');
+  const sumUpdate = () => {
+    const on = boxes.filter(b => b.checked).map(b => b.value);
+    msSum.textContent = !on.length ? 'Select one or more' : on.length <= 2 ? on.join(', ') : on.length + ' selected';
+    msSum.classList.toggle('has', on.length > 0);
+  };
+  const msOpen = open => { msPanel.hidden = !open; msBtn.setAttribute('aria-expanded', String(open)); };
+  if (msBtn) {
+    msBtn.addEventListener('click', () => msOpen(msPanel.hidden));
+    $('#intDone').addEventListener('click', () => { msOpen(false); msBtn.focus(); });
+    boxes.forEach(b => b.addEventListener('change', sumUpdate));
+    document.addEventListener('click', e => { if (!msPanel.hidden && !e.target.closest('#intMs')) msOpen(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !msPanel.hidden) { msOpen(false); msBtn.focus(); } });
+  }
   $$('[data-interest]').forEach(a => a.addEventListener('click', () => {
-    const want = a.dataset.interest;
-    const box = $$('#bookForm input[name="interest"]').find(b => b.value === want);
-    if (box) box.checked = true;
+    const box = boxes.find(b => b.value === a.dataset.interest);
+    if (box) { box.checked = true; sumUpdate(); }
   }));
+  const form = $('#bookForm');
   if (form) {
-    const fName = $('#f-name'), fType = $('#f-type'), fWa = $('#f-wa'), fEmail = $('#f-email');
+    const fType = $('#f-type');
     const mark = (el, bad) => el.closest('.field').classList.toggle('invalid', bad);
-    const validate = () => {
-      const badName = !fName.value.trim();
-      const badType = !fType.value;
-      const badWa = fWa.value.replace(/\D/g, '').length < 6;
-      const badEmail = fEmail.value.trim() !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fEmail.value.trim());
-      mark(fName, badName); mark(fType, badType); mark(fWa, badWa); mark(fEmail, badEmail);
-      return !(badName || badType || badWa || badEmail);
-    };
-    [fName, fType, fWa, fEmail].forEach(el => el.addEventListener('input', () => mark(el, false)));
+    fType.addEventListener('input', () => mark(fType, false));
     form.addEventListener('submit', e => {
       e.preventDefault();
-      if (!validate()) { const bad = $('.field.invalid .input', form); if (bad) bad.focus(); return; }
+      if (!fType.value) { mark(fType, true); fType.focus(); return; }
+      msOpen(false);
       const d = new FormData(form);
       const interests = d.getAll('interest');
-      const wa = d.get('cc') + ' ' + String(d.get('whatsapp')).trim();
+      const site = String(d.get('website') || '').trim(), note = String(d.get('message') || '').trim();
       const lines = ['Hi ForgeHype, I would like a free consultation.',
-        'Name: ' + String(d.get('name')).trim(),
-        d.get('company') ? 'Company: ' + d.get('company') : null,
         'Business type: ' + d.get('type'),
         interests.length ? 'Interested in: ' + interests.join(', ') : null,
-        'WhatsApp: ' + wa,
-        d.get('email') ? 'Email: ' + d.get('email') : null,
-        d.get('message') ? 'Notes: ' + d.get('message') : null].filter(Boolean);
+        site ? 'Website: ' + site : null,
+        note ? 'Notes: ' + note : null].filter(Boolean);
       const text = lines.join('\n');
       $('#mailFallback').href = 'mailto:info@forgehype.qa?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(text);
-      // Web3Forms emails the lead once the hidden access_key is filled in; the WhatsApp hand-off below runs either way.
+      // Web3Forms emails a copy once the hidden access_key is filled in; the WhatsApp hand-off below runs either way.
       const key = String(d.get('access_key') || '').trim();
       if (key && !d.get('botcheck')) {
         fetch('https://api.web3forms.com/submit', {
@@ -585,14 +590,12 @@
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             access_key: key, subject: 'Free consultation request: ' + d.get('type'), from_name: 'ForgeHype website',
-            name: d.get('name'), company: d.get('company') || '-', replyto: d.get('email') || undefined, business_type: d.get('type'), interests: interests.join(', ') || '-',
-            whatsapp: wa, email: d.get('email') || '-', message: d.get('message') || '-', summary: text
+            business_type: d.get('type'), interests: interests.join(', ') || '-', website: site || '-', message: note || '-', summary: text
           })
         }).catch(() => {});
       }
-      const win = window.open('https://wa.me/97455879325?text=' + encodeURIComponent(text), '_blank', 'noopener');
+      window.open('https://wa.me/97455879325?text=' + encodeURIComponent(text), '_blank', 'noopener');
       form.classList.add('sent');
-      if (!win) $('#mailFallback').focus();
     });
   }
   const waFloat = $('#waFloat'), bookSec = $('#book');
