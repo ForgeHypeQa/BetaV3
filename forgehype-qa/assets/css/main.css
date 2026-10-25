@@ -1119,3 +1119,4 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .trust{background:transparent;border-block-color:transparent}
 .hero-static .bg{background-color:transparent}.hero-static .bg::after{background:linear-gradient(to bottom,rgba(5,5,5,.35) 0%,rgba(5,5,5,0) 14%,rgba(5,5,5,0) 30%,rgba(5,5,5,.85) 46%,rgba(5,5,5,.6) 75%,rgba(5,5,5,0) 100%)}
 .hero-static .kicker,.hero .kicker,.hero-eyebrow{color:#f4efe9}.hero-static .kicker::before{background:#f4efe9}
+.hero-static{padding-block-end:var(--s-5)}
