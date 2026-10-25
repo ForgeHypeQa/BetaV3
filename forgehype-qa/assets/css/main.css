@@ -1200,3 +1200,19 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .orbit-after .code-form{margin-block-start:0}
 .orbit-after .code-label{margin-block-end:-.4rem}
 .orbit-done .tagline{font-size:clamp(1.6rem,1.1rem + 2vw,2.6rem);line-height:1.08}.orbit-after{margin-block-start:0}#process .orbit-wrap{row-gap:var(--s-6)}
+/* How we work (simple) */
+.how{display:grid;gap:var(--s-7);max-width:52rem}
+.how-head{display:grid;gap:var(--s-4)}
+.how-head .lead{color:#e3ddd6;margin:0}
+.how-steps{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.how-steps li{display:grid;grid-template-columns:3rem 1fr;gap:var(--s-4);padding-block:var(--s-5);border-block-start:1px solid rgba(255,255,255,.12)}
+.how-steps li:last-child{border-block-end:1px solid rgba(255,255,255,.12)}
+.hs-n{width:2.6rem;height:2.6rem;border-radius:50%;border:1.5px solid var(--accent);display:grid;place-items:center;font-family:var(--font-mono);color:var(--accent);font-size:.95rem}
+.how-steps h3{margin:0 0 .2rem;font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,1.1rem + .8vw,1.7rem);color:#fff}
+.how-steps p{margin:0;color:#d8d1ca;font-size:var(--fs-lead);line-height:1.45}
+.how-close{margin:0;font-size:clamp(1.8rem,1.2rem + 2.4vw,3rem);line-height:1.05;letter-spacing:-.03em;color:#fff}
+.how-offer{display:grid;gap:var(--s-3);justify-items:start;padding:var(--s-5);border-radius:20px;border:1px solid rgba(217,104,46,.45);background:rgba(217,104,46,.06)}
+.how-offer h3{margin:0;font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,1.1rem + .8vw,1.7rem);color:#fff}
+.how-offer p{margin:0;color:#d8d1ca}
+.how-offer .btn{margin-block-start:var(--s-2)}
+#process-title .ln{display:block}
