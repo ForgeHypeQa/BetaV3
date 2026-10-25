@@ -240,6 +240,7 @@ h1.kicker{font-weight:500;line-height:1.4}
 .tile:hover svg{transform:scale(1.06)}
 .tile-tag{display:block;font-family:var(--font-mono);font-size:.68rem;font-weight:500;letter-spacing:.04em;line-height:1.35;color:var(--accent);max-width:16ch}
 .pains-intro .pct{color:var(--accent);font-weight:700}
+.pains-intro .six{display:block;color:var(--accent);margin-block-start:var(--s-3)}
 .pains-intro{font-size:var(--fs-lead);color:#c9c0b7;max-width:46ch;margin-inline:auto;margin-block-end:var(--s-4);text-wrap:balance}
 .scroll-hint{text-align:center;font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--text-secondary);margin-block:var(--s-7) var(--s-5)}
 
