@@ -1216,3 +1216,19 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .how-offer p{margin:0;color:#d8d1ca}
 .how-offer .btn{margin-block-start:var(--s-2)}
 #process-title .ln{display:block}
+/* contact (Let's thrive together) */
+.talk-sec .section-head{display:grid;gap:var(--s-3);margin-block-end:var(--s-6)}
+.talk-sec .section-head .lead{margin:0;color:#e3ddd6;max-width:40ch}
+.talk-note{margin:0;color:var(--accent);font-weight:600}
+.contact-v2{display:grid;gap:var(--s-3)}
+.cv-block{display:block;padding:var(--s-4) var(--s-5);border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:#f4efe9;text-decoration:none}
+.cv-block h3{margin:0 0 .2rem;font-family:var(--font-display);font-weight:600;font-size:1.05rem;color:#fff}
+.cv-row{display:flex;gap:var(--s-4);align-items:center;transition:border-color .3s}
+.cv-row:hover{border-color:var(--accent)}
+.cv-ico{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(217,104,46,.12);color:var(--accent)}
+.cv-ico svg{width:22px;height:22px}
+.cv-val{color:#d8d1ca;font-size:var(--fs-sm);overflow-wrap:anywhere}
+.cv-icons{display:flex;gap:var(--s-3);margin-block-start:var(--s-3)}
+.cv-icons a{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);color:#f4efe9;transition:color .3s,border-color .3s}
+.cv-icons a:hover{color:var(--accent);border-color:var(--accent)}
+.cv-icons svg{width:22px;height:22px}
