@@ -206,7 +206,7 @@
 
   /* ================= 4. THEME MIXER: body colour follows the sections ================= */
   const root = document.documentElement;
-  const DARK = { canvas: [11, 9, 8], t1: [244, 239, 233], t2: [168, 159, 150], t3: [125, 117, 109], lineC: [255, 255, 255], line: .08, lineS: .18, glass: .045, glass2: .07, panel: [20, 17, 16], panel2: [28, 24, 21] };
+  const DARK = { canvas: [5, 5, 5], t1: [246, 243, 239], t2: [184, 176, 168], t3: [141, 133, 126], lineC: [255, 255, 255], line: .09, lineS: .16, glass: .045, glass2: .07, panel: [13, 12, 11], panel2: [22, 20, 18] };
   const LIGHT = { canvas: [255, 246, 239], t1: [20, 17, 15], t2: [107, 100, 94], t3: [138, 130, 123], lineC: [20, 17, 15], line: .1, lineS: .2, glass: .7, glass2: .95, panel: [255, 255, 255], panel2: [255, 255, 255] };
   const themed = $$('[data-theme]');
   let bounds = [], lastMix = -1, themeTick = false;
