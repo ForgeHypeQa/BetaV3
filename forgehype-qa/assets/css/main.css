@@ -997,7 +997,6 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
   .stack-text .fix,.ans-card .stack-text .fix{font-size:clamp(1.45rem,1.1rem + 1vw,2rem)}
   .tile svg{width:38px;max-width:38px}
 }
-#pains{background:#0b0908;--text-primary:#f4efe9;--text-secondary:#a89f96;--text-tertiary:#7d756d;--line:rgba(255,255,255,.08);--line-strong:rgba(255,255,255,.18);color:var(--text-primary)}
 /* FAQ page groups */
 .faq-groups{display:grid;gap:var(--s-3)}
 .faq-cat{font-family:var(--font-mono);font-size:var(--fs-xs);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:var(--s-6) 0 var(--s-2)}
@@ -1061,3 +1060,8 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .wa-float{inset-inline-end:auto;inset-inline-start:var(--s-5)}
 .scroll-arrows{left:auto;right:16px}
 @media (min-width:1024px){.scroll-arrows{left:auto;right:24px}}
+/* scroll arrows: plain chevrons, no circle */
+.sa{width:40px;height:34px;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;color:var(--text-primary);opacity:.6;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}
+.sa svg{width:30px;height:30px;stroke-width:3}
+.sa:hover,.sa:focus-visible{opacity:1;color:var(--accent);border:0}
+.scroll-arrows{gap:2px}
