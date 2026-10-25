@@ -1164,3 +1164,4 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 #bookForm .input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(217,104,46,.2)}
 #bookForm .form-success{color:#f4efe9}
 #bookForm select.input,#bookForm .ms-btn{background-repeat:no-repeat;background-position:right 1rem center;background-size:16px 16px}#bookForm .ms-btn{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23b8b0a8' stroke-width='1.5'><path d='M4 6l4 4 4-4'/></svg>")}
+.ms-pick{width:100%;border:0;background:none;text-align:start;font:inherit;font-size:var(--fs-sm);font-weight:500;cursor:pointer}.ms-pick[aria-selected="true"]{color:var(--accent)}#bookForm .ms-pick{color:#f4efe9}#bookForm .ms-pick[aria-selected="true"]{color:var(--accent)}

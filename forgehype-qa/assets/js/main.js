@@ -577,7 +577,7 @@
     fType.addEventListener('input', () => mark(fType, false));
     form.addEventListener('submit', e => {
       e.preventDefault();
-      if (!fType.value) { mark(fType, true); fType.focus(); return; }
+      if (!fType.value) { mark(fType, true); (document.getElementById('typeBtn') || fType).focus(); return; }
       msOpen(false);
       const d = new FormData(form);
       const interests = d.getAll('interest');
@@ -896,4 +896,33 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   show();
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   setInterval(() => { if (document.hidden) return; i = (i + 1) % tiles.length; show(); }, 2000);
+})();
+
+/* business type: custom single-choice dropdown in the same style as the interests list (no checkboxes) */
+(() => {
+  const sel = document.getElementById('f-type');
+  if (!sel) return;
+  const opts = [...sel.options].filter(o => o.value || !o.disabled).filter(o => o.value !== '');
+  const wrap = document.createElement('div'); wrap.className = 'ms ms-single'; wrap.id = 'typeMs';
+  const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'input ms-btn'; btn.id = 'typeBtn';
+  btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-labelledby', 'typeLbl typeSum');
+  btn.innerHTML = '<span class="ms-sum" id="typeSum">Select your sector</span>';
+  const panel = document.createElement('div'); panel.className = 'ms-panel'; panel.setAttribute('role', 'listbox'); panel.hidden = true;
+  opts.forEach(o => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'ms-opt ms-pick'; b.setAttribute('role', 'option'); b.textContent = o.textContent;
+    b.addEventListener('click', () => {
+      sel.value = o.value || o.textContent; sel.dispatchEvent(new Event('input', { bubbles: true }));
+      panel.querySelectorAll('.ms-pick').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+      const sum = btn.querySelector('.ms-sum'); sum.textContent = o.textContent; sum.classList.add('has');
+      open(false); btn.focus();
+    });
+    panel.appendChild(b);
+  });
+  const lbl = document.querySelector('label[for="f-type"]'); if (lbl) lbl.id = 'typeLbl';
+  const open = v => { panel.hidden = !v; btn.setAttribute('aria-expanded', String(v)); };
+  btn.addEventListener('click', () => open(panel.hidden));
+  document.addEventListener('click', e => { if (!panel.hidden && !wrap.contains(e.target)) open(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { open(false); btn.focus(); } });
+  sel.classList.add('sr-only'); sel.tabIndex = -1; sel.setAttribute('aria-hidden', 'true');
+  wrap.append(btn, panel); sel.after(wrap);
 })();
