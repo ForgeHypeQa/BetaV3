@@ -940,3 +940,12 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .light .tile{border-color:rgba(20,17,15,.14);background:#fff;box-shadow:0 14px 30px -22px rgba(40,20,6,.35)}
 .light .tile svg{color:#14110f}
 .light .tile:hover,.light .tile:focus-visible{background:#fff;border-color:rgba(254,93,2,.5);box-shadow:0 22px 40px -22px rgba(254,93,2,.45)}
+/* client strip: always solid dark, even while the page fades to the light problems section */
+.trust{background:#0b0908;--text-primary:#f4efe9;--text-secondary:#a89f96;--text-tertiary:#7d756d;--line:rgba(255,255,255,.08);--line-strong:rgba(255,255,255,.18);color:var(--text-primary)}
+/* white cards keep dark text on the dark booking section */
+.card-light,.contact-rows a,.map{--text-primary:#14110f;--text-secondary:#6b645e;--text-tertiary:#8a827b;--line:rgba(20,17,15,.1);--line-strong:rgba(20,17,15,.2);color:#14110f}
+/* journey line on dark */
+.book-sec .journey::before{background:rgba(255,255,255,.35)}
+.book-sec .j-dot{background:#0b0908;border-color:rgba(255,255,255,.45);color:var(--text-secondary)}
+.book-sec .journey li.on .j-dot{background:var(--accent);border-color:var(--accent);color:#140600}
+.hero-static{background:#0b0908;box-shadow:0 0 0 100vmax #0b0908;clip-path:inset(0 -100vmax)}
