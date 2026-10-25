@@ -789,3 +789,7 @@ html:not(.js) .journey li .j-lbl{opacity:1;transform:none}
 .journey.loop li:nth-child(4) .j-lbl{animation-delay:3.2s}
 @keyframes jbold{0%{font-weight:700;color:var(--text-primary)}33%{font-weight:400;color:var(--text-secondary)}}
 @media (prefers-reduced-motion:reduce){.journey.loop .j-lbl{animation:none;font-weight:600;color:var(--text-primary)}}
+/* problem tiles: wider rectangles, smaller icon */
+.tile{aspect-ratio:4/3;padding:var(--s-3);gap:var(--s-2)}
+.tile svg{width:36px;max-width:36px}
+@media (min-width:900px){.tile{aspect-ratio:16/10}.tile svg{width:44px;max-width:44px}}
