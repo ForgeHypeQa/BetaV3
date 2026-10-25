@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=20261025z">
+<link rel="stylesheet" href="assets/css/main.css?v=20261026a">
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "ProfessionalService", "@id": "https://forgehype.qa/#business", "name": "ForgeHype", "legalName": "ForgeHype website and Management consultancy W.L.L.", "url": "https://forgehype.qa/", "logo": "https://forgehype.qa/assets/img/brand/logo.png", "image": "https://forgehype.qa/assets/img/og.jpg", "description": "Website design and digital growth consultancy in Doha, Qatar: websites and e-commerce, website content and brand media, SEO and AI visibility audits, automation and AI consultancy, brand identity and monthly growth advisory.", "telephone": "+97455879325", "email": "info@forgehype.qa", "foundingDate": "2026-10-12", "address": {"@type": "PostalAddress", "streetAddress": "Building 66, Street 950, Zone 24", "addressLocality": "Doha", "addressCountry": "QA"}, "areaServed": {"@type": "Country", "name": "Qatar"}, "sameAs": ["https://www.instagram.com/forgehypeqatar/"], "knowsLanguage": ["en", "ar"]}
@@ -144,11 +144,11 @@
       <li><a class="tile" href="#fix-5" data-interest="Automating my operations"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 20.5a6.5 6.5 0 0 1 13 0"/><circle cx="18" cy="7" r="3.5"/><path d="M18 5.2V7l1.2 1.2"/></svg><span>Everything depends on you</span></a></li>
       <li><a class="tile" href="#fix-6"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l5.5 5.5 4-4L21 17M21 11v6h-6"/></svg><span>Falling behind</span></a></li>
     </ul>
-    <p class="scroll-hint reveal">Scroll to see the fix ↓</p>
+    <p class="scroll-hint reveal">Tap a problem to see its fix ↓</p>
   </div>
 
-  <div class="stack wrap" id="stack">
-    <article class="stack-card" id="fix-1" style="--i:0;--tint:#141110" aria-label="Your website isn’t working">
+  <div class="deck ans-deck" id="answersDeck" aria-roledescription="carousel" aria-label="Six fixes"><div class="deck-track">
+    <article class="ans-card" id="fix-1" style="--i:0;--tint:#141110" aria-label="Your website isn’t working">
       <div class="stack-inner">
         <figure class="stack-media"><img src="assets/img/problems/website.jpg" alt="A cracked frosted glass browser window with an unfinished orange loading bar" width="1000" height="1250" loading="lazy"><span class="n">01 / 06</span></figure>
         <div class="stack-text">
@@ -160,7 +160,7 @@
         </div>
       </div>
     </article>
-    <article class="stack-card" id="fix-2" style="--i:1;--tint:#111418" aria-label="Your content gets scrolled past">
+    <article class="ans-card" id="fix-2" style="--i:1;--tint:#111418" aria-label="Your content gets scrolled past">
       <div class="stack-inner">
         <figure class="stack-media"><img src="assets/img/problems/scroll.jpg" alt="A stack of glass social feed cards streaking past, one glowing orange" width="1000" height="1250" loading="lazy"><span class="n">02 / 06</span></figure>
         <div class="stack-text">
@@ -172,7 +172,7 @@
         </div>
       </div>
     </article>
-    <article class="stack-card" id="fix-3" style="--i:2;--tint:#151311" aria-label="Nobody finds you">
+    <article class="ans-card" id="fix-3" style="--i:2;--tint:#151311" aria-label="Nobody finds you">
       <div class="stack-inner">
         <figure class="stack-media"><img src="assets/img/problems/search.jpg" alt="A glass magnifying lens over a dark city map with a glowing orange pin" width="1000" height="1250" loading="lazy"><span class="n">03 / 06</span></figure>
         <div class="stack-text">
@@ -184,7 +184,7 @@
         </div>
       </div>
     </article>
-    <article class="stack-card" id="fix-4" style="--i:3;--tint:#101513" aria-label="Nobody remembers you">
+    <article class="ans-card" id="fix-4" style="--i:3;--tint:#101513" aria-label="Nobody remembers you">
       <div class="stack-inner">
         <figure class="stack-media"><img src="assets/img/problems/brand.jpg" alt="One polished black cube glowing orange above a grid of grey cubes" width="1000" height="1250" loading="lazy"><span class="n">04 / 06</span></figure>
         <div class="stack-text">
@@ -196,7 +196,7 @@
         </div>
       </div>
     </article>
-    <article class="stack-card" id="fix-5" style="--i:4;--tint:#16110e" aria-label="Everything depends on you">
+    <article class="ans-card" id="fix-5" style="--i:4;--tint:#16110e" aria-label="Everything depends on you">
       <div class="stack-inner">
         <figure class="stack-media"><img src="assets/img/problems/automation.jpg" alt="A glass sphere linked by orange light to a chat bubble, calendar, invoice and chart" width="1000" height="1250" loading="lazy"><span class="n">05 / 06</span></figure>
         <div class="stack-text">
@@ -208,7 +208,7 @@
         </div>
       </div>
     </article>
-    <article class="stack-card" id="fix-6" style="--i:5;--tint:#121216" aria-label="You’re falling behind">
+    <article class="ans-card" id="fix-6" style="--i:5;--tint:#121216" aria-label="You’re falling behind">
       <div class="stack-inner">
         <figure class="stack-media"><img src="assets/img/problems/growth.jpg" alt="A staircase of glass bars rising like a chart beside a glass clock" width="1000" height="1250" loading="lazy"><span class="n">06 / 06</span></figure>
         <div class="stack-text">
@@ -220,7 +220,7 @@
         </div>
       </div>
     </article>
-  </div>
+  </div><div class="deck-nav"><button type="button" class="deck-arrow" data-dir="-1" aria-label="Previous fix">←</button><div class="deck-dots"></div><button type="button" class="deck-arrow" data-dir="1" aria-label="Next fix">→</button></div></div>
   <div class="wrap stack-cta reveal">
     <a class="link-soft" href="#about">Discover More →</a>
   </div>
@@ -306,78 +306,44 @@
       <h2 class="t-display t-h2 lines" id="svc-title"><span class="ln">Every business is different.</span><span class="ln">So is every solution.</span><span class="ln">Six services. <span class="em">One team.</span></span></h2>
       <p class="lowkey">Pick what your business demands. We shape the scope to fit your needs.</p>
     </div>
-    <ol class="svc-grid" id="svcList">
-      <li class="svc-card reveal" data-labels="Watch reseller|Luxury boutique|Restaurant|Cafe|Real estate">
+    <div class="deck svc-deck" id="svcDeck" data-auto="3000" data-start-desktop="1" aria-roledescription="carousel" aria-label="Six services"><ol class="deck-track" id="svcList">
+      <li class="svc-card" data-labels="Watch reseller|Luxury boutique|Restaurant|Cafe|Real estate">
         <a href="services/website-ecommerce.html">
           <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/work/watch.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/work/bags.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/work/dining.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/web-cafe.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/web-realestate.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Watch reseller</span></span>
           <span class="svc-body"><span class="idx">01</span><h3 class="t-display">Website design and e-commerce</h3><p>Fast, custom, built to convert.</p><span class="tags"><span>Custom design</span><span>Shopify &amp; headless</span><span>Arabic ready</span></span></span>
         </a>
       </li>
-      <li class="svc-card reveal" data-labels="The shoot|Editing suite|Rendering|Billboard">
+      <li class="svc-card" data-labels="The shoot|Editing suite|Rendering|Billboard">
         <a href="services/media-production.html">
           <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/svc/media-shoot.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/media-edit.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/media-render.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/media-billboard.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">The shoot</span></span>
           <span class="svc-body"><span class="idx">02</span><h3 class="t-display">Website content and brand media</h3><p>Reels and films made for your site and brand.</p><span class="tags"><span>Reels &amp; UGC</span><span>Product films</span><span>Brand films</span></span></span>
         </a>
       </li>
-      <li class="svc-card reveal" data-labels="Chatbot|CRM|Finance tracker|Dashboards">
+      <li class="svc-card" data-labels="Chatbot|CRM|Finance tracker|Dashboards">
         <a href="services/ai-automation-apps.html">
           <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/svc/ai-chatbot.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/ai-crm.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/ai-finance.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/ai-dashboards.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Chatbot</span></span>
           <span class="svc-body"><span class="idx">03</span><h3 class="t-display">Automation and AI consultancy</h3><p>Routines mapped. Time back.</p><span class="tags"><span>WhatsApp agents</span><span>Booking flows</span><span>Automation planning</span></span></span>
         </a>
       </li>
-      <li class="svc-card reveal" data-labels="Maps|AI assistants|Search">
+      <li class="svc-card" data-labels="Maps|AI assistants|Search">
         <a href="services/search-ai-visibility.html">
           <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/svc/seo-map.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/seo-aichat.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/seo-search.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Maps</span></span>
           <span class="svc-body"><span class="idx">04</span><h3 class="t-display">SEO and AI visibility audits</h3><p>Found on Google. Cited by AI.</p><span class="tags"><span>Local SEO audits</span><span>AI search</span><span>Monthly reports</span></span></span>
         </a>
       </li>
-      <li class="svc-card reveal" data-labels="Logo|Digital menu|Packaging|Brand guideline">
+      <li class="svc-card" data-labels="Logo|Digital menu|Packaging|Brand guideline">
         <a href="services/brand-media-kit.html">
           <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/svc/brand-logo.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/brand-menu.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/brand-packaging.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/brand-guideline.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Logo</span></span>
           <span class="svc-body"><span class="idx">05</span><h3 class="t-display">Brand identity and media kits</h3><p>One identity, everywhere.</p><span class="tags"><span>Logo &amp; system</span><span>Menus &amp; catalogs</span><span>Packaging</span></span></span>
         </a>
       </li>
-      <li class="svc-card reveal" data-labels="Weekly deliverables|Weekly growth review|Organic growth|Consultancy">
+      <li class="svc-card" data-labels="Weekly deliverables|Weekly growth review|Organic growth|Consultancy">
         <a href="services/monthly-support.html">
           <span class="svc-media"><span class="thumb" aria-hidden="true"><img src="assets/img/svc/support-deliverables.jpg" alt="" width="800" height="1000" loading="lazy" class="on"><img src="assets/img/svc/support-review.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/support-growth.jpg" alt="" width="800" height="1000" loading="lazy"><img src="assets/img/svc/support-consult.jpg" alt="" width="800" height="1000" loading="lazy"></span><span class="now" aria-hidden="true">Weekly deliverables</span></span>
           <span class="svc-body"><span class="idx">06</span><h3 class="t-display">Monthly digital growth advisory</h3><p>Your growth advisor, on call.</p><span class="tags"><span>Monthly reports</span><span>Team training</span><span>Recommendations</span></span></span>
         </a>
       </li>
-    </ol>
-  </div>
-</section>
-
-<!-- ============ 6. FULL-SCREEN PHONE (dark) ============ -->
-<section class="phone-sec" id="ugc" data-theme="dark" aria-label="Content we make">
-  <div class="phone-stage" id="phoneStage">
-    <div class="wrap phone-wrap">
-      <div class="phone-main">
-      <div class="phone-stage-inner" id="reelStage">
-        <div class="phone" aria-hidden="true">
-          <div class="phone-screen" id="reel">
-            <div class="reel-slide is-active" data-caption="<strong>One light. Deep blacks.</strong><span>Brand film</span>"><img src="assets/img/svc/media-shoot.jpg" alt="" width="800" height="1000" loading="lazy"></div>
-            <div class="reel-slide" data-caption="<strong>Made to stop the scroll.</strong><span>Reel</span>"><img src="assets/img/work/social.jpg" alt="" width="1400" height="1750" loading="lazy"></div>
-            <div class="reel-slide" data-caption="<strong>Show it. Sell it.</strong><span>Product demo</span>"><img src="assets/img/work/bags.jpg" alt="" width="1400" height="1750" loading="lazy"></div>
-            <div class="reel-slide" data-caption="<strong>Real voices. Real trust.</strong><span>UGC</span>"><img src="assets/img/work/influencer.jpg" alt="" width="1400" height="1750" loading="lazy"></div>
-            <div class="reel-bars"><span class="is-active"><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
-            <div class="reel-ui"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></i></div>
-            <div class="reel-caption" id="reelCaption"><strong>One light. Deep blacks.</strong><span>Brand film</span></div>
-          </div>
-          <span class="phone-notch"></span>
-        </div>
-        <button class="btn btn-ghost reel-pause" type="button" id="reelToggle" aria-pressed="false">Pause reel</button>
-      </div>
-      <div class="facts">
-        <h3 class="t-display">Content people <span class="em">actually watch.</span></h3>
-        <div class="fact-grid">
-          <div class="fact" style="--d:.1s"><div class="v">10<small>→</small>60</div><p>From 10 to 60 videos a month for your website and brand. Scale as you grow.</p></div>
-          <div class="fact" style="--d:.25s"><div class="v">14</div><p>Years of GCC media production, across our team</p></div>
-          <div class="fact" style="--d:.4s"><div class="v">6</div><p>Services. One team.</p></div>
-          <div class="fact" style="--d:.55s"><div class="v">Days</div><p>From brief to delivery. Not weeks.</p></div>
-        </div>
-      </div>
-      </div>
-    </div>
+    </ol><div class="deck-nav"><button type="button" class="deck-arrow" data-dir="-1" aria-label="Previous service">←</button><div class="deck-dots"></div><button type="button" class="deck-arrow" data-dir="1" aria-label="Next service">→</button></div></div>
   </div>
 </section>
 
@@ -548,7 +514,8 @@
 
 <a class="wa-float" id="waFloat" href="https://wa.me/97455879325" target="_blank" rel="noopener" aria-label="WhatsApp us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.6A9 9 0 1 1 21 12z"/></svg><span class="lbl">WhatsApp us</span></a>
 
-<script src="assets/js/main.js?v=20261025m" defer></script>
+<script src="assets/js/main.js?v=20261025n" defer></script>
+<script src="assets/js/deck.js?v=2" defer></script>
 <script src="assets/js/glide.js?v=1" defer></script>
 <script src="assets/js/analytics.js?v=1" defer></script>
 </body>

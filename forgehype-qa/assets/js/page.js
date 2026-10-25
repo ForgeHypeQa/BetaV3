@@ -75,3 +75,24 @@
     });
   });
 })();
+
+/* footer: Services and Explore fold into tap-to-open rows on phones */
+(() => {
+  const mq = matchMedia('(max-width: 560px)');
+  const folds = [...document.querySelectorAll('.footer-grid > div')].filter(d => {
+    const h = d.querySelector('h2'); return h && d.querySelector('ul') && !/contact/i.test(h.textContent);
+  });
+  folds.forEach(d => {
+    const h = d.querySelector('h2');
+    d.classList.add('fold');
+    const toggle = () => { if (!mq.matches) return; const o = d.classList.toggle('open'); h.setAttribute('aria-expanded', String(o)); };
+    h.addEventListener('click', toggle);
+    h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  });
+  const apply = () => folds.forEach(d => {
+    const h = d.querySelector('h2');
+    if (mq.matches) { h.setAttribute('role', 'button'); h.tabIndex = 0; h.setAttribute('aria-expanded', String(d.classList.contains('open'))); }
+    else { h.removeAttribute('role'); h.removeAttribute('tabindex'); h.removeAttribute('aria-expanded'); }
+  });
+  mq.addEventListener('change', apply); apply();
+})();

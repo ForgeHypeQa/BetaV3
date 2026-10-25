@@ -822,3 +822,53 @@ html:not(.js) .journey li .j-lbl{opacity:1;transform:none}
 .orbit .node.next circle{stroke:var(--line-strong);animation:none}
 .orbit .node.next text{fill:var(--text-secondary)}
 @media (max-width:900px){.orbit{width:calc(100% + 32px);max-width:480px;margin-inline:-16px;padding-inline:3.6rem;justify-self:center}}
+
+/* ===== deck: horizontal card carousel (services, fixes) ===== */
+.deck{--cw:min(82vw,420px);--gap:14px;position:relative}
+.wrap .deck{margin-inline:calc(50% - 50vw)}
+.deck-track{position:relative;display:flex;align-items:stretch;gap:var(--gap);margin:0;padding:18px calc(50% - var(--cw) / 2) 22px;list-style:none;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.deck-track::-webkit-scrollbar{display:none}
+.deck-track>*{flex:0 0 var(--cw);scroll-snap-align:center;transform:scale(.9);opacity:.5;filter:saturate(.6);transition:transform .55s var(--ease),opacity .55s var(--ease),filter .55s var(--ease);cursor:pointer}
+.deck-track>.is-center{transform:none;opacity:1;filter:none;cursor:auto}
+html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
+.deck-nav{display:flex;align-items:center;justify-content:center;gap:var(--s-4);margin-block-start:var(--s-3)}
+.deck-dots{display:flex;gap:.45rem}
+.deck-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:var(--line-strong);cursor:pointer;transition:width .35s,background .35s}
+.deck-dot.on{width:24px;border-radius:8px;background:var(--accent)}
+.deck-arrow{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-strong);background:transparent;color:var(--text-primary);font-size:1.1rem;cursor:pointer}
+.deck-arrow:hover{border-color:var(--accent);color:var(--accent)}
+@media (min-width:900px){.deck{--cw:min(30vw,420px);--gap:24px}.deck-arrow{display:grid;place-items:center}.deck-track>*{transform:scale(.86)}.deck-track>.is-center{transform:none}}
+@media (prefers-reduced-motion:reduce){.deck-track>*{transition:none}}
+
+/* services inside the deck: one column card */
+.svc-deck .svc-card > a{grid-template-columns:1fr;gap:var(--s-4);padding:var(--s-4)}
+.svc-deck .svc-card .thumb{width:100%;aspect-ratio:4/3;transform:none}
+.svc-deck .svc-body h3{font-size:clamp(1.3rem,1.1rem + .8vw,1.7rem)}
+.svc-deck .svc-card > a:hover{transform:none}
+
+/* fixes inside the deck */
+.ans-deck{--cw:min(86vw,460px);margin-block-start:var(--s-4)}
+.ans-card{--p:0}
+.ans-card .stack-inner{min-height:0;height:100%;grid-template-columns:1fr;gap:var(--s-4);padding:var(--s-5);align-items:start}
+.ans-card .stack-media{aspect-ratio:16/10;max-height:none}
+.ans-card .stack-media img{transform:none}
+.ans-card .stack-text .fix{font-size:clamp(1.45rem,1.2rem + 1.2vw,2.2rem)}
+@media (min-width:900px){.ans-deck{--cw:min(62vw,940px)}.ans-card .stack-inner{grid-template-columns:.85fr 1.15fr;align-items:center;padding:var(--s-6)}.ans-card .stack-media{aspect-ratio:4/5;max-height:440px}}
+.scroll-hint{margin-block:var(--s-6) var(--s-2)}
+.stack-cta{padding-block-start:var(--s-6)}
+
+/* shorter scroll-driven hero on desktop */
+.hero{height:260vh}
+
+/* footer folds on phones */
+@media (max-width:560px){
+  .footer-grid{gap:0}
+  .footer-grid>div:first-child{margin-block-end:var(--s-5)}
+  .footer-grid .fold{border-block-start:1px solid var(--line)}
+  .footer-grid .fold h2{display:flex;justify-content:space-between;align-items:center;margin:0;padding:1rem 0;cursor:pointer}
+  .footer-grid .fold h2::after{content:"+";font-size:1.1rem;color:var(--text-secondary);transition:transform .3s}
+  .footer-grid .fold.open h2::after{transform:rotate(45deg)}
+  .footer-grid .fold ul{display:none;padding-block-end:var(--s-4)}
+  .footer-grid .fold.open ul{display:grid}
+  .footer-grid>div:last-child{border-block-start:1px solid var(--line);padding-block-start:var(--s-4)}
+}
