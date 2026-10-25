@@ -951,3 +951,11 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .hero-static{background:#0b0908;box-shadow:0 0 0 100vmax #0b0908;clip-path:inset(0 -100vmax)}
 .svc-card .thumb img{transition:opacity .45s var(--ease)}
 .talk-sec .talk{margin-block-start:0}
+/* tighter Why / closing spacing */
+#why{padding-block-end:var(--s-6)}
+#why .section-head{margin-block-end:var(--s-4)}
+.cmp{padding-block:var(--s-4)}
+@media (max-width:900px){.cmp-stage{min-height:8.5rem}}
+#closing{padding-block-start:var(--s-6);padding-block-end:var(--s-7)}
+.closing-cta{display:inline-block;margin-block-start:var(--s-5);font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,1.1rem + .9vw,1.8rem);letter-spacing:-.015em;color:var(--accent);text-decoration:none}
+.closing-cta:hover{text-decoration:underline;text-underline-offset:.2em}
