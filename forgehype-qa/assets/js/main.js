@@ -116,6 +116,7 @@
     }, { once: true });
   }
   const GATES = [
+    '(min-width: 0px)', // scroll-scrub hero retired: every screen uses the autoplay hero
     '(max-width: 720px)',
     '(orientation: portrait) and (max-width: 1024px)',
     '(orientation: portrait) and (pointer: coarse)',

@@ -1123,3 +1123,13 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 
 /* pitch-black dark theme: no orange background glow */
 .env-glow{display:none}
+/* desktop: autoplay hero (no scroll-scrub) */
+.hero{display:none}
+.hero-static{display:grid}
+@media (min-width:721px){
+  .hero-static{min-height:100svh;padding-block-end:var(--s-8)}
+  .hero-static .bg video{height:72%;object-position:50% 40%}
+  .hero-static .bg::after{background:linear-gradient(to bottom,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,0) 40%,rgba(0,0,0,.85) 66%,rgba(0,0,0,.6) 85%,rgba(0,0,0,0) 100%),linear-gradient(to right,rgba(0,0,0,.55),rgba(0,0,0,0) 55%)}
+  .hero-static .hero-title{font-size:clamp(4rem,1rem + 6.5vw,8rem)}
+}
+.hero-static .bg video{-webkit-mask-image:linear-gradient(to bottom,#000 50%,transparent 100%);mask-image:linear-gradient(to bottom,#000 50%,transparent 100%)}
