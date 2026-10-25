@@ -217,7 +217,7 @@
     themed.forEach(el => {
       if (!el.offsetParent && getComputedStyle(el).display === 'none') return;
       const t = el.dataset.theme;
-      if (prev !== null && t !== prev) bounds.push({ y: el.getBoundingClientRect().top + scrollY, to: t === 'light' ? 1 : 0 });
+      if (prev !== null && t !== prev) bounds.push({ y: el.getBoundingClientRect().top + scrollY, to: t === 'light' ? 1 : 0, late: el.dataset.fade === 'late' });
       prev = t;
     });
     lastMix = -1; applyTheme();
@@ -229,7 +229,7 @@
       // light sections keep their own dark text, so the canvas must be light whenever their content shows:
       // fade to light early (before the boundary scrolls in), fade back to dark late (once it nears the top)
       const rel = (y + vh - b.y) / vh;
-      const t = b.to === 1 ? smoothstep(rel, -0.25, 0.08) : smoothstep(rel, 0.68, 0.98);
+      const t = b.to === 1 ? (b.late ? smoothstep(rel, 0.3, 0.75) : smoothstep(rel, -0.25, 0.08)) : smoothstep(rel, 0.68, 0.98);
       m = lerp(m, b.to, t);
     }
     return m;
