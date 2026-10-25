@@ -998,3 +998,7 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
   .tile svg{width:38px;max-width:38px}
 }
 #pains{background:#0b0908;--text-primary:#f4efe9;--text-secondary:#a89f96;--text-tertiary:#7d756d;--line:rgba(255,255,255,.08);--line-strong:rgba(255,255,255,.18);color:var(--text-primary)}
+/* FAQ page groups */
+.faq-groups{display:grid;gap:var(--s-3)}
+.faq-cat{font-family:var(--font-mono);font-size:var(--fs-xs);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:var(--s-6) 0 var(--s-2)}
+.faq-cat:first-child{margin-block-start:0}
