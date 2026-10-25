@@ -7,7 +7,7 @@
   if (!ON || /[?&]noglide\b/.test(location.search)) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const FREE = new Set(['hero', 'trust', 'pains', 'ugc']);       // native scrolling only
+  const FREE = new Set(['hero', 'trust', 'pains', 'fixes', 'ugc']);       // native scrolling only
   const secs = [...document.querySelectorAll('main > section[id]')].filter(s => getComputedStyle(s).display !== 'none');
   if (secs.length < 3) return;
 

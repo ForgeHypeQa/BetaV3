@@ -264,14 +264,15 @@
   /* ================= 5. PROBLEM GRID ================= */
   const tiles = $$('#pgrid .tile');
   if (tiles.length) {
-    // each tile scrolls to the fixes carousel and brings its card to the centre
+    // the fix cards are sticky, so an anchor jump lands on the stuck position; scroll to the card's natural spot instead
     tiles.forEach(t => t.addEventListener('click', e => {
-      const card = $(t.getAttribute('href')), deck = $('#answersDeck'); if (!card || !deck) return;
+      const card = $(t.getAttribute('href')); if (!card) return;
       e.preventDefault();
-      const i = [...card.parentElement.children].indexOf(card);
-      const top = deck.getBoundingClientRect().top + scrollY - (innerWidth < 900 ? 16 : 100);
-      scrollTo({ top: Math.round(top), behavior: RM.matches ? 'auto' : 'smooth' });
-      if (deck._goTo) deck._goTo(i);
+      const stack = card.parentElement, cards = [...stack.children], cs = getComputedStyle(stack);
+      const gap = parseFloat(cs.rowGap) || 0, navH = parseFloat(cs.getPropertyValue('--nav-h')) || 88, step = parseFloat(cs.getPropertyValue('--step')) || 14;
+      let top = stack.getBoundingClientRect().top + scrollY;
+      for (const c of cards) { if (c === card) break; top += c.offsetHeight + gap; }
+      scrollTo({ top: Math.round(top - navH - cards.indexOf(card) * step), behavior: RM.matches ? 'auto' : 'smooth' });
       history.replaceState(null, '', t.getAttribute('href'));
     }));
   }
