@@ -1177,3 +1177,13 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .nav.mini .nav-toggle span{background:#f4efe9}
 .nav.mini .nav-toggle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
 .nav.mini .nav-toggle{position:fixed;top:10px;right:10px;margin:0}@media (min-width:1024px){.nav.mini .nav-toggle{top:16px;right:16px}}
+/* How we work: plain-language explanation of the current stage */
+.stage-explain{display:grid;gap:.35rem;padding:var(--s-4) var(--s-5);border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#f4efe9;opacity:.45;transition:opacity .4s}
+.stage-explain.on{opacity:1}
+.stage-explain.pop{animation:sepop .45s var(--ease)}
+@keyframes sepop{from{transform:translateY(6px);opacity:.3}to{transform:none;opacity:1}}
+.se-step{margin:0;font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.se-title{margin:0;font-size:clamp(1.4rem,1.1rem + 1vw,1.9rem);color:#fff}
+.se-text{margin:0;color:#e9e3dc;font-size:var(--fs-lead);line-height:1.45}
+.orbit-wrap.forged .hold-hint{opacity:1;max-height:none;overflow:visible}
+.orbit-wrap:not(.forged) .orbit-done{display:none}

@@ -442,6 +442,20 @@
     orbitCore.setAttribute('aria-label', 'Forged. Crafted to last. Seen to shine.');
     if (navigator.vibrate) { try { navigator.vibrate([20, 40, 60]); } catch (e) {} }
   }
+  const STAGE_TEXT = [
+    'We learn your business, your customers and your goals.',
+    'We build your website, brand and content to work as one.',
+    'We take you live where customers look: Google, Maps, social and AI search.',
+    'We train your team and stay beside them, month after month.',
+    'We track what actually brings you business, then improve it. And we keep going.'
+  ];
+  function showStage(n) {
+    const box = document.getElementById('stageExplain'); if (!box) return;
+    box.querySelector('.se-step').textContent = 'Step ' + n + ' of 5';
+    box.querySelector('.se-title').textContent = STAGES[n - 1] || '';
+    box.querySelector('.se-text').textContent = STAGE_TEXT[n - 1] || '';
+    box.classList.add('on'); box.classList.remove('pop'); void box.offsetWidth; box.classList.add('pop');
+  }
   function tapStep() {
     if (forged || !orbit) return;
     const n = Math.min(5, lit + 1);
@@ -450,6 +464,7 @@
     if (coreStep) { coreStep.textContent = STAGES[n - 1] || ''; coreStep.classList.remove('pop'); void coreStep.offsetWidth; coreStep.classList.add('pop'); }
     orbitCore.setAttribute('aria-label', 'Stage ' + n + ' of 5: ' + (STAGES[n - 1] || '') + (n < 5 ? '. Tap for the next stage.' : ''));
     if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
+    showStage(n);
     heatTo((n - 1) / 5, n === 5 ? () => setTimeout(() => heatTo(1, completeForge), 450) : null);
   }
   if (orbit && orbitCore) {
