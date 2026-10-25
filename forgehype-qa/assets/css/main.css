@@ -1097,3 +1097,5 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .price-deck .pc-grid{gap:var(--s-2)}
 .price-deck .pc-grid li{padding:.7rem .8rem;font-size:var(--fs-sm)}
 .price-deck .deck-nav{display:none}.price-deck.stacked{padding-block-end:0}.price-deck.stacked .deck-track{height:calc(var(--h,440px) + 22px)}.price-wrap .btn-row.center{margin-block-start:var(--s-2)}
+.map{aspect-ratio:100/81;align-self:start}.map img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.map{aspect-ratio:100/86}
