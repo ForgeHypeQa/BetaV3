@@ -935,3 +935,8 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .work-deck .work-card{width:var(--cw)}
 @media (min-width:900px){.work-deck{--cw:min(26vw,24rem)}}
 .fixes-sec{padding-block:var(--s-6) var(--s-8)}
+/* problems section on light */
+.light .pains-intro{color:var(--text-secondary)}
+.light .tile{border-color:rgba(20,17,15,.14);background:#fff;box-shadow:0 14px 30px -22px rgba(40,20,6,.35)}
+.light .tile svg{color:#14110f}
+.light .tile:hover,.light .tile:focus-visible{background:#fff;border-color:rgba(254,93,2,.5);box-shadow:0 22px 40px -22px rgba(254,93,2,.45)}
