@@ -603,7 +603,7 @@
         site ? 'Website: ' + site : null,
         note ? 'Notes: ' + note : null].filter(Boolean);
       const text = lines.join('\n');
-      $('#mailFallback').href = 'mailto:info@forgehype.qa?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(text);
+      $('#mailFallback').href = 'mailto:ForgeHypeqatar@gmail.com?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(text);
       // Web3Forms emails a copy once the hidden access_key is filled in; the WhatsApp hand-off below runs either way.
       const key = String(d.get('access_key') || '').trim();
       if (key && !d.get('botcheck')) {
@@ -616,7 +616,7 @@
           })
         }).catch(() => {});
       }
-      window.open('https://wa.me/97455879325?text=' + encodeURIComponent(text), '_blank', 'noopener');
+      window.open('https://wa.me/97470069544?text=' + encodeURIComponent(text), '_blank', 'noopener');
       form.classList.add('sent');
     });
   }
@@ -896,7 +896,7 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
     const key = keyEl ? keyEl.value.trim() : '';
     if (key) fetch('https://api.web3forms.com/submit', { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({ access_key: key, subject: '10% discount code request', from_name: 'ForgeHype website', replyto: email, email }) }).catch(() => {});
-    window.open('https://wa.me/97455879325?text=' + encodeURIComponent(text), '_blank', 'noopener');
+    window.open('https://wa.me/97470069544?text=' + encodeURIComponent(text), '_blank', 'noopener');
     msg.textContent = 'Thanks! Tell us your challenge in WhatsApp and we will send your code.';
     f.reset();
   });

@@ -113,9 +113,9 @@ Release early eases back. Reduced motion shows the final state.
 - "Do you work in Arabic?" / "Yes. Bilingual sites, menus and content, built right to left where it matters."
 
 **CTA and form (`#book`).** Kicker `[ free audit ]`. Heading "Forge your business hype." Lead "A free audit or consultation, on Microsoft Teams." Fields: "Your name", "Work email", "WhatsApp or phone", "What do you need?" (Not sure yet, Website & e-commerce, Media production, AI agents & automation, Search & AI visibility, Brand & media kit, Monthly support), "Anything else?". Button "Book a free audit". Note "Opens WhatsApp with your details filled in. We reply with a Teams invite." Success "Sent. We reply within one working day with a Teams invite."
-Form handling: opens WhatsApp (wa.me/97455879325) with the message prefilled; a mailto fallback link to info@forgehype.qa sits beside it. Static site, no backend, stated plainly.
+Form handling: opens WhatsApp (wa.me/97470069544) with the message prefilled; a mailto fallback link to ForgeHypeqatar@gmail.com sits beside it. Static site, no backend, stated plainly.
 
-**Footer.** Logo. "Doha, Qatar. Working across the UAE and worldwide." Links: Services, Work, Process, FAQ, Book a free audit. Contact: +974 5587 9325, info@forgehype.qa, WhatsApp. "© 2026 ForgeHype." Imagery note is not shown on the site (decision: generated visuals are placeholders to be swapped with real client footage; no AI label).
+**Footer.** Logo. "Doha, Qatar. Working across the UAE and worldwide." Links: Services, Work, Process, FAQ, Book a free audit. Contact: +974 7006 9544, ForgeHypeqatar@gmail.com, WhatsApp. "© 2026 ForgeHype." Imagery note is not shown on the site (decision: generated visuals are placeholders to be swapped with real client footage; no AI label).
 
 ## 7. Vector and living layer
 
