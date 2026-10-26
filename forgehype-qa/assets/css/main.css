@@ -1309,3 +1309,6 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
   .stack-media.stack-film{width:100%;border-radius:18px}
 }
 @media (min-width:900px){.stack-inner{padding:1.6rem 2rem}}
+/* fix cards: only the front card plays; the ones still arriving are half transparent */
+.stack-card.is-coming{opacity:.5;transition:opacity .35s var(--ease)}
+.stack-card.is-front{opacity:1}

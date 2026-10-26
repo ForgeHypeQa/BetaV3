@@ -294,6 +294,18 @@
           card._p = p; card.style.setProperty('--p', p.toFixed(3));
         }
       }
+      /* the front card: the last one that has reached its sticky position. Only its film plays;
+         cards still on their way up sit at half opacity until they arrive */
+      let front = -1;
+      stackCards.forEach((card, i) => { const top = parseFloat(getComputedStyle(card).top) || 0; if (card.getBoundingClientRect().top <= top + 4) front = i; });
+      if (front < 0 && stackCards.length && stackCards[0].getBoundingClientRect().top < innerHeight * .5) front = 0;
+      stackCards.forEach((card, i) => {
+        const on = i === front;
+        card.classList.toggle('is-front', on);
+        card.classList.toggle('is-coming', i > front);
+        const v = card.querySelector('video');
+        if (v) { if (on) { if (v.preload === 'none') { v.preload = 'auto'; v.load(); } v.play().catch(() => {}); } else if (!v.paused) v.pause(); }
+      });
     });
   }
   if (stackCards.length) {
@@ -390,7 +402,7 @@
     if (Math.abs(p - qP) > 0.004 || (p === 1 && qP !== 1) || (p === 0 && qP !== 0)) { qP = p; qatarMedia.style.setProperty('--p', p.toFixed(3)); }
   }
   // videos below the fold: load and play only when near, pause when away
-  $$('video.qvid, video.pvid').forEach(v => {
+  $$('video.qvid, video.pvid').filter(v => !v.closest('.stack-film')).forEach(v => {   // fix-card films are driven by the stack (front card only)
     v.addEventListener('error', () => v.classList.add('no-src'), true);
     new IntersectionObserver(([e]) => {
       if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; v.load(); } v.play().catch(() => {}); }
