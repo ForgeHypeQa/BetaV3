@@ -581,7 +581,14 @@
     cmp.addEventListener('focusout', () => { hover = false; });
   }
 
-  /* ================= 14. FORM → WEB3FORMS + WHATSAPP ================= */
+  /* ================= 14. FORM → GOOGLE SHEET + WHATSAPP ================= */
+  /* LEADS_URL: the Apps Script web-app URL (ends in /exec) from assets/leads-sheet.gs. Empty = WhatsApp hand-off only. */
+  const LEADS_URL = '';
+  const sendLead = fields => {
+    if (!LEADS_URL || fields.botcheck) return;
+    const body = new URLSearchParams({ ...fields, page: location.pathname + location.hash });
+    fetch(LEADS_URL, { method: 'POST', mode: 'no-cors', keepalive: true, body }).catch(() => {});
+  };
   /* interests: dropdown with checkboxes */
   const msBtn = $('#intBtn'), msPanel = $('#intPanel'), msSum = $('#intSum');
   const boxes = $$('#bookForm input[name="interest"]');
@@ -613,26 +620,20 @@
       msOpen(false);
       const d = new FormData(form);
       const interests = d.getAll('interest');
-      const site = String(d.get('website') || '').trim(), note = String(d.get('message') || '').trim();
+      const consent = $('#f-consent');
+      if (consent && !consent.checked) { consent.closest('.field').classList.add('invalid'); consent.focus(); return; }
+      if (consent) consent.closest('.field').classList.remove('invalid');
+      const site = String(d.get('website') || '').trim(), note = String(d.get('message') || '').trim(), email = String(d.get('email') || '').trim();
       const lines = ['Hi ForgeHype, I would like a free consultation.',
         'Business type: ' + d.get('type'),
         interests.length ? 'Interested in: ' + interests.join(', ') : null,
         site ? 'Website: ' + site : null,
-        note ? 'Notes: ' + note : null].filter(Boolean);
+        email ? 'Email: ' + email : null,
+        note ? 'Biggest problem: ' + note : null].filter(Boolean);
       const text = lines.join('\n');
       $('#mailFallback').href = 'mailto:ForgeHypeqatar@gmail.com?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(text);
-      // Web3Forms emails a copy once the hidden access_key is filled in; the WhatsApp hand-off below runs either way.
-      const key = String(d.get('access_key') || '').trim();
-      if (key && !d.get('botcheck')) {
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST', keepalive: true,
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            access_key: key, subject: 'Free consultation request: ' + d.get('type'), from_name: 'ForgeHype website',
-            business_type: d.get('type'), interests: interests.join(', ') || '-', website: site || '-', message: note || '-', summary: text
-          })
-        }).catch(() => {});
-      }
+      // every submission is also saved to the leads Google Sheet (assets/leads-sheet.gs) once LEADS_URL is set
+      sendLead({ source: 'Book a call', type: d.get('type'), interests: interests.join(', '), website: site, email, message: note, consent: 'yes', botcheck: d.get('botcheck') || '' });
       window.open('https://wa.me/97470069544?text=' + encodeURIComponent(text), '_blank', 'noopener');
       form.classList.add('sent');
     });
@@ -909,10 +910,6 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { f.classList.add('bad'); msg.textContent = 'Please enter a valid email.'; inp.focus(); return; }
     f.classList.remove('bad');
     const text = 'Hi ForgeHype, I would like my 10% discount code.\nEmail: ' + email + '\nMy challenge: ';
-    const keyEl = document.querySelector('#bookForm input[name="access_key"]');
-    const key = keyEl ? keyEl.value.trim() : '';
-    if (key) fetch('https://api.web3forms.com/submit', { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ access_key: key, subject: '10% discount code request', from_name: 'ForgeHype website', replyto: email, email }) }).catch(() => {});
     window.open('https://wa.me/97470069544?text=' + encodeURIComponent(text), '_blank', 'noopener');
     msg.textContent = 'Thanks! Tell us your challenge in WhatsApp and we will send your code.';
     f.reset();

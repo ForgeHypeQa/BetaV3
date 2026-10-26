@@ -1368,3 +1368,8 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
   .compare{margin:0;justify-self:start;width:100%}
 }
 .cv-val strong{display:block;font-weight:600;color:#f4efe9;margin-block-end:.15rem}
+/* booking form: consent row */
+.field-consent{grid-column:1/-1}
+.consent-lbl{display:flex;gap:.7rem;align-items:flex-start;font-size:.9rem;color:#c9c0b7;line-height:1.45;cursor:pointer}
+.consent-lbl input{width:20px;height:20px;flex:none;margin-top:.15rem;accent-color:var(--accent)}
+.field-consent.invalid .consent-lbl{color:#ff8a65}
