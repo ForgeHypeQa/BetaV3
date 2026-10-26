@@ -1252,18 +1252,5 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .hero-static.hero-in .sub .l1{animation-delay:1s}.hero-static.hero-in .sub .l2{animation-delay:1.15s}.hero-static.hero-in .btn-row{animation-delay:1.5s}
 @keyframes heroIn{from{opacity:0;transform:translateY(.5em);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
 @media (prefers-reduced-motion:reduce){.hero-static.hero-in :is(.kicker,.hero-title .w1,.hero-title .em,.sub .l1,.sub .l2,.btn-row){animation:none}}
-/* Qatar: cinematic panel — the flight over West Bay with the words over it, lines rising in on scroll */
-.qatar-cine{position:relative;aspect-ratio:21/9;border-radius:24px;overflow:hidden;background:#000;isolation:isolate}
-.qatar-cine video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
-.qatar-cine::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,.86) 0%,rgba(0,0,0,.5) 36%,rgba(0,0,0,0) 64%),linear-gradient(to right,rgba(0,0,0,.35),rgba(0,0,0,0) 60%)}
-.qatar-cine .qatar-text{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:var(--s-7);display:grid;gap:var(--s-3);justify-items:start;max-width:46rem;color:#f4efe9}
-.qatar-cine .qatar-text .ln{display:block}
-.qatar-cine .qatar-text .sec-label{color:#f4efe9}
-.qatar-cine .qatar-text .lead{color:#d9d1c9}
-.qatar-cine .qatar-text .t-h2{color:#f4efe9}
-.reveal.in .qatar-text .ln:nth-child(2){transition-delay:.15s}.reveal.in .qatar-text .ln:nth-child(3){transition-delay:.35s}
-@media (max-width:720px){
-  .qatar-cine{aspect-ratio:auto;height:min(78svh,640px)}
-  .qatar-cine .qatar-text{padding:var(--s-5) var(--s-5) var(--s-6)}
-  .qatar-cine video{object-position:50% 30%}
-}
+/* Qatar: the flight over West Bay in 16:9 */
+.qatar-media{aspect-ratio:16/9}
