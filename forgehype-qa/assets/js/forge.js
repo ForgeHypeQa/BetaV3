@@ -144,7 +144,7 @@
     const portrait = phone() || innerHeight > innerWidth;
     if (portrait) {                                          // resting place, phones and portrait tablets: between the navbar and the kicker
       const k = sec.querySelector('.kicker'), top = 104, bottom = (k ? k.offsetTop : H * .54) - 10;
-      G1.R = Math.max(40, Math.min(W * .44, (bottom - top) / 2.45)); G1.cx = W - G1.R - 16; G1.cy = top + G1.R * 1.05;   // tucked to the right
+      G1.R = Math.max(40, Math.min(W * .44, (bottom - top) / 2.45)); G1.cx = W / 2; G1.cy = top + G1.R * 1.05;
     } else { G1.cx = W * .72; G1.cy = H * .44; G1.R = Math.min(H * .30, W * .17); }   // desktop: right of the headline
     G0.cx = W / 2; G0.cy = H * .46; G0.R = portrait ? Math.min(W * .42, H * .21) : Math.min(W * .42, H * .28);   // intro: centre stage
     geo(); const LSmax = Math.ceil(Math.max(G0.R, G1.R) * 3.2);
@@ -189,8 +189,8 @@
     const yaw = (RM ? 0 : Math.sin(now * .00045) * .3) + mx * .5, pitch = .14 + my * .3;
     const cy1 = Math.cos(yaw), sy1 = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch), F = 2.6;
     const base = Math.max(5.5, R * .044);
-    const dim = ease(mix);                                   // 0 = intro, 1 = at rest: 70% opacity, softer light
-    cv.style.opacity = (1 - .3 * dim).toFixed(3);
+    const dim = ease(mix);                                   // 0 = intro, 1 = at rest: 50% opacity, darker light
+    cv.style.opacity = (1 - .5 * dim).toFixed(3);
 
     /* particles → layer (additive) */
     lc.setTransform(DPR, 0, 0, DPR, 0, 0); lc.clearRect(0, 0, LS, LS); lc.globalCompositeOperation = 'lighter';
@@ -207,7 +207,7 @@
       const s = F / (F - z), sz = base * q.s * Math.pow(s, 1.4);
       const tw = .55 + .45 * Math.sin(now * .003 + q.ph);
       const lit = .42 + .58 * Math.max(0, (-x * .32 - y * .62 + z * .72));       // key light: top-left-front
-      lc.globalAlpha = Math.min(1, (.3 + .7 * lit) * (q.k === 2 ? tw : .8 + .2 * tw)) * (1 - .25 * dim);
+      lc.globalAlpha = Math.min(1, (.3 + .7 * lit) * (q.k === 2 ? tw : .8 + .2 * tw)) * (1 - .35 * dim);
       lc.drawImage(SPR[q.k], ox + x * R * s - sz / 2, oy + y * R * s - sz / 2, sz, sz);
     }
     lc.globalAlpha = 1;
@@ -224,11 +224,11 @@
     /* compose */
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.clearRect(0, 0, W, H); ctx.globalCompositeOperation = 'source-over';
     const glow = ctx.createRadialGradient(cx, cy + R * .15, 0, cx, cy + R * .15, R * 1.75);
-    glow.addColorStop(0, 'rgba(' + ACC + ',' + (.24 - .12 * dim) + ')'); glow.addColorStop(.45, 'rgba(' + ACC + ',' + (.07 - .04 * dim) + ')'); glow.addColorStop(1, 'rgba(' + ACC + ',0)');
+    glow.addColorStop(0, 'rgba(' + ACC + ',' + (.24 - .16 * dim) + ')'); glow.addColorStop(.45, 'rgba(' + ACC + ',' + (.07 - .05 * dim) + ')'); glow.addColorStop(1, 'rgba(' + ACC + ',0)');
     ctx.fillStyle = glow; ctx.fillRect(cx - R * 1.8, cy - R * 1.7, R * 3.6, R * 3.6);
     ctx.save(); ctx.translate(cx, floorY); ctx.scale(1, .11);
     const pool = ctx.createRadialGradient(0, 0, 0, 0, 0, R * 1.35);
-    pool.addColorStop(0, 'rgba(' + ACC + ',' + (.34 - .16 * dim) + ')'); pool.addColorStop(1, 'rgba(' + ACC + ',0)');
+    pool.addColorStop(0, 'rgba(' + ACC + ',' + (.34 - .22 * dim) + ')'); pool.addColorStop(1, 'rgba(' + ACC + ',0)');
     ctx.fillStyle = pool; ctx.fillRect(-R * 1.4, -R * 1.4, R * 2.8, R * 2.8); ctx.restore();
     ctx.globalCompositeOperation = 'lighter';
     const LP = Math.round(LS * DPR);
