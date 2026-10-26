@@ -86,16 +86,16 @@ const Panel: React.FC<{ side: "you" | "them"; spec: FixSpec; delay: number; out:
   return (
     <div style={{ position: "absolute", top, left: 36, width: 1008, height: 500, opacity: p * (1 - out), transform: `translateX(${x}px)`,
       borderRadius: 30, background: good ? theme.colors.panel2 : theme.colors.panel, border: `1px solid ${good ? theme.colors.primary + "66" : theme.colors.line}`, padding: "28px 36px", overflow: "hidden" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 14, fontFamily: theme.fonts.mono, fontSize: 30, letterSpacing: ".22em", color: good ? theme.colors.primary : theme.colors.textDim }}>
-        <span style={{ width: 14, height: 14, borderRadius: 99, background: good ? theme.colors.primary : theme.colors.textDim }} />{good ? "YOUR COMPETITOR" : "YOU"}
+      <div style={{ display: "flex", alignItems: "center", gap: 14, fontFamily: theme.fonts.display, fontWeight: 800, fontSize: 46, letterSpacing: "-.01em", color: good ? theme.colors.primary : theme.colors.text }}>
+        <span style={{ width: 16, height: 16, borderRadius: 99, background: good ? theme.colors.primary : theme.colors.text }} />{good ? "Your competitor" : "You"}
       </div>
-      <div style={{ display: "flex", gap: 40, marginTop: 22, alignItems: "flex-start" }}>
+      <div style={{ display: "flex", gap: 40, marginTop: 16, alignItems: "flex-start" }}>
         <div style={{ flex: "0 0 200px", transform: "scale(.68)", transformOrigin: "0 0", height: 0 }}><Phone width={280}><Screen kind={spec.kind} good={good} /></Phone></div>
         <div style={{ flex: 1, display: "grid", gap: 26, marginTop: 10, marginLeft: 20 }}>
           {(good ? spec.them : spec.you).map((t, i) => {
             const q = spring({ frame: frame - delay - 24 - i * 18, fps, config: theme.spring.snappy });
             return <div key={i} style={{ display: "flex", gap: 18, alignItems: "center", opacity: q, transform: `translateX(${(1 - q) * 30}px)` }}>
-              <span style={{ flex: "0 0 auto" }}>{good ? <Tick size={60} /> : <Cross size={60} />}</span>
+              <span style={{ flex: "0 0 auto" }}>{good ? <Tick size={60} color="#25d366" /> : <Cross size={60} color="#e34f4f" />}</span>
               <span style={{ fontFamily: theme.fonts.display, fontWeight: 800, fontSize: 64, lineHeight: 1.04, letterSpacing: "-.02em", color: good ? theme.colors.text : theme.colors.textDim }}>{t}</span></div>;
           })}
         </div>
