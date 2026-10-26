@@ -1373,3 +1373,8 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .consent-lbl{display:flex;gap:.7rem;align-items:flex-start;font-size:.9rem;color:#c9c0b7;line-height:1.45;cursor:pointer}
 .consent-lbl input{width:20px;height:20px;flex:none;margin-top:.15rem;accent-color:var(--accent)}
 .field-consent.invalid .consent-lbl{color:#ff8a65}
+/* dark form: ticked boxes are orange with a white tick */
+#bookForm .ms-opt input:checked{background:var(--accent);border-color:var(--accent)}
+#bookForm .ms-opt input:checked::after{border-color:#fff}
+#bookForm .ms-opt input{width:22px;height:22px;border-radius:6px}
+#bookForm .ms-opt input:checked::after{width:10px;height:5px;border-width:2.5px}
