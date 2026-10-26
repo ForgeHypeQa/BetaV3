@@ -1244,3 +1244,9 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .hero-static .bg{background:transparent}
 .hero-static .bg::after{display:none}
 .forge{position:absolute;inset:0;width:100%;height:100%;display:block}
+.forge-cap{position:absolute;margin:0;transform:translateX(-50%);white-space:nowrap;font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;line-height:1;color:#f4efe9;text-shadow:0 0 18px rgba(217,104,46,.45);pointer-events:none}
+.forge-cap span{display:inline-block;animation:forgeIn .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*28ms)}
+.forge-cap.out span{animation:forgeOut .35s ease-in both;animation-delay:calc(var(--i,0)*10ms)}
+@keyframes forgeIn{from{opacity:0;transform:translateY(.45em) scale(.9);filter:blur(6px)}60%{filter:blur(0)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes forgeOut{to{opacity:0;transform:translateY(-.35em);filter:blur(5px)}}
+@media (prefers-reduced-motion:reduce){.forge-cap span,.forge-cap.out span{animation:none}}

@@ -18,13 +18,10 @@
     c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath();
   };
   const dot = (c, x, y, r) => { c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); };
+  const CAPS = ['', 'Websites that convert', 'Media production', 'Web portal & app', 'E-commerce', 'AI integration', 'Business growth'];
   const DRAW = [
     null,                                                     // 0: globe (computed, not drawn)
-    c => {                                                    // 1: reels / media — play
-      c.lineWidth = .08; c.beginPath(); c.arc(0, 0, .9, 0, 7); c.stroke();
-      c.beginPath(); c.moveTo(-.28, -.46); c.lineTo(-.28, .46); c.lineTo(.52, 0); c.closePath(); c.fill();
-    },
-    c => {                                                    // 2: website — browser window
+    c => {                                                    // 1: websites — browser window
       c.lineWidth = .07; rr(c, -1, -.72, 2, 1.44, .14); c.stroke();
       c.beginPath(); c.moveTo(-1, -.4); c.lineTo(1, -.4); c.stroke();
       [-.8, -.64, -.48].forEach(x => dot(c, x, -.56, .05));
@@ -35,12 +32,22 @@
       c.save(); c.translate(.38, .02); c.scale(.62, .62);     // cursor
       c.beginPath(); c.moveTo(0, 0); c.lineTo(0, .78); c.lineTo(.2, .6); c.lineTo(.34, .9); c.lineTo(.47, .84); c.lineTo(.34, .55); c.lineTo(.58, .55); c.closePath(); c.fill(); c.restore();
     },
-    c => {                                                    // 3: e-commerce — shopping bag
+    c => {                                                    // 2: media production — play
+      c.lineWidth = .08; c.beginPath(); c.arc(0, 0, .9, 0, 7); c.stroke();
+      c.beginPath(); c.moveTo(-.28, -.46); c.lineTo(-.28, .46); c.lineTo(.52, 0); c.closePath(); c.fill();
+    },
+    c => {                                                    // 3: web portal & app — phone with app grid
+      c.lineWidth = .07; rr(c, -.52, -.98, 1.04, 1.96, .18); c.stroke();
+      c.lineWidth = .06; c.beginPath(); c.moveTo(-.16, -.8); c.lineTo(.16, -.8); c.stroke();
+      [[-.36, -.5], [.04, -.5], [-.36, -.1], [.04, -.1]].forEach(p => { rr(c, p[0], p[1], .32, .32, .08); c.fill(); });
+      c.lineWidth = .065; c.beginPath(); c.moveTo(-.34, .42); c.lineTo(.34, .42); c.moveTo(-.34, .62); c.lineTo(.1, .62); c.stroke();
+    },
+    c => {                                                    // 4: e-commerce — shopping bag
       c.lineWidth = .07; rr(c, -.72, -.22, 1.44, 1.12, .14); c.stroke();
       c.beginPath(); c.arc(0, -.22, .4, Math.PI, 0); c.stroke();
       c.lineWidth = .065; c.beginPath(); c.moveTo(-.2, .28); c.lineTo(-.04, .46); c.lineTo(.26, .1); c.stroke();
     },
-    c => {                                                    // 4: AI integration — chip with a spark
+    c => {                                                    // 5: AI integration — chip with a spark
       c.lineWidth = .07; rr(c, -.55, -.55, 1.1, 1.1, .12); c.stroke();
       c.lineWidth = .065;
       [-.3, 0, .3].forEach(t => {
@@ -50,7 +57,7 @@
       c.beginPath(); c.moveTo(0, -.34); c.quadraticCurveTo(0, 0, .34, 0); c.quadraticCurveTo(0, 0, 0, .34);
       c.quadraticCurveTo(0, 0, -.34, 0); c.quadraticCurveTo(0, 0, 0, -.34); c.fill();
     },
-    c => {                                                    // 5: growth — rising chart with arrow
+    c => {                                                    // 6: business growth — rising chart with arrow
       c.lineWidth = .08; c.beginPath(); c.moveTo(-.95, .62); c.lineTo(-.45, .25); c.lineTo(-.05, .44); c.lineTo(.4, -.2); c.lineTo(.78, -.58); c.stroke();
       c.beginPath(); c.moveTo(.47, -.53); c.lineTo(.78, -.58); c.lineTo(.73, -.27); c.stroke();
       [[-.95, .62], [-.45, .25], [-.05, .44], [.4, -.2]].forEach(p => dot(c, p[0], p[1], .085));
@@ -104,8 +111,19 @@
       R = Math.max(40, Math.min(W * .34, (bottom - top) / 2.75)); cx = W / 2; cy = top + R * 1.02;
     } else { cx = W * .72; cy = H * .44; R = Math.min(H * .30, W * .17); }   // desktop: right of the headline
     floorY = cy + R * 1.14; LS = Math.ceil(R * 3.2); lx = cx - LS / 2; ly = cy - LS / 2;
+    cap.style.left = cx + 'px'; cap.style.top = (floorY + R * .22) + 'px'; cap.style.fontSize = Math.max(15, Math.min(26, R * .11)) + 'px';
     layer.width = refl.width = Math.round(LS * DPR); layer.height = refl.height = Math.round(LS * DPR);
   };
+
+  /* ---------- caption: one line per shape, letters forge in with the shape ---------- */
+  const cap = document.createElement('p'); cap.className = 'forge-cap'; cap.setAttribute('aria-hidden', 'true'); cv.parentElement.appendChild(cap);
+  let capShown = -1;
+  const showCap = i => {
+    if (capShown === i) return; capShown = i;
+    cap.textContent = ''; cap.classList.remove('out');
+    [...CAPS[i]].forEach((ch, n) => { const sp = document.createElement('span'); sp.textContent = ch === ' ' ? '\u00a0' : ch; sp.style.setProperty('--i', n); cap.appendChild(sp); });
+  };
+  const hideCap = () => { cap.classList.add('out'); capShown = -1; };
 
   /* ---------- animation state ---------- */
   const q0 = /[?&]forge=(\d)/.exec(location.search);
@@ -121,8 +139,8 @@
   const frame = now => {
     const dt = Math.min(50, now - (last || now)); last = now;
     if (!RM) {
-      if (morphing) { t += dt / MORPH; if (t >= 1) { t = 1; morphing = false; idx = nxt; hold = HOLD; } }
-      else { hold -= dt; if (hold <= 0) { nxt = (idx + 1) % SHAPES.length; morphing = true; t = 0; } }
+      if (morphing) { t += dt / MORPH; if (t >= .5 && capShown !== nxt) showCap(nxt); if (t >= 1) { t = 1; morphing = false; idx = nxt; hold = HOLD; } }
+      else { hold -= dt; if (hold <= 0) { nxt = (idx + 1) % SHAPES.length; morphing = true; t = 0; hideCap(); } }
     }
     mx += (tx - mx) * .05; my += (ty - my) * .05;
     const yaw = (RM ? 0 : Math.sin(now * .00045) * .3) + mx * .5, pitch = .14 + my * .3;
@@ -185,7 +203,7 @@
   };
   const kick = () => { if (!raf && !RM) { last = 0; raf = requestAnimationFrame(frame); } };
 
-  place(); EMB.forEach(e => { ember(e); e.t = Math.random(); }); frame(performance.now());
+  place(); EMB.forEach(e => { ember(e); e.t = Math.random(); }); if (idx) showCap(idx); frame(performance.now());
   if ('ResizeObserver' in window) new ResizeObserver(() => { place(); if (RM) frame(performance.now()); }).observe(cv.parentElement);
   else addEventListener('resize', () => { place(); if (RM) frame(performance.now()); });
   new IntersectionObserver(([en]) => { inView = en.isIntersecting; if (inView) kick(); }, { threshold: .05 }).observe(cv);
