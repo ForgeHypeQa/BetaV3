@@ -1337,3 +1337,22 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .pricing-sec .how-offer h3,.pricing-sec .how-offer p{color:inherit}
 .pricing-sec .how-offer p{color:#d9d1c9}
 @media (min-width:900px){.pricing-sec .how-offer{max-width:46rem}}
+/* why us: all six reasons at once, a two-column scorecard that reveals row by row */
+.score{max-width:52rem;margin-inline:auto}
+.score-head{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3);margin-block-end:var(--s-3)}
+.sh{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;padding:0 var(--s-3)}
+.sh-us{color:var(--accent)}.sh-them{color:#8d857e}
+.score-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3);margin-block-end:var(--s-3)}
+.score-row p{margin:0;display:flex;align-items:center;gap:.75rem;padding:var(--s-4) var(--s-4);border-radius:16px;font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;line-height:1.2;font-size:clamp(1rem,.9rem + .5vw,1.25rem)}
+.score-row svg{width:22px;height:22px;flex:none}
+.score-row .yes{background:#141210;color:#f4efe9;border:1px solid rgba(217,104,46,.45)}
+.score-row .yes svg{color:#2ecc71}
+.score-row .no{background:rgba(255,255,255,.04);color:#a39a91;border:1px solid rgba(255,255,255,.1);font-weight:500}
+.score-row .no svg{color:#e34f4f}
+html.js .reveal .score-row{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(var(--i)*.1s)}
+html.js .reveal.in .score-row{opacity:1;transform:none}
+@media (max-width:640px){
+  .score-head{display:none}
+  .score-row{grid-template-columns:1fr;gap:6px;margin-block-end:var(--s-4)}
+  .score-row .no{padding-block:.7rem;font-size:.95rem}
+}
