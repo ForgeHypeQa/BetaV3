@@ -589,6 +589,7 @@
     const body = new URLSearchParams({ ...fields, page: location.pathname + location.hash });
     fetch(LEADS_URL, { method: 'POST', mode: 'no-cors', keepalive: true, body }).catch(() => {});
   };
+  window.fhSendLead = sendLead;
   /* interests: dropdown with checkboxes */
   const msBtn = $('#intBtn'), msPanel = $('#intPanel'), msSum = $('#intSum');
   const boxes = $$('#bookForm input[name="interest"]');
@@ -623,17 +624,15 @@
       const consent = $('#f-consent');
       if (consent && !consent.checked) { consent.closest('.field').classList.add('invalid'); consent.focus(); return; }
       if (consent) consent.closest('.field').classList.remove('invalid');
-      const site = String(d.get('website') || '').trim(), note = String(d.get('message') || '').trim(), email = String(d.get('email') || '').trim();
+      const site = String(d.get('website') || '').trim(), note = String(d.get('message') || '').trim();
       const lines = ['Hi ForgeHype, I would like a free consultation.',
         'Business type: ' + d.get('type'),
         interests.length ? 'Interested in: ' + interests.join(', ') : null,
         site ? 'Website: ' + site : null,
-        email ? 'Email: ' + email : null,
-        note ? 'Biggest problem: ' + note : null].filter(Boolean);
+        note ? 'Notes: ' + note : null].filter(Boolean);
       const text = lines.join('\n');
       $('#mailFallback').href = 'mailto:ForgeHypeqatar@gmail.com?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(text);
-      // every submission is also saved to the leads Google Sheet (assets/leads-sheet.gs) once LEADS_URL is set
-      sendLead({ source: 'Book a call', type: d.get('type'), interests: interests.join(', '), website: site, email, message: note, consent: 'yes', botcheck: d.get('botcheck') || '' });
+      sendLead({ source: 'Booking', type: d.get('type'), interests: interests.join(', '), website: site, message: note, consent: 'yes', botcheck: d.get('botcheck') || '' });
       window.open('https://wa.me/97470069544?text=' + encodeURIComponent(text), '_blank', 'noopener');
       form.classList.add('sent');
     });
@@ -933,14 +932,15 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
 })();
 
 /* business type: custom single-choice dropdown in the same style as the interests list (no checkboxes) */
-(() => {
-  const sel = document.getElementById('f-type');
+['f-type', 'a-type'].forEach((selId, n) => {
+  const sel = document.getElementById(selId);
   if (!sel) return;
+  const sfx = n ? '2' : '';
   const opts = [...sel.options].filter(o => o.value || !o.disabled).filter(o => o.value !== '');
-  const wrap = document.createElement('div'); wrap.className = 'ms ms-single'; wrap.id = 'typeMs';
-  const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'input ms-btn'; btn.id = 'typeBtn';
-  btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-labelledby', 'typeLbl typeSum');
-  btn.innerHTML = '<span class="ms-sum" id="typeSum">Select your sector</span>';
+  const wrap = document.createElement('div'); wrap.className = 'ms ms-single'; wrap.id = 'typeMs' + sfx;
+  const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'input ms-btn'; btn.id = 'typeBtn' + sfx;
+  btn.setAttribute('aria-haspopup', 'listbox'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-labelledby', 'typeLbl' + sfx + ' typeSum' + sfx);
+  btn.innerHTML = '<span class="ms-sum" id="typeSum' + sfx + '">Select your sector</span>';
   const panel = document.createElement('div'); panel.className = 'ms-panel'; panel.setAttribute('role', 'listbox'); panel.hidden = true;
   opts.forEach(o => {
     const b = document.createElement('button'); b.type = 'button'; b.className = 'ms-opt ms-pick'; b.setAttribute('role', 'option'); b.textContent = o.textContent;
@@ -952,14 +952,14 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
     });
     panel.appendChild(b);
   });
-  const lbl = document.querySelector('label[for="f-type"]'); if (lbl) lbl.id = 'typeLbl';
+  const lbl = document.querySelector('label[for="' + selId + '"]'); if (lbl) lbl.id = 'typeLbl' + sfx;
   const open = v => { panel.hidden = !v; btn.setAttribute('aria-expanded', String(v)); };
   btn.addEventListener('click', () => open(panel.hidden));
   document.addEventListener('click', e => { if (!panel.hidden && !wrap.contains(e.target)) open(false); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { open(false); btn.focus(); } });
   sel.classList.add('sr-only'); sel.tabIndex = -1; sel.setAttribute('aria-hidden', 'true');
   wrap.append(btn, panel); sel.after(wrap);
-})();
+});
 
 /* navbar: full bar only at the very top and the very bottom; in between just a floating menu button */
 (() => {
@@ -1039,4 +1039,38 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   btns.forEach(b => b.addEventListener('click', () => set(b.dataset.side)));
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   new IntersectionObserver(([e], io) => { if (!e.isIntersecting) return; io.disconnect(); setTimeout(() => { if (box.getAttribute('data-side') === 'typical') set('forge'); }, RM ? 0 : 1400); }, { threshold: .5 }).observe(box);
+})();
+
+/* booking section: choose consultation or audit; the audit form goes to the leads Sheet only */
+(() => {
+  const choose = document.getElementById('bookChoose'); if (!choose) return;
+  const forms = { bookForm: document.getElementById('bookForm'), auditForm: document.getElementById('auditForm') };
+  const open = id => {
+    choose.classList.add('picked');
+    choose.querySelectorAll('.choice').forEach(b => b.classList.toggle('on', b.dataset.form === id));
+    Object.entries(forms).forEach(([k, f]) => { if (f) f.hidden = k !== id; });
+    const f = forms[id]; if (f) { f.classList.add('in'); const first = f.querySelector('.ms-btn, .input'); if (first && matchMedia('(pointer:fine)').matches) first.focus({ preventScroll: true }); }
+  };
+  choose.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => open(b.dataset.form)));
+  document.querySelectorAll('[data-open-form]').forEach(a => a.addEventListener('click', () => open(a.dataset.openForm)));
+  if (/[#&]audit\b/.test(location.hash)) open('auditForm');
+
+  const f = forms.auditForm; if (!f) return;
+  const bad = (el, on) => el.closest('.field').classList.toggle('invalid', on);
+  f.querySelectorAll('.input').forEach(el => el.addEventListener('input', () => bad(el, false)));
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const d = new FormData(f);
+    const type = String(d.get('type') || ''), site = String(d.get('website') || '').trim(), wa = String(d.get('whatsapp') || '').trim(), email = String(d.get('email') || '').trim();
+    let ok = true;
+    if (!type) { bad(f.querySelector('#a-type'), true); ok = false; }
+    if (!site) { bad(f.querySelector('#a-site'), true); ok = false; }
+    if (!wa && !email) { f.querySelector('.a-method').classList.add('invalid'); ok = false; } else f.querySelector('.a-method').classList.remove('invalid');
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { bad(f.querySelector('#a-email'), true); ok = false; }
+    const consent = f.querySelector('#a-consent');
+    if (!consent.checked) { consent.closest('.field').classList.add('invalid'); ok = false; } else consent.closest('.field').classList.remove('invalid');
+    if (!ok) { const first = f.querySelector('.invalid .input, .invalid input'); if (first) first.focus(); return; }
+    (window.fhSendLead || (() => {}))({ source: 'Free audit', type, website: site, whatsapp: wa, email, online: String(d.get('online') || '').trim(), operations: String(d.get('operations') || '').trim(), ai: String(d.get('ai') || '').trim(), consent: 'yes', botcheck: d.get('botcheck') || '' });
+    f.classList.add('sent');
+  });
 })();
