@@ -1,5 +1,5 @@
 /* Forge hero (homepage): a particle hologram that shapes itself into what ForgeHype builds —
-   globe → reels (play) → website (browser) → e-commerce (bag) → AI (chip) → growth (chart) → globe.
+   Qatar in a ring → website → media (play) → app (phone) → e-commerce (bag) → AI (chip) → growth (chart).
    Canvas 2D, no libraries: about 1,100 particles on phones, 1,800 on desktop, brand orange on black.
    Pauses when off screen or the tab is hidden; a single still frame with reduced motion.
    Tune: HOLD / MORPH (ms), the shape list, and place() for where the object sits. */
@@ -9,7 +9,7 @@
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const phone = () => innerWidth < 721;
   const N = phone() ? 1300 : innerWidth >= 1600 ? 2800 : 2100;
-  const HOLD = 2600, MORPH = 1300, SPIN = .00055;      // ms per shape, ms per change, rad per ms
+  const HOLD = 2600, MORPH = 1300;                     // ms per shape, ms per change
   const ACC = '217,104,46', LIT = '255,158,96', HOT = '255,238,224';
 
   /* ---------- shapes drawn in unit space (-1..1, y down), then sampled into points ---------- */
@@ -18,9 +18,15 @@
     c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath();
   };
   const dot = (c, x, y, r) => { c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); };
+  const QATAR = [[.063,.616],[-.004,.633],[-.065,.65],[-.118,.65],[-.158,.643],[-.188,.626],[-.241,.556],[-.278,.467],[-.257,.417],[-.249,.386],[-.3,.148],[-.315,-.033],[-.31,-.07],[-.281,-.113],[-.23,-.207],[-.206,-.299],[-.132,-.509],[-.055,-.59],[.06,-.65],[.153,-.533],[.268,-.444],[.289,-.345],[.254,-.264],[.225,-.136],[.244,-.076],[.249,-.025],[.281,.062],[.31,.173],[.315,.251],[.3,.323],[.26,.383],[.182,.566],[.158,.585]];
   const CAPS = ['', 'Websites that convert', 'Media production', 'Web portal & app', 'E-commerce', 'AI integration', 'Business growth'];
   const DRAW = [
-    null,                                                     // 0: globe (computed, not drawn)
+    c => {                                                    // 0: Qatar in a ring, Doha marked (Natural Earth 1:50m outline)
+      c.lineWidth = .07; c.beginPath(); c.arc(0, 0, .95, 0, 7); c.stroke();
+      c.save(); c.scale(1.16, 1.16); c.lineWidth = .06;
+      c.beginPath(); QATAR.forEach((p, i) => (i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1]))); c.closePath(); c.stroke();
+      c.lineWidth = .05; c.beginPath(); c.arc(.258, .06, .15, 0, 7); c.stroke(); dot(c, .258, .06, .07); c.restore();
+    },
     c => {                                                    // 1: websites — browser window
       c.lineWidth = .07; rr(c, -1, -.72, 2, 1.44, .14); c.stroke();
       c.beginPath(); c.moveTo(-1, -.4); c.lineTo(1, -.4); c.stroke();
@@ -77,10 +83,7 @@
     for (let i = 0; i < N; i++) { const p = pts[i % pts.length]; out.push({ x: p[0] + (Math.random() - .5) * .006, y: p[1] + (Math.random() - .5) * .006, z: (Math.random() - .5) * .05 }); }
     return out.sort(byAngle);
   };
-  const globe = [], GA = Math.PI * (3 - Math.sqrt(5));
-  for (let i = 0; i < N; i++) { const y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), t = GA * i; const j = .965 + Math.random() * .07; globe.push({ x: Math.cos(t) * r * .92 * j, y: y * .92 * j, z: Math.sin(t) * r * .92 * j }); }
-  globe.sort(byAngle);
-  const SHAPES = DRAW.map(d => (d ? sample(d) : globe));
+  const SHAPES = DRAW.map(d => sample(d));
 
   /* ---------- particles ---------- */
   const sprite = (rgb, size) => {
@@ -131,9 +134,7 @@
   const ease = k => (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
   const tmp = { x: 0, y: 0, z: 0 };
   const at = (shape, i, time, o) => {
-    const p = SHAPES[shape][i];
-    if (shape === 0) { const a = time * SPIN, ca = Math.cos(a), sa = Math.sin(a); o.x = p.x * ca + p.z * sa; o.y = p.y; o.z = -p.x * sa + p.z * ca; }
-    else { o.x = p.x; o.y = p.y; o.z = p.z; }
+    const p = SHAPES[shape][i]; o.x = p.x; o.y = p.y; o.z = p.z;
   };
 
   const frame = now => {
