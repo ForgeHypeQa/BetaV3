@@ -397,6 +397,16 @@
     }, { rootMargin: '200px 0px' }).observe(v);
   });
 
+  /* Qatar video titles: restart the title cycle every time the flight loops, so the words stay on the camera move */
+  const qvt = $('#qvt'), qv = $('#qatarMedia video');
+  if (qvt && qv && !RM.matches) {
+    let lastT = 0;
+    const sync = () => { qvt.classList.remove('run'); void qvt.offsetWidth; qvt.classList.add('run'); };
+    qv.addEventListener('playing', () => { if (qv.currentTime < .3) sync(); else if (!qvt.classList.contains('run')) sync(); });
+    qv.addEventListener('timeupdate', () => { if (qv.currentTime < lastT - 1) sync(); lastT = qv.currentTime; });
+    qv.addEventListener('pause', () => qvt.classList.remove('run'));
+  }
+
   /* ================= 10. PHONE STAGE (reveal) ================= */
   const phoneStage = $('#phoneStage');
   if (phoneStage) new IntersectionObserver(([e]) => { if (e.isIntersecting) phoneStage.classList.add('in'); }, { threshold: 0.35 }).observe(phoneStage);
