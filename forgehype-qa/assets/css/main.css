@@ -1332,3 +1332,8 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .price-note{text-align:center;color:#6b645e;font-size:.95rem;margin:var(--s-3) 0 0}
 @media (max-width:480px){.price-compare{grid-template-columns:1fr}}
 @media (min-width:900px){.steps-path{max-width:46rem}.price-compare{max-width:46rem}}
+/* offer box inside pricing (light section) */
+.pricing-sec .how-offer{max-width:40rem;margin:var(--s-7) auto 0;background:#14110f;color:#f4efe9;border:1px solid rgba(217,104,46,.5);border-radius:20px;padding:var(--s-5)}
+.pricing-sec .how-offer h3,.pricing-sec .how-offer p{color:inherit}
+.pricing-sec .how-offer p{color:#d9d1c9}
+@media (min-width:900px){.pricing-sec .how-offer{max-width:46rem}}
