@@ -1367,3 +1367,4 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
   .why-film{margin:0;width:min(100%,440px);justify-self:end}
   .compare{margin:0;justify-self:start;width:100%}
 }
+.cv-val strong{display:block;font-weight:600;color:#f4efe9;margin-block-end:.15rem}
