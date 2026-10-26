@@ -4,6 +4,7 @@ import { loadFont } from "@remotion/fonts";
 import { Stack } from "./fx";
 import { Intro, Website, Content, Search, Brand, Replies, Focus, Outro } from "./scenes";
 import { FixFilm, FIXES } from "./fixes";
+import { WhyFilm, WHY_DUR } from "./why";
 
 loadFont({ family: "Bricolage", url: staticFile("fonts/bricolage.woff2"), weight: "200 800" });
 loadFont({ family: "Manrope", url: staticFile("fonts/manrope.woff2"), weight: "500" });
@@ -27,5 +28,6 @@ export const Root: React.FC = () => (
   <>
     <Composition id="Problems" component={Problems} durationInFrames={TOTAL} fps={FPS} width={1920} height={1080} />
     {FIXES.map(f => <Composition key={f.n} id={"Fix" + f.n} component={FixFilm} durationInFrames={390} fps={FPS} width={1080} height={1350} defaultProps={{ spec: f }} />)}
+    <Composition id="Why" component={WhyFilm} durationInFrames={WHY_DUR} fps={FPS} width={1080} height={1350} />
   </>
 );
