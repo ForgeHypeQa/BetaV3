@@ -1298,3 +1298,7 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
   .svc-deck.stacked[data-spread] .deck-track>[data-pos="1"],.svc-deck.stacked[data-spread] .deck-track>[data-pos="-1"]{opacity:.28;filter:saturate(.3) brightness(.55)}
   .svc-deck.stacked[data-spread] .deck-track>[data-pos="2"],.svc-deck.stacked[data-spread] .deck-track>[data-pos="-2"]{opacity:.12}
 }
+/* fix cards: a 16:9 film and one line, nothing else */
+.stack-media.stack-film{aspect-ratio:4/5;max-height:none;width:min(100%,520px);margin-inline:auto;background:#000}
+.stack-media.stack-film video{width:100%;height:100%;object-fit:cover;display:block}
+@media (min-width:900px){.stack-inner{grid-template-columns:.8fr 1.2fr}.stack-inner .stack-film{grid-column:2;grid-row:1;width:auto;height:min(60vh,560px);justify-self:center}.stack-inner .stack-text{grid-column:1;grid-row:1}}

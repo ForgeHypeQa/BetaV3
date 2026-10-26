@@ -62,7 +62,7 @@ export const WordReveal: React.FC<{ text: string; delay?: number; per?: number; 
     <div style={{ display: "flex", flexWrap: "wrap", columnGap: "0.24em", rowGap: 0, ...style }}>
       {text.split(" ").map((w, i) => {
         const p = spring({ frame: frame - delay - i * per, fps, config: theme.spring.snappy });
-        const on = hi.some(h => w.replace(/[.,!?]/g, "").toUpperCase() === h.toUpperCase());
+        const norm = (x: string) => x.replace(/[.,!?']/g, "").toUpperCase(); const on = hi.some(h => norm(w) === norm(h));
         return <span key={i} style={{ display: "inline-block", opacity: p, transform: `translateY(${interpolate(p, [0, 1], [34, 0])}px)`,
           color: on ? theme.colors.primary : undefined }}>{w}</span>;
       })}
