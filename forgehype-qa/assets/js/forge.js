@@ -1,15 +1,18 @@
 /* Forge hero (homepage): a particle hologram that shapes itself into what ForgeHype builds —
    Qatar in a ring → website → media (play) → app (phone) → e-commerce (bag) → AI (chip) → growth (chart).
    Canvas 2D, no libraries: about 1,100 particles on phones, 1,800 on desktop, brand orange on black.
+   First visit: a cinematic intro — the hologram plays one full cycle large in the centre with its captions,
+   then glides to its resting place while the headline text flows in. Any scroll, tap or key skips it;
+   it plays once per browser session (sessionStorage 'fh-intro'). ?intro=1 forces it, ?forge=N jumps to a shape.
    Pauses when off screen or the tab is hidden; a single still frame with reduced motion.
-   Tune: HOLD / MORPH (ms), the shape list, and place() for where the object sits. */
+   Tune: HOLD / MORPH (ms), HOLD_I / MORPH_I for the intro, and place() for where the object sits. */
 (() => {
   const cv = document.getElementById('forge'); if (!cv || !cv.getContext) return;
   const ctx = cv.getContext('2d');
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const phone = () => innerWidth < 721;
   const N = phone() ? 1800 : innerWidth >= 1600 ? 3400 : 2700;
-  const HOLD = 2600, MORPH = 1300;                     // ms per shape, ms per change
+  const HOLD = 2600, MORPH = 1300, HOLD_I = 1600, MORPH_I = 950, TRANS = 1500;   // ms per shape / per change; intro pace; glide to rest
   const ACC = '217,104,46', LIT = '255,158,96', HOT = '255,238,224';
 
   /* ---------- shapes drawn in unit space (-1..1, y down), then sampled into points ---------- */
@@ -99,13 +102,18 @@
     lines.forEach((l, n) => c.fillText(l, 0, y0 + n * lh)); c.restore();
     CAPL[i] = { lines, fs: px / m, ys: lines.map((l, n) => (y0 + n * lh) / m) };
   };
-  const build = () => DRAW.map((draw, i) => {
-    if (!CAPS[i]) return sample(draw, N);
+  const build = withCaps => DRAW.map((draw, i) => {
+    if (!withCaps || !CAPS[i]) return sample(draw, N);
     sample(c => text(CAPS[i], c, i), 1);                 // measures the caption layout only
-    return sample(c => { c.translate(0, -.42); c.scale(.56, .56); draw(c); }, N);
+    return sample(c => { c.translate(0, -.42); c.scale(.56, .56); draw(c); }, N);   // icon above, room for the caption
   });
-  let SHAPES = build();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { SHAPES = build(); });   // re-sample once the brand font is in
+  const sec = cv.parentElement.parentElement;
+  const q0 = /[?&]forge=(\d)/.exec(location.search);
+  let intro = !RM && !q0 && (/[?&]intro=1/.test(location.search) || !(() => { try { return sessionStorage.getItem('fh-intro'); } catch (e) { return 0; } })());
+  window.__forge = true;
+  const SETS = { cap: build(true), full: build(false) };
+  let SHAPES = intro ? SETS.cap : SETS.full;
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { SETS.cap = build(true); SETS.full = build(false); SHAPES = intro ? SETS.cap : SETS.full; });
 
   /* ---------- particles ---------- */
   const sprite = (rgb, size) => {
@@ -124,25 +132,41 @@
   const ember = e => { e.v = 3200 + Math.random() * 3200; e.x = cx + (Math.random() - .5) * R * 2.6; e.y = floorY + R * .1; e.s = 1.5 + Math.random() * 1.8; e.a = .15 + Math.random() * .3; e.w = Math.random() * 6.28; };
 
   /* ---------- layout ---------- */
-  let W = 0, H = 0, DPR = 1, cx = 0, cy = 0, R = 0, floorY = 0, lx = 0, ly = 0, LS = 0;
+  let W = 0, H = 0, DPR = 1, cx = 0, cy = 0, R = 0, floorY = 0, lx = 0, ly = 0, LS = 0, mix = intro ? 0 : 1;   // mix: 0 = intro (centre, large), 1 = resting place
+  const G0 = { cx: 0, cy: 0, R: 0 }, G1 = { cx: 0, cy: 0, R: 0 };
+  const ease = k => (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
   const layer = document.createElement('canvas'), lc = layer.getContext('2d');
   const refl = document.createElement('canvas'), rc = refl.getContext('2d');
   const place = () => {
     const host = cv.parentElement, sec = host.parentElement; W = host.clientWidth; H = host.clientHeight;
     DPR = Math.min(devicePixelRatio || 1, phone() ? 1.5 : 2);   // soft sprites: 1.5x is plenty on phones
     cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); cv.style.width = W + 'px'; cv.style.height = H + 'px';
-    if (phone() || innerHeight > innerWidth) {               // phones and portrait tablets: centred between the navbar and the kicker
+    const portrait = phone() || innerHeight > innerWidth;
+    if (portrait) {                                          // resting place, phones and portrait tablets: between the navbar and the kicker
       const k = sec.querySelector('.kicker'), top = 104, bottom = (k ? k.offsetTop : H * .54) - 10;
-      R = Math.max(40, Math.min(W * .34, (bottom - top) / 2.75)); cx = W / 2; cy = top + R * 1.02;
-    } else { cx = W * .72; cy = H * .44; R = Math.min(H * .30, W * .17); }   // desktop: right of the headline
+      G1.R = Math.max(40, Math.min(W * .34, (bottom - top) / 2.75)); G1.cx = W / 2; G1.cy = top + G1.R * 1.02;
+    } else { G1.cx = W * .72; G1.cy = H * .44; G1.R = Math.min(H * .30, W * .17); }   // desktop: right of the headline
+    G0.cx = W / 2; G0.cy = H * .46; G0.R = portrait ? Math.min(W * .42, H * .21) : Math.min(W * .42, H * .28);   // intro: centre stage
+    geo(); const LSmax = Math.ceil(Math.max(G0.R, G1.R) * 3.2);
+    layer.width = refl.width = Math.round(LSmax * DPR); layer.height = refl.height = Math.round(LSmax * DPR);
+  };
+  const geo = () => {                                        // current geometry from the intro → rest mix
+    const e = ease(mix);
+    cx = G0.cx + (G1.cx - G0.cx) * e; cy = G0.cy + (G1.cy - G0.cy) * e; R = G0.R + (G1.R - G0.R) * e;
     floorY = cy + R * 1.14; LS = Math.ceil(R * 3.2); lx = cx - LS / 2; ly = cy - LS / 2;
-    layer.width = refl.width = Math.round(LS * DPR); layer.height = refl.height = Math.round(LS * DPR);
   };
 
   /* ---------- animation state ---------- */
-  const q0 = /[?&]forge=(\d)/.exec(location.search);
-  let idx = q0 ? Math.min(+q0[1], DRAW.length - 1) : 0, nxt = 0, morphing = false, t = 0, hold = HOLD, last = 0, mx = 0, my = 0, tx = 0, ty = 0, inView = true, raf = 0;
-  const ease = k => (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+  let idx = q0 ? Math.min(+q0[1], DRAW.length - 1) : 0, nxt = 0, morphing = false, t = 0, hold = intro ? HOLD_I : HOLD, last = 0, mx = 0, my = 0, tx = 0, ty = 0, inView = true, raf = 0;
+  let cycle = 0, trans = -1, transDur = TRANS, revealed = false;   // intro bookkeeping
+  const reveal = () => {
+    if (revealed) return; revealed = true;
+    sec.classList.remove('intro'); sec.classList.add('hero-in');
+    try { sessionStorage.setItem('fh-intro', '1'); } catch (e) {}
+  };
+  const endIntro = fast => { if (!intro || trans >= 0) return; trans = 0; transDur = fast ? 700 : TRANS; };
+  if (!intro) reveal();
+  else ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(ev => addEventListener(ev, () => endIntro(true), { passive: true, once: false }));
   const tmp = { x: 0, y: 0, z: 0 };
   const at = (shape, i, time, o) => {
     const p = SHAPES[shape][i]; o.x = p.x; o.y = p.y; o.z = p.z;
@@ -151,8 +175,15 @@
   const frame = now => {
     const dt = Math.min(50, now - (last || now)); last = now;
     if (!RM) {
-      if (morphing) { t += dt / MORPH; if (t >= 1) { t = 1; morphing = false; idx = nxt; hold = HOLD; } }
-      else { hold -= dt; if (hold <= 0) { nxt = (idx + 1) % SHAPES.length; morphing = true; t = 0; } }
+      const M = intro ? MORPH_I : MORPH;
+      if (morphing) { t += dt / M; if (t >= 1) { t = 1; morphing = false; idx = nxt; hold = intro ? HOLD_I : HOLD; if (idx === 0) cycle++; } }
+      else { hold -= dt; if (hold <= 0) { nxt = (idx + 1) % SHAPES.length; morphing = true; t = 0; if (intro && nxt === 0) endIntro(false); } }
+      if (trans >= 0) {                                      // glide from centre stage to the resting place
+        trans += dt / transDur; mix = Math.min(1, trans);
+        if (mix > .2) reveal();
+        if (trans >= 1) { intro = false; trans = -1; mix = 1; SHAPES = SETS.full; if (!morphing) { idx = idx; } }
+        geo();
+      }
     }
     mx += (tx - mx) * .05; my += (ty - my) * .05;
     const yaw = (RM ? 0 : Math.sin(now * .00045) * .3) + mx * .5, pitch = .14 + my * .3;
@@ -206,22 +237,24 @@
     const drawCap = (i, k) => {                        // k: 0 → 1 pop-in (negative = fading out)
       const L = CAPL[i]; if (!L || k === 0) return;
       const a = Math.abs(k), e = 1 - Math.pow(1 - a, 3), sc = k > 0 ? .9 + .1 * e : .97 + .03 * a, dy = k > 0 ? (1 - e) * R * .08 : 0;
-      if (!L.img || L.imgR !== R || L.imgD !== DPR) {        // glow text is costly: render each caption once per size
-        const fs = L.fs * R, pad = R * .2, w = Math.ceil(R * 2.6 + pad * 2), h = Math.ceil(L.lines.length * fs * 1.02 + pad * 2);
+      const Rk = Math.round(R / 8) * 8;
+      if (!L.img || L.imgR !== Rk || L.imgD !== DPR) {        // glow text is costly: render each caption once per size
+        const fs = L.fs * Rk, pad = Rk * .2, w = Math.ceil(Rk * 2.6 + pad * 2), h = Math.ceil(L.lines.length * fs * 1.02 + pad * 2);
         const o = L.img || document.createElement('canvas'); o.width = Math.round(w * DPR); o.height = Math.round(h * DPR);
         const c = o.getContext('2d'); c.setTransform(DPR, 0, 0, DPR, 0, 0);
         c.fillStyle = '#f4efe9'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = '700 ' + fs + 'px ' + FONT;
         if ('letterSpacing' in c) c.letterSpacing = (-.03 * fs) + 'px';
         L.lines.forEach((l, n) => c.fillText(l, w / 2, pad + fs * .51 + n * fs * 1.02));
-        L.img = o; L.imgR = R; L.imgD = DPR; L.imgW = w; L.imgH = h; L.imgPad = pad; L.imgFs = fs;
+        L.img = o; L.imgR = Rk; L.imgD = DPR; L.imgW = w; L.imgH = h; L.imgPad = pad; L.imgFs = fs;
       }
       const yc = (L.ys[0] + L.ys[L.ys.length - 1]) / 2, y2 = yc * cp, z = yc * sp, s = F / (F - z);
       ctx.save(); ctx.globalAlpha = e; ctx.translate(cx, cy + y2 * R * s + dy); ctx.scale(Math.cos(yaw) * s * sc, s * sc);
-      ctx.drawImage(L.img, -L.imgW / 2, -L.imgH / 2, L.imgW, L.imgH); ctx.restore();
+      const kk = R / Rk; ctx.drawImage(L.img, -L.imgW * kk / 2, -L.imgH * kk / 2, L.imgW * kk, L.imgH * kk); ctx.restore();
     };
-    if (RM) drawCap(idx, 1);
-    else if (morphing) { drawCap(idx, -(1 - Math.min(1, t * 4))); drawCap(nxt, Math.max(0, (t - .55) / .45)); }
-    else drawCap(idx, 1);
+    if (intro && trans < 0) {
+      if (morphing) { drawCap(idx, -(1 - Math.min(1, t * 4))); drawCap(nxt, Math.max(0, (t - .55) / .45)); }
+      else drawCap(idx, 1);
+    } else if (intro) drawCap(idx === 0 && morphing ? idx : idx, -(1 - Math.min(1, mix * 3)));
     ctx.globalCompositeOperation = 'lighter';
 
     /* embers rising from the floor */
