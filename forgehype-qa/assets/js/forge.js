@@ -8,7 +8,7 @@
   const ctx = cv.getContext('2d');
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const phone = () => innerWidth < 721;
-  const N = phone() ? 1300 : innerWidth >= 1600 ? 2800 : 2100;
+  const N = phone() ? 1800 : innerWidth >= 1600 ? 3400 : 2700;
   const HOLD = 2600, MORPH = 1300;                     // ms per shape, ms per change
   const ACC = '217,104,46', LIT = '255,158,96', HOT = '255,238,224';
 
@@ -19,7 +19,7 @@
   };
   const dot = (c, x, y, r) => { c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); };
   const QATAR = [[.063,.616],[-.004,.633],[-.065,.65],[-.118,.65],[-.158,.643],[-.188,.626],[-.241,.556],[-.278,.467],[-.257,.417],[-.249,.386],[-.3,.148],[-.315,-.033],[-.31,-.07],[-.281,-.113],[-.23,-.207],[-.206,-.299],[-.132,-.509],[-.055,-.59],[.06,-.65],[.153,-.533],[.268,-.444],[.289,-.345],[.254,-.264],[.225,-.136],[.244,-.076],[.249,-.025],[.281,.062],[.31,.173],[.315,.251],[.3,.323],[.26,.383],[.182,.566],[.158,.585]];
-  const CAPS = ['', 'Websites that convert', 'Media production', 'Web portal & app', 'E-commerce', 'AI integration', 'Business growth'];
+  const CAPS = ['', 'Websites\nthat convert', 'Media\nproduction', 'Web portal\n& app', 'E-commerce', 'AI integration', 'Business\ngrowth'];
   const DRAW = [
     c => {                                                    // 0: Qatar in a ring, Doha marked (Natural Earth 1:50m outline)
       c.lineWidth = .07; c.beginPath(); c.arc(0, 0, .95, 0, 7); c.stroke();
@@ -71,19 +71,42 @@
     }
   ];
   const byAngle = (a, b) => Math.atan2(a.y, a.x) - Math.atan2(b.y, b.x);
-  const sample = draw => {
-    const S = 320, m = S / 2.3, oc = document.createElement('canvas'); oc.width = oc.height = S;
+  /* sample(draw, count): rasterise a drawing in unit space and pick `count` points on it */
+  const S = 480, m = S / 2.3;
+  const sample = (draw, count, sortBy) => {
+    const oc = document.createElement('canvas'); oc.width = oc.height = S;
     const c = oc.getContext('2d', { willReadFrequently: true });
     c.translate(S / 2, S / 2); c.scale(m, m); c.lineCap = c.lineJoin = 'round'; c.fillStyle = c.strokeStyle = '#fff';
     draw(c);
     const d = c.getImageData(0, 0, S, S).data, pts = [];
     for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) if (d[(y * S + x) * 4 + 3] > 90) pts.push([(x + .5 - S / 2) / m, (y + .5 - S / 2) / m]);
+    if (!pts.length) pts.push([0, 0]);
     for (let i = pts.length - 1; i > 0; i--) { const j = (Math.random() * (i + 1)) | 0; const t = pts[i]; pts[i] = pts[j]; pts[j] = t; }
     const out = [];
-    for (let i = 0; i < N; i++) { const p = pts[i % pts.length]; out.push({ x: p[0] + (Math.random() - .5) * .006, y: p[1] + (Math.random() - .5) * .006, z: (Math.random() - .5) * .05 }); }
-    return out.sort(byAngle);
+    for (let i = 0; i < count; i++) { const p = pts[i % pts.length]; out.push({ x: p[0] + (Math.random() - .5) * .006, y: p[1] + (Math.random() - .5) * .006, z: (Math.random() - .5) * .05 }); }
+    return out.sort(sortBy || byAngle);
   };
-  const SHAPES = DRAW.map(d => sample(d));
+  /* each state = the icon (smaller, upper part) + its caption as particles below it; Qatar has no caption and fills the space */
+  const FONT = (getComputedStyle(document.documentElement).getPropertyValue('--font-display') || 'sans-serif').trim();
+  const NT = Math.round(N * .5);                      // particles given to the caption
+  const CAPL = [];                                     // caption layout per state, in unit space (for the crisp text layer)
+  const text = (str, c, i) => {                        // drawn in pixel space so the font size is not scaled by m
+    c.save(); c.setTransform(1, 0, 0, 1, S / 2, S / 2);
+    const lines = str.split('\n'); let px = lines.length > 1 ? 54 : 60; c.font = '700 ' + px + 'px ' + FONT;
+    const w = Math.max(...lines.map(l => c.measureText(l).width)), maxW = 2.1 * m; if (w > maxW) { px *= maxW / w; c.font = '700 ' + px + 'px ' + FONT; }
+    c.textAlign = 'center'; c.textBaseline = 'middle';
+    const lh = px * 1.02, y0 = (lines.length > 1 ? .78 : .86) * m - (lines.length - 1) * lh / 2;
+    lines.forEach((l, n) => c.fillText(l, 0, y0 + n * lh)); c.restore();
+    CAPL[i] = { lines, fs: px / m, ys: lines.map((l, n) => (y0 + n * lh) / m) };
+  };
+  const build = () => DRAW.map((draw, i) => {
+    if (!CAPS[i]) return sample(draw, N);
+    const icon = sample(c => { c.translate(0, -.42); c.scale(.56, .56); draw(c); }, N - NT);
+    const cap = sample(c => text(CAPS[i], c, i), NT, (a, b) => a.x - b.x);
+    return icon.concat(cap);
+  });
+  let SHAPES = build();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { SHAPES = build(); });   // re-sample once the brand font is in
 
   /* ---------- particles ---------- */
   const sprite = (rgb, size) => {
@@ -96,7 +119,8 @@
   const P = [];
   for (let i = 0; i < N; i++) {
     const r = Math.random();
-    P.push({ k: r < .8 ? 0 : r < .96 ? 1 : 2, s: .8 + Math.random() * .5, ph: Math.random() * 6.28, d: i / N, x: 0, y: 0, z: 0 });
+    const capP = i >= N - NT;
+    P.push({ k: capP ? (r < .5 ? 1 : r < .94 ? 0 : 2) : (r < .8 ? 0 : r < .96 ? 1 : 2), s: (capP ? .62 : .8) + Math.random() * .45, ph: Math.random() * 6.28, d: i / N, x: 0, y: 0, z: 0 });
   }
   const EMB = []; for (let i = 0; i < (phone() ? 12 : 22); i++) EMB.push({ x: 0, y: 0, v: 1, a: 0, t: 1, s: 2, w: 0 });
   const ember = e => { e.v = 3200 + Math.random() * 3200; e.x = cx + (Math.random() - .5) * R * 2.6; e.y = floorY + R * .1; e.s = 1.5 + Math.random() * 1.8; e.a = .15 + Math.random() * .3; e.w = Math.random() * 6.28; };
@@ -114,19 +138,8 @@
       R = Math.max(40, Math.min(W * .34, (bottom - top) / 2.75)); cx = W / 2; cy = top + R * 1.02;
     } else { cx = W * .72; cy = H * .44; R = Math.min(H * .30, W * .17); }   // desktop: right of the headline
     floorY = cy + R * 1.14; LS = Math.ceil(R * 3.2); lx = cx - LS / 2; ly = cy - LS / 2;
-    cap.style.left = cx + 'px'; cap.style.top = (floorY + R * .22) + 'px'; cap.style.fontSize = Math.max(15, Math.min(26, R * .11)) + 'px';
     layer.width = refl.width = Math.round(LS * DPR); layer.height = refl.height = Math.round(LS * DPR);
   };
-
-  /* ---------- caption: one line per shape, letters forge in with the shape ---------- */
-  const cap = document.createElement('p'); cap.className = 'forge-cap'; cap.setAttribute('aria-hidden', 'true'); cv.parentElement.appendChild(cap);
-  let capShown = -1;
-  const showCap = i => {
-    if (capShown === i) return; capShown = i;
-    cap.textContent = ''; cap.classList.remove('out');
-    [...CAPS[i]].forEach((ch, n) => { const sp = document.createElement('span'); sp.textContent = ch === ' ' ? '\u00a0' : ch; sp.style.setProperty('--i', n); cap.appendChild(sp); });
-  };
-  const hideCap = () => { cap.classList.add('out'); capShown = -1; };
 
   /* ---------- animation state ---------- */
   const q0 = /[?&]forge=(\d)/.exec(location.search);
@@ -140,8 +153,8 @@
   const frame = now => {
     const dt = Math.min(50, now - (last || now)); last = now;
     if (!RM) {
-      if (morphing) { t += dt / MORPH; if (t >= .5 && capShown !== nxt) showCap(nxt); if (t >= 1) { t = 1; morphing = false; idx = nxt; hold = HOLD; } }
-      else { hold -= dt; if (hold <= 0) { nxt = (idx + 1) % SHAPES.length; morphing = true; t = 0; hideCap(); } }
+      if (morphing) { t += dt / MORPH; if (t >= 1) { t = 1; morphing = false; idx = nxt; hold = HOLD; } }
+      else { hold -= dt; if (hold <= 0) { nxt = (idx + 1) % SHAPES.length; morphing = true; t = 0; } }
     }
     mx += (tx - mx) * .05; my += (ty - my) * .05;
     const yaw = (RM ? 0 : Math.sin(now * .00045) * .3) + mx * .5, pitch = .14 + my * .3;
@@ -190,6 +203,28 @@
     ctx.drawImage(layer, lx, ly, LS, LS);
     ctx.drawImage(refl, lx, ly + 2 * (floorY - ly) - LS, LS, LS);
 
+    /* crisp caption on top of its particles: fades out as a change starts, in as the letters settle */
+    ctx.globalCompositeOperation = 'source-over';
+    const drawCap = (i, a) => {
+      const L = CAPL[i]; if (!L || a <= 0) return;
+      if (!L.img || L.imgR !== R || L.imgD !== DPR) {        // glow text is costly: render each caption once per size
+        const fs = L.fs * R, pad = R * .2, w = Math.ceil(R * 2.6 + pad * 2), h = Math.ceil(L.lines.length * fs * 1.02 + pad * 2);
+        const o = L.img || document.createElement('canvas'); o.width = Math.round(w * DPR); o.height = Math.round(h * DPR);
+        const c = o.getContext('2d'); c.setTransform(DPR, 0, 0, DPR, 0, 0);
+        c.fillStyle = '#f6efe8'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = '700 ' + fs + 'px ' + FONT;
+        c.shadowColor = 'rgba(' + ACC + ',.8)'; c.shadowBlur = R * .09;
+        L.lines.forEach((l, n) => c.fillText(l, w / 2, pad + fs * .51 + n * fs * 1.02));
+        L.img = o; L.imgR = R; L.imgD = DPR; L.imgW = w; L.imgH = h; L.imgPad = pad; L.imgFs = fs;
+      }
+      const yc = (L.ys[0] + L.ys[L.ys.length - 1]) / 2, y2 = yc * cp, z = yc * sp, s = F / (F - z);
+      ctx.save(); ctx.globalAlpha = a; ctx.translate(cx, cy + y2 * R * s); ctx.scale(Math.cos(yaw) * s, s);
+      ctx.drawImage(L.img, -L.imgW / 2, -L.imgH / 2, L.imgW, L.imgH); ctx.restore();
+    };
+    if (RM) drawCap(idx, 1);
+    else if (morphing) { drawCap(idx, 1 - Math.min(1, t * 5)); drawCap(nxt, Math.max(0, (t - .78) / .22)); }
+    else drawCap(idx, 1);
+    ctx.globalCompositeOperation = 'lighter';
+
     /* embers rising from the floor */
     if (!RM) for (const e of EMB) {
       e.t += dt / e.v;
@@ -204,7 +239,7 @@
   };
   const kick = () => { if (!raf && !RM) { last = 0; raf = requestAnimationFrame(frame); } };
 
-  place(); EMB.forEach(e => { ember(e); e.t = Math.random(); }); if (idx) showCap(idx); frame(performance.now());
+  place(); EMB.forEach(e => { ember(e); e.t = Math.random(); }); frame(performance.now());
   if ('ResizeObserver' in window) new ResizeObserver(() => { place(); if (RM) frame(performance.now()); }).observe(cv.parentElement);
   else addEventListener('resize', () => { place(); if (RM) frame(performance.now()); });
   new IntersectionObserver(([en]) => { inView = en.isIntersecting; if (inView) kick(); }, { threshold: .05 }).observe(cv);
