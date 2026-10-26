@@ -58,7 +58,7 @@
   --canvas:#fff6ef;--canvas-rgb:255,246,239;--canvas-2:#ffe9da;--panel:#fff;--panel-2:#fff;
   --text-primary:#14110f;--text-secondary:#6b645e;--text-tertiary:#8a827b;
   --line:rgba(20,17,15,.1);--line-strong:rgba(20,17,15,.2);--glass:rgba(255,255,255,.7);--glass-2:#fff;
-  --tshadow:none;color:var(--text-primary);color-scheme:light
+  --tshadow:none;color:var(--text-primary)
 }
 
 /* ---------- 2. Base ---------- */
