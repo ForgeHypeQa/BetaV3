@@ -979,3 +979,53 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   new MutationObserver(upd).observe(document.body, { attributes: true, attributeFilter: ['class'] });
   upd();
 })();
+
+/* fix cards: one swipe (or wheel flick) pulls exactly one card up and locks it at the top.
+   Native scrolling before the first card and after the last; reduced motion keeps native scrolling. */
+(() => {
+  const stack = document.getElementById('stack'); if (!stack) return;
+  const cards = [...stack.children]; if (cards.length < 2) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const targets = () => {                                   // document y at which card i locks at the top
+    const cs = getComputedStyle(stack), gap = parseFloat(cs.rowGap) || 0;
+    const navH = parseFloat(cs.getPropertyValue('--nav-h')) || 88, step = parseFloat(cs.getPropertyValue('--step')) || 14;
+    let top = stack.getBoundingClientRect().top + scrollY; const out = [];
+    cards.forEach((c, i) => { out.push(Math.round(top - (navH + i * step))); top += c.offsetHeight + gap; });
+    return out;
+  };
+  let busy = false, lockUntil = 0;
+  const ease = t => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const glideTo = y => {
+    const from = scrollY, dist = y - from; if (Math.abs(dist) < 2) return;
+    busy = true; const html = document.documentElement, prev = html.style.scrollBehavior; html.style.scrollBehavior = 'auto';
+    const dur = Math.min(800, Math.max(450, Math.abs(dist) * .7)), t0 = performance.now();
+    const step = now => { const k = Math.min(1, (now - t0) / dur); scrollTo(0, from + dist * ease(k)); if (k < 1) requestAnimationFrame(step); else { html.style.scrollBehavior = prev; busy = false; lockUntil = performance.now() + 450; } };
+    requestAnimationFrame(step);
+  };
+  /* where a gesture in direction dir (1 = up/next, -1 = down/previous) should land, or null for native scrolling */
+  const plan = dir => {
+    const ts = targets(), y = scrollY, first = ts[0], last = ts[ts.length - 1];
+    if (y < first - innerHeight * .7 || y > last + 60) return null;       // not in the stack yet / already past it
+    let cur = -1; ts.forEach((t, i) => { if (y >= t - 6) cur = i; });
+    const next = cur + dir;
+    if (dir > 0 && cur >= ts.length - 1) return null;                    // last card: scroll on normally
+    if (dir < 0 && cur <= 0) return cur === 0 && y > first + 6 ? first : null;   // settle back on the first card, else native
+    return ts[Math.max(0, Math.min(ts.length - 1, next))];
+  };
+  let sy = 0, mode = null, target = null;
+  addEventListener('touchstart', e => { if (e.touches.length !== 1) { mode = 'native'; return; } sy = e.touches[0].clientY; mode = null; target = null; }, { passive: true });
+  addEventListener('touchmove', e => {
+    if (busy || mode === 'glide') { e.preventDefault(); return; }
+    if (mode === 'native') return;
+    const dy = sy - e.touches[0].clientY; if (Math.abs(dy) < 8) return;
+    const y = plan(Math.sign(dy)); if (y == null) { mode = 'native'; return; }
+    mode = 'glide'; target = y; e.preventDefault();
+  }, { passive: false });
+  addEventListener('touchend', e => { if (mode === 'glide' && target != null && performance.now() > lockUntil) glideTo(target); mode = null; target = null; }, { passive: true });
+  addEventListener('wheel', e => {
+    if (e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX) || Math.abs(e.deltaY) < 4) return;
+    if (busy || performance.now() < lockUntil) { if (plan(Math.sign(e.deltaY)) != null) e.preventDefault(); return; }
+    const y = plan(Math.sign(e.deltaY)); if (y == null) return;
+    e.preventDefault(); glideTo(y); lockUntil = performance.now() + 900;
+  }, { passive: false });
+})();
