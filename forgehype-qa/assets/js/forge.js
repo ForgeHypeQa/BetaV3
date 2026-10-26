@@ -88,11 +88,11 @@
   };
   /* each state = the icon (smaller, upper part) + its caption as particles below it; Qatar has no caption and fills the space */
   const FONT = (getComputedStyle(document.documentElement).getPropertyValue('--font-display') || 'sans-serif').trim();
-  const NT = Math.round(N * .5);                      // particles given to the caption
+  const NT = 0;                                        // captions are crisp text, not particles
   const CAPL = [];                                     // caption layout per state, in unit space (for the crisp text layer)
   const text = (str, c, i) => {                        // drawn in pixel space so the font size is not scaled by m
     c.save(); c.setTransform(1, 0, 0, 1, S / 2, S / 2);
-    const lines = str.split('\n'); let px = lines.length > 1 ? 54 : 60; c.font = '700 ' + px + 'px ' + FONT;
+    const lines = str.split('\n'); let px = lines.length > 1 ? 54 : 60; c.font = '700 ' + px + 'px ' + FONT; if ('letterSpacing' in c) c.letterSpacing = (-.03 * px) + 'px';
     const w = Math.max(...lines.map(l => c.measureText(l).width)), maxW = 2.1 * m; if (w > maxW) { px *= maxW / w; c.font = '700 ' + px + 'px ' + FONT; }
     c.textAlign = 'center'; c.textBaseline = 'middle';
     const lh = px * 1.02, y0 = (lines.length > 1 ? .78 : .86) * m - (lines.length - 1) * lh / 2;
@@ -101,9 +101,8 @@
   };
   const build = () => DRAW.map((draw, i) => {
     if (!CAPS[i]) return sample(draw, N);
-    const icon = sample(c => { c.translate(0, -.42); c.scale(.56, .56); draw(c); }, N - NT);
-    const cap = sample(c => text(CAPS[i], c, i), NT, (a, b) => a.x - b.x);
-    return icon.concat(cap);
+    sample(c => text(CAPS[i], c, i), 1);                 // measures the caption layout only
+    return sample(c => { c.translate(0, -.42); c.scale(.56, .56); draw(c); }, N);
   });
   let SHAPES = build();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { SHAPES = build(); });   // re-sample once the brand font is in
@@ -119,8 +118,7 @@
   const P = [];
   for (let i = 0; i < N; i++) {
     const r = Math.random();
-    const capP = i >= N - NT;
-    P.push({ k: capP ? (r < .5 ? 1 : r < .94 ? 0 : 2) : (r < .8 ? 0 : r < .96 ? 1 : 2), s: (capP ? .62 : .8) + Math.random() * .45, ph: Math.random() * 6.28, d: i / N, x: 0, y: 0, z: 0 });
+    P.push({ k: r < .8 ? 0 : r < .96 ? 1 : 2, s: .8 + Math.random() * .45, ph: Math.random() * 6.28, d: i / N, x: 0, y: 0, z: 0 });
   }
   const EMB = []; for (let i = 0; i < (phone() ? 12 : 22); i++) EMB.push({ x: 0, y: 0, v: 1, a: 0, t: 1, s: 2, w: 0 });
   const ember = e => { e.v = 3200 + Math.random() * 3200; e.x = cx + (Math.random() - .5) * R * 2.6; e.y = floorY + R * .1; e.s = 1.5 + Math.random() * 1.8; e.a = .15 + Math.random() * .3; e.w = Math.random() * 6.28; };
@@ -205,23 +203,24 @@
 
     /* crisp caption on top of its particles: fades out as a change starts, in as the letters settle */
     ctx.globalCompositeOperation = 'source-over';
-    const drawCap = (i, a) => {
-      const L = CAPL[i]; if (!L || a <= 0) return;
+    const drawCap = (i, k) => {                        // k: 0 → 1 pop-in (negative = fading out)
+      const L = CAPL[i]; if (!L || k === 0) return;
+      const a = Math.abs(k), e = 1 - Math.pow(1 - a, 3), sc = k > 0 ? .9 + .1 * e : .97 + .03 * a, dy = k > 0 ? (1 - e) * R * .08 : 0;
       if (!L.img || L.imgR !== R || L.imgD !== DPR) {        // glow text is costly: render each caption once per size
         const fs = L.fs * R, pad = R * .2, w = Math.ceil(R * 2.6 + pad * 2), h = Math.ceil(L.lines.length * fs * 1.02 + pad * 2);
         const o = L.img || document.createElement('canvas'); o.width = Math.round(w * DPR); o.height = Math.round(h * DPR);
         const c = o.getContext('2d'); c.setTransform(DPR, 0, 0, DPR, 0, 0);
-        c.fillStyle = '#f6efe8'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = '700 ' + fs + 'px ' + FONT;
-        c.shadowColor = 'rgba(' + ACC + ',.8)'; c.shadowBlur = R * .09;
+        c.fillStyle = '#f4efe9'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = '700 ' + fs + 'px ' + FONT;
+        if ('letterSpacing' in c) c.letterSpacing = (-.03 * fs) + 'px';
         L.lines.forEach((l, n) => c.fillText(l, w / 2, pad + fs * .51 + n * fs * 1.02));
         L.img = o; L.imgR = R; L.imgD = DPR; L.imgW = w; L.imgH = h; L.imgPad = pad; L.imgFs = fs;
       }
       const yc = (L.ys[0] + L.ys[L.ys.length - 1]) / 2, y2 = yc * cp, z = yc * sp, s = F / (F - z);
-      ctx.save(); ctx.globalAlpha = a; ctx.translate(cx, cy + y2 * R * s); ctx.scale(Math.cos(yaw) * s, s);
+      ctx.save(); ctx.globalAlpha = e; ctx.translate(cx, cy + y2 * R * s + dy); ctx.scale(Math.cos(yaw) * s * sc, s * sc);
       ctx.drawImage(L.img, -L.imgW / 2, -L.imgH / 2, L.imgW, L.imgH); ctx.restore();
     };
     if (RM) drawCap(idx, 1);
-    else if (morphing) { drawCap(idx, 1 - Math.min(1, t * 5)); drawCap(nxt, Math.max(0, (t - .78) / .22)); }
+    else if (morphing) { drawCap(idx, -(1 - Math.min(1, t * 4))); drawCap(nxt, Math.max(0, (t - .55) / .45)); }
     else drawCap(idx, 1);
     ctx.globalCompositeOperation = 'lighter';
 
