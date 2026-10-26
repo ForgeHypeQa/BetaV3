@@ -1302,3 +1302,10 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .stack-media.stack-film{aspect-ratio:4/5;max-height:none;width:min(100%,520px);margin-inline:auto;background:#000}
 .stack-media.stack-film video{width:100%;height:100%;object-fit:cover;display:block}
 @media (min-width:900px){.stack-inner{grid-template-columns:.8fr 1.2fr}.stack-inner .stack-film{grid-column:2;grid-row:1;width:auto;height:min(60vh,560px);justify-self:center}.stack-inner .stack-text{grid-column:1;grid-row:1}}
+/* fix cards: tighter, and they stick just under the floating menu button on phones */
+@media (max-width:720px){
+  .stack{--nav-h:118px;--step:8px}
+  .stack-inner{padding:.9rem .9rem 1.4rem;gap:var(--s-4)}
+  .stack-media.stack-film{width:100%;border-radius:18px}
+}
+@media (min-width:900px){.stack-inner{padding:1.6rem 2rem}}

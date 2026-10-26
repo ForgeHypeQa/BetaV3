@@ -84,9 +84,9 @@ const Panel: React.FC<{ side: "you" | "them"; spec: FixSpec; delay: number; out:
   const p = spring({ frame: frame - delay, fps, config: theme.spring.smooth });
   const x = interpolate(p, [0, 1], [good ? 80 : -80, 0]) + interpolate(out, [0, 1], [0, good ? 900 : -900], { easing: theme.ease.in });
   return (
-    <div style={{ position: "absolute", top, left: 60, width: 960, height: 500, opacity: p * (1 - out), transform: `translateX(${x}px)`,
+    <div style={{ position: "absolute", top, left: 36, width: 1008, height: 500, opacity: p * (1 - out), transform: `translateX(${x}px)`,
       borderRadius: 30, background: good ? theme.colors.panel2 : theme.colors.panel, border: `1px solid ${good ? theme.colors.primary + "66" : theme.colors.line}`, padding: "28px 36px", overflow: "hidden" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 14, fontFamily: theme.fonts.mono, fontSize: 26, letterSpacing: ".22em", color: good ? theme.colors.primary : theme.colors.textDim }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 14, fontFamily: theme.fonts.mono, fontSize: 30, letterSpacing: ".22em", color: good ? theme.colors.primary : theme.colors.textDim }}>
         <span style={{ width: 14, height: 14, borderRadius: 99, background: good ? theme.colors.primary : theme.colors.textDim }} />{good ? "YOUR COMPETITOR" : "YOU"}
       </div>
       <div style={{ display: "flex", gap: 40, marginTop: 22, alignItems: "flex-start" }}>
@@ -95,8 +95,8 @@ const Panel: React.FC<{ side: "you" | "them"; spec: FixSpec; delay: number; out:
           {(good ? spec.them : spec.you).map((t, i) => {
             const q = spring({ frame: frame - delay - 24 - i * 18, fps, config: theme.spring.snappy });
             return <div key={i} style={{ display: "flex", gap: 18, alignItems: "center", opacity: q, transform: `translateX(${(1 - q) * 30}px)` }}>
-              <span style={{ flex: "0 0 auto" }}>{good ? <Tick size={52} /> : <Cross size={52} />}</span>
-              <span style={{ fontFamily: theme.fonts.display, fontWeight: 800, fontSize: 54, lineHeight: 1.04, letterSpacing: "-.02em", color: good ? theme.colors.text : theme.colors.textDim }}>{t}</span></div>;
+              <span style={{ flex: "0 0 auto" }}>{good ? <Tick size={60} /> : <Cross size={60} />}</span>
+              <span style={{ fontFamily: theme.fonts.display, fontWeight: 800, fontSize: 64, lineHeight: 1.04, letterSpacing: "-.02em", color: good ? theme.colors.text : theme.colors.textDim }}>{t}</span></div>;
           })}
         </div>
       </div>
@@ -115,23 +115,22 @@ export const FixFilm: React.FC<{ spec: FixSpec }> = ({ spec }) => {
   return (
     <Stack>
       <AbsoluteFill style={{ opacity: endFade }}>
-        <div style={{ opacity: 1 - out }}><Label text={`problem 0${spec.n}`} delay={2} x={60} y={56} /></div>
-        <div style={{ position: "absolute", right: 60, top: 36, fontFamily: theme.fonts.display, fontWeight: 800, fontSize: 120, lineHeight: 1, letterSpacing: "-.04em", color: "rgba(255,255,255,.08)", opacity: 1 - out }}>0{spec.n}</div>
-        <Panel side="you" spec={spec} delay={T_SPLIT} out={out} top={170} />
-        <div style={{ position: "absolute", left: "50%", top: 680, transform: "translateX(-50%)", opacity: useSpring(T_SPLIT + 30) * (1 - out) }}>
+        <div style={{ position: "absolute", left: 0, right: 0, top: 26, textAlign: "center", fontFamily: theme.fonts.display, fontWeight: 800, fontSize: 150, lineHeight: 1, letterSpacing: "-.04em", color: "rgba(255,255,255,.3)", opacity: (1 - out) * useSpring(2) }}>0{spec.n}</div>
+        <Panel side="you" spec={spec} delay={T_SPLIT} out={out} top={200} />
+        <div style={{ position: "absolute", left: "50%", top: 712, transform: "translateX(-50%)", opacity: useSpring(T_SPLIT + 30) * (1 - out) }}>
           <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke={theme.colors.primary} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 4v16M5 13l7 7 7-7" /></svg>
         </div>
-        <Panel side="them" spec={spec} delay={T_SPLIT + 10} out={out} top={740} />
+        <Panel side="them" spec={spec} delay={T_SPLIT + 10} out={out} top={775} />
         {frame >= T_PUNCH - 10 && (
           <AbsoluteFill style={{ opacity: punchOut }}>
-            <div style={{ position: "absolute", left: 60, top: 300, fontFamily: theme.fonts.mono, fontSize: 24, letterSpacing: ".2em", color: theme.colors.textDim }}>YOU</div>
-            <div style={{ position: "absolute", left: 60, top: 620, fontFamily: theme.fonts.mono, fontSize: 24, letterSpacing: ".2em", color: theme.colors.primary }}>YOUR COMPETITOR</div>
+            <div style={{ position: "absolute", left: 36, top: 300, fontFamily: theme.fonts.mono, fontSize: 28, letterSpacing: ".2em", color: theme.colors.textDim }}>YOU</div>
+            <div style={{ position: "absolute", left: 36, top: 620, fontFamily: theme.fonts.mono, fontSize: 28, letterSpacing: ".2em", color: theme.colors.primary }}>YOUR COMPETITOR</div>
             {Array.from({ length: walkers }).map((_, i) => {
               const t = interpolate(frame, [T_PUNCH + i * 5, T_PUNCH + 44 + i * 5], [0, 1], { easing: theme.ease.inOut, extrapolateLeft: "clamp", extrapolateRight: "clamp" });
               const x = 220 + (i % 4) * 190 + Math.sin(t * 6 + i) * 6, y = interpolate(t, [0, 1], [330 + Math.floor(i / 4) * 70, 660 + Math.floor(i / 4) * 70]);
               return <div key={i} style={{ position: "absolute", left: x, top: y, width: 54, height: 54, borderRadius: 99, background: t > .5 ? theme.colors.primary : theme.colors.textDim, boxShadow: t > .5 ? `0 0 30px ${theme.colors.glow}` : "none" }} />;
             })}
-            <div style={{ position: "absolute", left: 60, right: 60, top: 860, fontFamily: theme.fonts.display, fontWeight: 800, fontSize: 96, lineHeight: 1, letterSpacing: "-.03em", color: theme.colors.text, textTransform: "uppercase" }}>
+            <div style={{ position: "absolute", left: 36, right: 36, top: 860, fontFamily: theme.fonts.display, fontWeight: 800, fontSize: 104, lineHeight: 1, letterSpacing: "-.03em", color: theme.colors.text, textTransform: "uppercase" }}>
               <WordReveal text={spec.punch} delay={T_PUNCH + 6} per={3} hi={spec.punchHi} />
             </div>
           </AbsoluteFill>
