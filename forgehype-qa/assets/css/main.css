@@ -1312,3 +1312,23 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 /* fix cards: only the front card plays; the ones still arriving are half transparent */
 .stack-card.is-coming{opacity:.5;transition:opacity .35s var(--ease)}
 .stack-card.is-front{opacity:1}
+/* pricing: three steps on a path, a short comparison, one call to action */
+.pricing-sec .section-head .lead{max-width:40rem;margin-inline:auto}
+.steps-path{list-style:none;margin:var(--s-7) auto 0;padding:0;max-width:40rem;position:relative;display:grid;gap:var(--s-5)}
+.steps-path::before{content:"";position:absolute;left:23px;top:28px;bottom:28px;width:2px;background:linear-gradient(var(--accent),rgba(217,104,46,.15))}
+.sp-step{position:relative;display:grid;grid-template-columns:48px 1fr;gap:var(--s-4);align-items:start}
+.sp-num{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:1.1rem;box-shadow:0 10px 24px -12px rgba(217,104,46,.6);position:relative;z-index:1}
+.sp-body{background:#fff;border:1px solid rgba(20,17,15,.1);border-radius:18px;padding:var(--s-4) var(--s-5);box-shadow:0 20px 40px -30px rgba(40,20,6,.35)}
+.sp-body h3{margin:0 0 .35rem;font-size:clamp(1.25rem,1.1rem + .7vw,1.6rem);font-weight:700;letter-spacing:-.02em;color:#14110f}
+.sp-body p{margin:0;color:#4f4842;line-height:1.5}
+.price-compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3);max-width:40rem;margin:var(--s-7) auto 0}
+.pc-col{border-radius:16px;padding:var(--s-4);border:1px solid rgba(20,17,15,.1)}
+.pc-col h4{margin:0 0 .6rem;font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:-.01em}
+.pc-col ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem;font-size:.95rem;line-height:1.35}
+.pc-col li{position:relative;padding-left:1.5rem}
+.pc-col li::before{position:absolute;left:0;top:0;font-weight:700}
+.pc-old{background:#f3ede6;color:#6b645e}.pc-old h4{color:#6b645e}.pc-old li::before{content:"✕";color:#c0392b}
+.pc-new{background:#14110f;color:#f4efe9;border-color:#14110f}.pc-new h4{color:var(--accent)}.pc-new li::before{content:"✓";color:#2ecc71}
+.price-note{text-align:center;color:#6b645e;font-size:.95rem;margin:var(--s-3) 0 0}
+@media (max-width:480px){.price-compare{grid-template-columns:1fr}}
+@media (min-width:900px){.steps-path{max-width:46rem}.price-compare{max-width:46rem}}
