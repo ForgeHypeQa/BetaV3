@@ -1282,17 +1282,16 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
   .nav.mini .brand,.nav.mini .nav-links,.nav.mini .nav-inner>.btn{opacity:1;visibility:visible}
   .nav.mini .nav-toggle{display:none}
 }
-/* wide screens: six problems as text left, film right (like the Doha section) */
+/* six problems: one third text (left, vertically centred), two thirds question + film (centred) on wide screens */
+.pains-q{margin-block-end:var(--s-4)}
 @media (min-width:900px){
-  #pains .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:var(--s-8);align-items:start}
-  #pains .section-head{grid-column:1/-1;display:grid;grid-template-columns:.85fr 1.15fr;gap:var(--s-8);align-items:end;text-align:left;max-width:none;margin:0;justify-items:start}
-  #pains .pains-intro{margin:0;max-width:none;text-align:left;font-size:var(--fs-lead)}
-  #pains .pains-intro .six{margin-block-start:var(--s-3)}
-  #pains .pains-intro::before{content:none}
-  #pains #pains-title{text-align:left;margin:0}
-  #pains .pains-film{grid-column:2;margin-block:0 var(--s-4)}
-  #pains .pgrid.chapters{grid-column:2;margin:0;max-width:none}
-  #pains .scroll-hint{grid-column:2;text-align:left}
+  #pains .wrap{display:grid;grid-template-columns:1fr 2fr;gap:var(--s-8);align-items:center;max-width:var(--max)}
+  #pains .section-head:not(.pains-q){text-align:left;max-width:none;margin:0;justify-items:start}
+  #pains .pains-intro{margin:0;max-width:none;text-align:left}
+  #pains .pains-right{display:grid;justify-items:center;text-align:center}
+  #pains .pains-q{margin:0 0 var(--s-4)}
+  #pains .pains-film{width:min(100%,calc((100svh - 25rem) * 16 / 9));margin-block:0 var(--s-4)}
+  #pains .pgrid.chapters{width:min(100%,calc((100svh - 25rem) * 16 / 9));max-width:none;margin:0}
 }
 /* wide screens: only the centre service card plays its slideshow; the neighbours step back */
 @media (min-width:900px){
