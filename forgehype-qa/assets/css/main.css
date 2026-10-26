@@ -1265,3 +1265,14 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .qvt-3{font-family:var(--font-display);font-weight:600;font-size:clamp(1.05rem,3vw,1.9rem);line-height:1.15;letter-spacing:-.02em;color:#ffd7bf;margin-block-start:.7em}
 @keyframes qvtIn{from{opacity:0;transform:translateY(12px);filter:blur(8px);letter-spacing:.14em}to{opacity:1;transform:none;filter:blur(0)}}
 @media (prefers-reduced-motion:reduce){.qvt-l,.qvt.run .qvt-l{opacity:1;animation:none}}
+/* six problems: the film, then a slim chapter row that follows it */
+.pains-film{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,.08);box-shadow:0 40px 80px -40px rgba(0,0,0,.8);margin-block:var(--s-6) var(--s-5)}
+.pains-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pgrid.chapters{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;max-width:52rem}
+.pgrid.chapters .tile{aspect-ratio:auto;padding:12px 6px;gap:6px;border-radius:14px;font-size:.78rem}
+.pgrid.chapters .tile svg{width:22px;height:22px;max-width:22px}
+@media (min-width:900px){.pgrid.chapters .tile{aspect-ratio:auto}.pgrid.chapters .tile svg{width:22px;max-width:22px}}
+.pgrid.chapters .tile .tile-n{display:none}
+.pgrid.chapters .tile.num-on{border-color:var(--accent);color:var(--accent)}
+.pgrid.chapters .tile.num-on svg{color:var(--accent)}
+@media (max-width:759px){.pgrid.chapters .tile>span{font-size:.62rem;letter-spacing:.02em}}

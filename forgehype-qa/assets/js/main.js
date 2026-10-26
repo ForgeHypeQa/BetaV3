@@ -910,9 +910,14 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
 (() => {
   const tiles = [...document.querySelectorAll('#pgrid .tile')];
   if (!tiles.length) return;
-  let i = 0;
+  let i = -1;
   const show = () => tiles.forEach((t, k) => t.classList.toggle('num-on', k === i));
-  show();
+  const film = document.querySelector('#painsFilm video');
+  if (film) {                                   // chapter row follows the film: 4 s intro, then 6 s per problem
+    film.addEventListener('timeupdate', () => { const n = Math.floor((film.currentTime - 4) / 6); const k = n < 0 || n > 5 ? -1 : n; if (k !== i) { i = k; show(); } });
+    return;
+  }
+  i = 0; show();
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   setInterval(() => { if (document.hidden) return; i = (i + 1) % tiles.length; show(); }, 2000);
 })();
