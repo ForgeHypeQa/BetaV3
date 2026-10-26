@@ -12,7 +12,7 @@
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const phone = () => innerWidth < 721;
   const N = phone() ? 1800 : innerWidth >= 1600 ? 3400 : 2700;
-  const HOLD = 2600, MORPH = 1300, HOLD_I = 1600, MORPH_I = 950, TRANS = 1500;   // ms per shape / per change; intro pace; glide to rest
+  const HOLD = 2600, MORPH = 1300, HOLD_I = 1280, MORPH_I = 760, TRANS = 1200;   // ms per shape / per change; intro pace; glide to rest
   const ACC = '217,104,46', LIT = '255,158,96', HOT = '255,238,224';
 
   /* ---------- shapes drawn in unit space (-1..1, y down), then sampled into points ---------- */
@@ -144,7 +144,7 @@
     const portrait = phone() || innerHeight > innerWidth;
     if (portrait) {                                          // resting place, phones and portrait tablets: between the navbar and the kicker
       const k = sec.querySelector('.kicker'), top = 104, bottom = (k ? k.offsetTop : H * .54) - 10;
-      G1.R = Math.max(40, Math.min(W * .34, (bottom - top) / 2.75)); G1.cx = W / 2; G1.cy = top + G1.R * 1.02;
+      G1.R = Math.max(40, Math.min(W * .44, (bottom - top) / 2.45)); G1.cx = W / 2; G1.cy = top + G1.R * 1.05;
     } else { G1.cx = W * .72; G1.cy = H * .44; G1.R = Math.min(H * .30, W * .17); }   // desktop: right of the headline
     G0.cx = W / 2; G0.cy = H * .46; G0.R = portrait ? Math.min(W * .42, H * .21) : Math.min(W * .42, H * .28);   // intro: centre stage
     geo(); const LSmax = Math.ceil(Math.max(G0.R, G1.R) * 3.2);
@@ -153,7 +153,7 @@
   const geo = () => {                                        // current geometry from the intro → rest mix
     const e = ease(mix);
     cx = G0.cx + (G1.cx - G0.cx) * e; cy = G0.cy + (G1.cy - G0.cy) * e; R = G0.R + (G1.R - G0.R) * e;
-    floorY = cy + R * 1.14; LS = Math.ceil(R * 3.2); lx = cx - LS / 2; ly = cy - LS / 2;
+    floorY = cy + R * (1.14 - .06 * e); LS = Math.ceil(R * 3.2); lx = cx - LS / 2; ly = cy - LS / 2;
   };
 
   /* ---------- animation state ---------- */
@@ -212,10 +212,10 @@
 
     /* reflection = layer flipped and faded */
     rc.setTransform(DPR, 0, 0, DPR, 0, 0); rc.clearRect(0, 0, LS, LS); rc.globalCompositeOperation = 'source-over';
-    rc.save(); rc.translate(0, LS); rc.scale(1, -1); rc.drawImage(layer, 0, 0, LS, LS); rc.restore();
+    rc.save(); rc.translate(0, LS); rc.scale(1, -1); rc.drawImage(layer, 0, 0, Math.round(LS * DPR), Math.round(LS * DPR), 0, 0, LS, LS); rc.restore();
     rc.globalCompositeOperation = 'destination-in';
     const fr = LS - (floorY - ly);           // the floor line, in flipped-layer rows
-    const g = rc.createLinearGradient(0, fr - 2, 0, fr + R * .55);
+    const g = rc.createLinearGradient(0, fr - 2, 0, fr + R * (.55 - .17 * ease(mix)));
     g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(.01, 'rgba(0,0,0,.32)'); g.addColorStop(1, 'rgba(0,0,0,0)');
     rc.fillStyle = g; rc.fillRect(0, 0, LS, LS);
 
@@ -229,8 +229,9 @@
     pool.addColorStop(0, 'rgba(' + ACC + ',.34)'); pool.addColorStop(1, 'rgba(' + ACC + ',0)');
     ctx.fillStyle = pool; ctx.fillRect(-R * 1.4, -R * 1.4, R * 2.8, R * 2.8); ctx.restore();
     ctx.globalCompositeOperation = 'lighter';
-    ctx.drawImage(layer, lx, ly, LS, LS);
-    ctx.drawImage(refl, lx, ly + 2 * (floorY - ly) - LS, LS, LS);
+    const LP = Math.round(LS * DPR);
+    ctx.drawImage(layer, 0, 0, LP, LP, lx, ly, LS, LS);
+    ctx.drawImage(refl, 0, 0, LP, LP, lx, ly + 2 * (floorY - ly) - LS, LS, LS);
 
     /* crisp caption on top of its particles: fades out as a change starts, in as the letters settle */
     ctx.globalCompositeOperation = 'source-over';
