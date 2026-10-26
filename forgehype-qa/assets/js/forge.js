@@ -145,7 +145,7 @@
     if (portrait) {                                          // resting place, phones and portrait tablets: between the navbar and the kicker
       const k = sec.querySelector('.kicker'), top = 104, bottom = (k ? k.offsetTop : H * .54) - 10;
       G1.R = Math.max(40, Math.min(W * .44, (bottom - top) / 2.45)); G1.cx = W / 2; G1.cy = top + G1.R * 1.05;
-    } else { G1.cx = W * .72; G1.cy = H * .44; G1.R = Math.min(H * .30, W * .17); }   // desktop: right of the headline
+    } else { G1.R = Math.min(H * .30, W * .17); G1.cx = W - Math.max(46, (W - Math.min(W - 92, 1380)) / 2) - G1.R * 1.05; G1.cy = H * .44; }   // desktop: against the right edge of the content
     G0.cx = W / 2; G0.cy = H * .46; G0.R = portrait ? Math.min(W * .42, H * .21) : Math.min(W * .42, H * .28);   // intro: centre stage
     geo(); const LSmax = Math.ceil(Math.max(G0.R, G1.R) * 3.2);
     layer.width = refl.width = Math.round(LSmax * DPR); layer.height = refl.height = Math.round(LSmax * DPR);

@@ -314,7 +314,8 @@
   }
   function cycleTick() {
     if (RM.matches || document.hidden) return;
-    svcRows.filter(r => r.vis).forEach(r => showRowImage(r, r.i + 1));   // every visible card changes image each second
+    const wide = innerWidth >= 900;                                   // wide screens: only the centre card plays
+    svcRows.filter(r => r.vis && (!wide || (r.row.closest('[data-pos]') || {}).dataset?.pos === '0')).forEach(r => showRowImage(r, r.i + 1));
   }
   if (svcRows.length) {
     const rowIO = new IntersectionObserver(es => es.forEach(e => { const r = svcRows.find(x => x.row === e.target); if (r) r.vis = e.isIntersecting; }), { threshold: 0.2 });
@@ -959,7 +960,7 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   const upd = () => {
     t = false;
     const edge = scrollY < 40 || scrollY + innerHeight >= document.documentElement.scrollHeight - 40;
-    nav.classList.toggle('mini', !edge && !document.body.classList.contains('menu-open'));
+    nav.classList.toggle('mini', innerWidth < 900 && !edge && !document.body.classList.contains('menu-open'));
   };
   addEventListener('scroll', () => { if (!t) { t = true; requestAnimationFrame(upd); } }, { passive: true });
   addEventListener('resize', upd);
