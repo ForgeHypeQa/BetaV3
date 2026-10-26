@@ -1029,3 +1029,17 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
     e.preventDefault(); glideTo(y); lockUntil = performance.now() + 900;
   }, { passive: false });
 })();
+
+/* why us: the compare switch flips every row in place; flips to ForgeHype by itself once on first view */
+(() => {
+  const box = document.getElementById('compare'); if (!box) return;
+  const btns = [...box.querySelectorAll('.compare-switch button')], live = document.getElementById('compareLive');
+  const set = side => {
+    box.setAttribute('data-side', side);
+    btns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.side === side)));
+    if (live) live.textContent = side === 'forge' ? 'Showing how ForgeHype works' : 'Showing how a typical agency works';
+  };
+  btns.forEach(b => b.addEventListener('click', () => set(b.dataset.side)));
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  new IntersectionObserver(([e], io) => { if (!e.isIntersecting) return; io.disconnect(); setTimeout(() => { if (box.getAttribute('data-side') === 'typical') set('forge'); }, RM ? 0 : 1400); }, { threshold: .5 }).observe(box);
+})();
