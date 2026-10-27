@@ -91,7 +91,7 @@
       '<p class="q-cta">Want the full report and a plan for your business? Leave your WhatsApp and we’ll send it.</p>' +
       '<div class="field"><label for="q-wa">WhatsApp number</label><input class="input" id="q-wa" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="+974 …"><p class="err">Please add your WhatsApp number.</p></div>' +
       '<div class="field"><label for="q-site">Business name or website <span class="opt">(optional)</span></label><input class="input" id="q-site" name="website" type="text" placeholder="yourbusiness.qa"></div>' +
-      '<div class="field field-consent"><label class="consent-lbl"><input type="checkbox" id="q-consent" required><span>I agree that ForgeHype may contact me on WhatsApp about my results. See the <a class="link" href="privacy.html">privacy policy</a>.</span></label></div>' +
+      '<div class="field field-consent"><label class="consent-lbl"><input type="checkbox" id="q-consent" required><span>I agree ForgeHype may contact me about my results. <a class="link" href="privacy.html">Privacy Policy</a></span></label></div>' +
       '<button class="btn btn-primary" type="submit">Send me the full report →</button></form>' +
       '<p class="q-alt">Or <a class="link" href="free-check.html">get a free check of your website</a>.</p>';
     /* count up */
