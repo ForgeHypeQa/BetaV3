@@ -16,7 +16,7 @@
    and "Lead tools" (the free website check and the Growth Score quiz).
 */
 
-const ALERT_TO = 'ForgeHypeqatar@gmail.com';
+const ALERT_TO = 'info@forgehype.qa';
 const FROM_NAME = 'ForgeHype';
 const H_BOOK = ['Received', 'Business type', 'Interests', 'Website', 'Notes', 'Consent', 'Page', 'Status', 'Follow-up'];
 const H_TOOLS = ['Received', 'Source', 'Business type / score', 'Website / company', 'WhatsApp', 'Email', 'Details', 'Consent', 'Page', 'Status', 'Sent', 'Follow-up'];

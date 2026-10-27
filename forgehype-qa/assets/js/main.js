@@ -631,7 +631,7 @@
         site ? 'Website: ' + site : null,
         note ? 'Notes: ' + note : null].filter(Boolean);
       const text = lines.join('\n');
-      $('#mailFallback').href = 'mailto:ForgeHypeqatar@gmail.com?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(text);
+      $('#mailFallback').href = 'mailto:info@forgehype.qa?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(text);
       sendLead({ source: 'Booking', type: d.get('type'), interests: interests.join(', '), website: site, message: note, consent: 'yes', botcheck: d.get('botcheck') || '' });
       window.open('https://wa.me/97470069544?text=' + encodeURIComponent(text), '_blank', 'noopener');
       form.classList.add('sent');
