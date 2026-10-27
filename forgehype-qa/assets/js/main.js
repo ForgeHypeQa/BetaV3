@@ -1048,7 +1048,7 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   const open = id => {
     choose.classList.add('picked');
     choose.querySelectorAll('.choice').forEach(b => b.classList.toggle('on', b.dataset.form === id));
-    Object.entries(forms).forEach(([k, f]) => { if (f) f.hidden = k !== id; });
+    Object.entries(forms).forEach(([k, f]) => { if (f) { f.hidden = k !== id; if (k !== id) { f.classList.remove('sent'); f.reset(); } } });
     const f = forms[id]; if (f) { f.classList.add('in'); const first = f.querySelector('.ms-btn, .input'); if (first && matchMedia('(pointer:fine)').matches) first.focus({ preventScroll: true }); }
   };
   choose.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => open(b.dataset.form)));

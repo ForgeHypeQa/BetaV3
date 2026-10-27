@@ -1403,3 +1403,12 @@ fieldset.field .field{margin-block-end:var(--s-3)}
 #auditForm textarea.input{min-height:4.2rem;height:4.2rem;resize:vertical}
 #auditForm .a-note{color:#a39a91}
 .form .consent-lbl{color:#c9c0b7}
+/* booking chooser: two cards side by side, like the Typical/ForgeHype pair */
+.book-choose,.book-choose.picked{grid-template-columns:1fr 1fr;gap:var(--s-3)}
+.book-choose .choice,.book-choose.picked .choice{padding:var(--s-4)}
+.book-choose.picked .c-sub{display:block}
+.choice .c-sub{font-size:.85rem;line-height:1.35}
+.book-choose .choice:not(.on){opacity:.75}
+.book-choose:not(.picked) .choice{opacity:1}
+.choice.on{transform:none}
+@media (max-width:480px){.choice .c-sub{display:none!important}.choice .c-title{font-size:1.05rem}}
