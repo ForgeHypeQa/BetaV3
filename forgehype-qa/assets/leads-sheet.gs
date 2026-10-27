@@ -20,7 +20,7 @@ const ALERT_TO = 'ForgeHypeqatar@gmail.com';
 const FROM_NAME = 'ForgeHype';
 const H_BOOK = ['Received', 'Business type', 'Interests', 'Website', 'Notes', 'Consent', 'Page', 'Status', 'Follow-up'];
 const H_TOOLS = ['Received', 'Source', 'Business type / score', 'Website / company', 'WhatsApp', 'Email', 'Details', 'Consent', 'Page', 'Status', 'Sent', 'Follow-up'];
-const H_AUDIT = ['Received', 'Business type', 'Website / company', 'WhatsApp', 'Email', 'Online presence', 'Operations', 'AI integration', 'Consent', 'Page', 'Status', 'Report sent', 'Meeting'];
+const H_AUDIT = ['Received', 'Business type', 'Website', 'WhatsApp', 'Email', 'What is not working', 'Consent', 'Page', 'Status', 'Report sent', 'Meeting'];
 
 function doPost(e) {
   try {
@@ -44,10 +44,10 @@ function doPost(e) {
     const sh = sheet(ss, audit ? 'Audits' : 'Bookings', audit ? H_AUDIT : H_BOOK);
     let subject, body;
     if (audit) {
-      sh.appendRow([now, s(p.type), s(p.website), s(p.whatsapp), s(p.email), s(p.online), s(p.operations), s(p.ai), p.consent ? 'Yes' : 'No', s(p.page), 'New', '', '']);
-      subject = 'Audit request: ' + (s(p.website) || s(p.type));
-      body = ['New FREE AUDIT request from the website', '', 'Business type: ' + s(p.type), 'Website / company: ' + s(p.website),
-        'WhatsApp: ' + s(p.whatsapp), 'Email: ' + s(p.email), '', 'Online presence: ' + s(p.online), 'Operations: ' + s(p.operations), 'AI integration: ' + s(p.ai),
+      sh.appendRow([now, s(p.type), s(p.website), s(p.whatsapp), s(p.email), s(p.online), p.consent ? 'Yes' : 'No', s(p.page), 'New', '', '']);
+      subject = 'Website audit request: ' + (s(p.website) || s(p.type));
+      body = ['New FREE WEBSITE AUDIT request', '', 'Business type: ' + s(p.type), 'Website: ' + s(p.website),
+        'WhatsApp: ' + s(p.whatsapp), 'Email: ' + s(p.email), '', 'What is not working: ' + s(p.online),
         '', 'Next: review, send the report, then book the meeting.', 'Sheet: ' + ss.getUrl()].join('\n');
       if (s(p.email)) autoReply(s(p.email), s(p.website) || s(p.type));
     } else {
@@ -65,11 +65,11 @@ function doPost(e) {
 
 /* automatic "received" reply to the visitor; edit the wording here */
 function autoReply(to, name) {
-  const subject = 'Your free audit request is received';
+  const subject = 'Your free website audit request is received';
   const body = ['Hi,', '',
-    'Thanks for asking ForgeHype for a free audit of ' + name + '.', '',
+    'Thanks for asking ForgeHype for a free audit of your website, ' + name + '.', '',
     'Here is what happens next:',
-    '1. We review your online presence: website, Google, social and anything you told us about operations and AI.',
+    '1. We review your website the way a customer would: speed on a phone, clarity, how easy it is to order or contact you, and how it shows up on Google.',
     '2. We send you the report the way you asked (WhatsApp or email).',
     '3. We invite you to a short meeting to go through it together and agree the next step.', '',
     'If you want to add anything in the meantime, reply to this email or message us on WhatsApp: +974 7006 9544.', '',

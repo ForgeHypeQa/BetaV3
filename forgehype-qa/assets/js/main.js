@@ -1048,7 +1048,7 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   const choose = document.getElementById('bookChoose');
   const forms = { bookForm: document.getElementById('bookForm'), auditForm: document.getElementById('auditForm') };
   if (!modal || !forms.bookForm) return;
-  const titles = { bookForm: 'Book a free consultation', auditForm: 'Get a free audit' };
+  const titles = { bookForm: 'Book a free consultation', auditForm: 'Get a free website audit' };
   const show = id => {
     modal.querySelectorAll('.fm-tab').forEach(b => b.classList.toggle('on', b.dataset.form === id));
     document.getElementById('fmTitle').textContent = titles[id];
@@ -1092,7 +1092,7 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
     const consent = f.querySelector('#a-consent');
     if (!consent.checked) { consent.closest('.field').classList.add('invalid'); ok = false; } else consent.closest('.field').classList.remove('invalid');
     if (!ok) { const first = f.querySelector('.invalid .input, .invalid input'); if (first) first.focus(); return; }
-    (window.fhSendLead || (() => {}))({ source: 'Free audit', type, website: site, whatsapp: wa, email, online: String(d.get('online') || '').trim(), operations: String(d.get('operations') || '').trim(), ai: String(d.get('ai') || '').trim(), consent: 'yes', botcheck: d.get('botcheck') || '' });
+    (window.fhSendLead || (() => {}))({ source: 'Free audit', type, website: site, whatsapp: wa, email, online: String(d.get('online') || '').trim(), consent: 'yes', botcheck: d.get('botcheck') || '' });
     f.classList.add('sent');
   });
 })();

@@ -1157,7 +1157,7 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 #bookForm select.input:invalid,#auditForm select.input:invalid,#checkForm select.input:invalid,#bookForm select.input option[value=""],#auditForm select.input option[value=""],#checkForm select.input option[value=""]{color:#7d756d}
 #bookForm select.input option,#auditForm select.input option,#checkForm select.input option{background:#181614;color:#f4efe9}
 #bookForm .ms-btn,#auditForm .ms-btn,#checkForm .ms-btn{background-color:#181614}
-#bookForm .ms-sum,#auditForm .ms-sum,#checkForm .ms-sum{color:#7d756d}#bookForm .ms-sum.has{color:#f4efe9}
+#bookForm .ms-sum,#auditForm .ms-sum,#checkForm .ms-sum{color:#7d756d}#bookForm .ms-sum.has,#auditForm .ms-sum.has,#checkForm .ms-sum.has{color:#f4efe9}
 #bookForm .ms-panel,#auditForm .ms-panel,#checkForm .ms-panel{background:#181614;border-color:rgba(255,255,255,.12)}
 #bookForm .ms-opt,#auditForm .ms-opt,#checkForm .ms-opt{color:#f4efe9}#bookForm .ms-opt:hover{background:#221f1c}
 #bookForm .ms-opt input,#auditForm .ms-opt input,#checkForm .ms-opt input{background:#0d0c0b;border-color:#5a534d}
