@@ -35,7 +35,7 @@ function doPost(e) {
       MailApp.sendEmail({ to: ALERT_TO, name: FROM_NAME, subject: src + ': ' + (s(p.website) || s(p.type)),
         body: ['New ' + src.toUpperCase() + ' lead from the website', '', 'Business type / score: ' + s(p.type), 'Website / company: ' + s(p.website),
           'WhatsApp: ' + s(p.whatsapp), 'Email: ' + s(p.email), 'Details: ' + s(p.online), '',
-          src === 'Free check' ? 'Promise: short video with the 3 biggest fixes within 48 hours.' : 'Promise: full report on WhatsApp within one working day.',
+          src === 'Free check' ? 'Promise: short report with the 3 biggest fixes within 48 hours.' : 'Promise: full report on WhatsApp within one working day.',
           'Sheet: ' + ss.getUrl()].join('\n') });
       if (src === 'Free check' && s(p.email)) checkReply(s(p.email), s(p.website));
       return out({ ok: true });
@@ -80,7 +80,7 @@ function autoReply(to, name) {
 function checkReply(to, link) {
   MailApp.sendEmail({ to: to, name: FROM_NAME, replyTo: ALERT_TO, subject: 'Your free website check is on its way',
     body: ['Hi,', '', 'Thanks for asking ForgeHype to check ' + link + '.', '',
-      'Within 48 hours we will send you a short video showing the three biggest things costing you customers, and what to fix first.', '',
+      'Within 48 hours we will send you a short report showing the three biggest things costing you customers, and what to fix first.', '',
       'Questions in the meantime? Reply to this email or WhatsApp us: +974 7006 9544.', '', 'ForgeHype', 'Website design and digital growth consultancy, Doha', 'forgehype.qa'].join('\n') });
 }
 

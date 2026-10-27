@@ -1001,6 +1001,7 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
   };
   /* where a gesture in direction dir (1 = up/next, -1 = down/previous) should land, or null for native scrolling */
   const plan = dir => {
+    if (document.querySelector('dialog[open]')) return null;      // forms pop-up open: leave scrolling alone
     const ts = targets(), y = scrollY, first = ts[0], last = ts[ts.length - 1];
     if (y < first - innerHeight * .7 || y > last + 60) return null;       // not in the stack yet / already past it
     let cur = -1; ts.forEach((t, i) => { if (y >= t - 6) cur = i; });
@@ -1043,17 +1044,38 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
 
 /* booking section: choose consultation or audit; the audit form goes to the leads Sheet only */
 (() => {
-  const choose = document.getElementById('bookChoose'); if (!choose) return;
+  const modal = document.getElementById('formModal');
+  const choose = document.getElementById('bookChoose');
   const forms = { bookForm: document.getElementById('bookForm'), auditForm: document.getElementById('auditForm') };
-  const open = id => {
-    choose.classList.add('picked');
-    choose.querySelectorAll('.choice').forEach(b => b.classList.toggle('on', b.dataset.form === id));
-    Object.entries(forms).forEach(([k, f]) => { if (f) { f.hidden = k !== id; if (k !== id) { f.classList.remove('sent'); f.reset(); } } });
-    const f = forms[id]; if (f) { f.classList.add('in'); const first = f.querySelector('.ms-btn, .input'); if (first && matchMedia('(pointer:fine)').matches) first.focus({ preventScroll: true }); }
+  if (!modal || !forms.bookForm) return;
+  const titles = { bookForm: 'Book a free consultation', auditForm: 'Get a free audit' };
+  const show = id => {
+    modal.querySelectorAll('.fm-tab').forEach(b => b.classList.toggle('on', b.dataset.form === id));
+    document.getElementById('fmTitle').textContent = titles[id];
+    Object.entries(forms).forEach(([k, f]) => { if (!f) return; f.hidden = k !== id; if (f.classList.contains('sent')) { f.classList.remove('sent'); f.reset(); } });
   };
-  choose.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => open(b.dataset.form)));
-  document.querySelectorAll('[data-open-form]').forEach(a => a.addEventListener('click', () => open(a.dataset.openForm)));
-  if (/[#&]audit\b/.test(location.hash)) open('auditForm');
+  let keepY = 0;
+  const open = id => {
+    show(id);
+    if (!modal.open) { keepY = scrollY; document.documentElement.classList.add('fm-lock'); modal.showModal(); }
+    modal.querySelector('.fm-box').scrollTop = 0;
+  };
+  const close = () => { if (modal.open) modal.close(); };
+  modal.addEventListener('close', () => {          // back exactly where the visitor was
+    const html = document.documentElement, prev = html.style.scrollBehavior;
+    html.classList.remove('fm-lock'); html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, keepY); requestAnimationFrame(() => { window.scrollTo(0, keepY); html.style.scrollBehavior = prev; });
+  });
+  modal.addEventListener('click', e => { if (e.target === modal || e.target.closest('[data-close]')) close(); });
+  modal.querySelectorAll('.fm-tab').forEach(b => b.addEventListener('click', () => show(b.dataset.form)));
+  if (choose) choose.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => open(b.dataset.form)));
+  document.querySelectorAll('[data-open-form]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const m = document.getElementById('menu'); if (document.body.classList.contains('menu-open') && m) { const t = document.querySelector('.nav-toggle'); if (t) t.click(); } open(a.dataset.openForm); }));
+  const fromHash = () => {
+    if (location.hash === '#audit') open('auditForm'); else if (location.hash === '#consult') open('bookForm'); else return;
+    history.replaceState(null, '', location.pathname);
+  };
+  fromHash(); addEventListener('hashchange', fromHash);
+  window.fhOpenForm = open;
 
   const f = forms.auditForm; if (!f) return;
   const bad = (el, on) => el.closest('.field').classList.toggle('invalid', on);

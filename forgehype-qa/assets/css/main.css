@@ -1448,3 +1448,24 @@ fieldset.field .field{margin-block-end:var(--s-3)}
 .problems-quiz{text-align:center;margin:var(--s-3) 0 0;color:#c9c0b7}
 .q-tips{list-style:decimal}.q-tips li::marker{color:var(--accent);font-weight:700}
 #qResult:focus{outline:none}
+/* pop-up forms */
+.form-modal{padding:0;border:0;background:transparent;max-width:none;max-height:none;width:100%;height:100%;margin:0;color:#f4efe9}
+.form-modal::backdrop{background:rgba(0,0,0,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.form-modal[open]{display:grid;place-items:center}
+.fm-box{width:min(100% - 24px,560px);max-height:calc(100svh - 32px);overflow:auto;overscroll-behavior:contain;background:#0d0c0b;border:1px solid rgba(255,255,255,.1);border-radius:24px;box-shadow:0 40px 80px -30px rgba(0,0,0,.9);padding:var(--s-5);animation:fmIn .35s var(--ease) both}
+@keyframes fmIn{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+.fm-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);margin-block-end:var(--s-3)}
+.fm-title{margin:0;font-size:clamp(1.3rem,1.1rem + .8vw,1.7rem);font-weight:700;letter-spacing:-.02em}
+.fm-x{width:40px;height:40px;flex:none;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:transparent;color:#f4efe9;font-size:1.6rem;line-height:1;cursor:pointer}
+.fm-x:hover{border-color:var(--accent)}
+.fm-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border-radius:14px;background:#181614;margin-block-end:var(--s-4)}
+.fm-tab{font:inherit;font-weight:700;padding:.7rem;border-radius:10px;border:0;background:transparent;color:#a39a91;cursor:pointer}
+.fm-tab.on{background:var(--accent);color:#120600}
+.form-modal .form{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
+.fm-done{justify-self:center;margin-top:var(--s-4)}
+html.fm-lock,html.fm-lock body{overflow:hidden}
+@media (max-width:560px){
+  .form-modal[open]{place-items:end center}
+  .fm-box{width:100%;max-height:92svh;border-radius:24px 24px 0 0;padding:var(--s-4) var(--s-4) calc(var(--s-5) + env(safe-area-inset-bottom))}
+  @keyframes fmIn{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+}

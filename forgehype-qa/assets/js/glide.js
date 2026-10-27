@@ -64,7 +64,7 @@
     return Math.max(prevTop, prevEnd);                               // long section: land on its end
   };
 
-  const typing = () => /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '') ||
+  const typing = () => !!document.querySelector('dialog[open]') || /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '') ||
     !!document.querySelector('.ms-panel:not([hidden])');
 
   /* wheel and trackpad */
