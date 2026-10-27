@@ -12,12 +12,14 @@
    4. Copy the Web app URL (ends in /exec) and send it to Claude. It goes into LEADS_URL in assets/js/main.js.
    Re-deploying after an edit: Deploy > Manage deployments > edit (pencil) > Version: New version > Deploy. The URL stays the same.
 
-   Two sheets are kept: "Bookings" (consultation requests, which also open WhatsApp) and "Audits" (free audit requests).
+   Three sheets are kept: "Bookings" (consultation requests, which also open WhatsApp), "Audits" (free audit requests)
+   and "Lead tools" (the free website check and the Growth Score quiz).
 */
 
 const ALERT_TO = 'ForgeHypeqatar@gmail.com';
 const FROM_NAME = 'ForgeHype';
 const H_BOOK = ['Received', 'Business type', 'Interests', 'Website', 'Notes', 'Consent', 'Page', 'Status', 'Follow-up'];
+const H_TOOLS = ['Received', 'Source', 'Business type / score', 'Website / company', 'WhatsApp', 'Email', 'Details', 'Consent', 'Page', 'Status', 'Sent', 'Follow-up'];
 const H_AUDIT = ['Received', 'Business type', 'Website / company', 'WhatsApp', 'Email', 'Online presence', 'Operations', 'AI integration', 'Consent', 'Page', 'Status', 'Report sent', 'Meeting'];
 
 function doPost(e) {
@@ -26,7 +28,19 @@ function doPost(e) {
     if (p.botcheck) return out({ ok: true });                       // honeypot filled: silently ignore
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const now = new Date();
-    const audit = s(p.source) === 'Free audit';
+    const src = s(p.source);
+    if (src === 'Free check' || src === 'Growth Score') {
+      const t = sheet(ss, 'Lead tools', H_TOOLS);
+      t.appendRow([now, src, s(p.type), s(p.website), s(p.whatsapp), s(p.email), s(p.online), p.consent ? 'Yes' : 'No', s(p.page), 'New', '', '']);
+      MailApp.sendEmail({ to: ALERT_TO, name: FROM_NAME, subject: src + ': ' + (s(p.website) || s(p.type)),
+        body: ['New ' + src.toUpperCase() + ' lead from the website', '', 'Business type / score: ' + s(p.type), 'Website / company: ' + s(p.website),
+          'WhatsApp: ' + s(p.whatsapp), 'Email: ' + s(p.email), 'Details: ' + s(p.online), '',
+          src === 'Free check' ? 'Promise: short video with the 3 biggest fixes within 48 hours.' : 'Promise: full report on WhatsApp within one working day.',
+          'Sheet: ' + ss.getUrl()].join('\n') });
+      if (src === 'Free check' && s(p.email)) checkReply(s(p.email), s(p.website));
+      return out({ ok: true });
+    }
+    const audit = src === 'Free audit';
     const sh = sheet(ss, audit ? 'Audits' : 'Bookings', audit ? H_AUDIT : H_BOOK);
     let subject, body;
     if (audit) {
@@ -61,6 +75,13 @@ function autoReply(to, name) {
     'If you want to add anything in the meantime, reply to this email or message us on WhatsApp: +974 7006 9544.', '',
     'ForgeHype', 'Website design and digital growth consultancy, Doha', 'forgehype.qa'].join('\n');
   MailApp.sendEmail({ to: to, subject: subject, body: body, name: FROM_NAME, replyTo: ALERT_TO });
+}
+
+function checkReply(to, link) {
+  MailApp.sendEmail({ to: to, name: FROM_NAME, replyTo: ALERT_TO, subject: 'Your free website check is on its way',
+    body: ['Hi,', '', 'Thanks for asking ForgeHype to check ' + link + '.', '',
+      'Within 48 hours we will send you a short video showing the three biggest things costing you customers, and what to fix first.', '',
+      'Questions in the meantime? Reply to this email or WhatsApp us: +974 7006 9544.', '', 'ForgeHype', 'Website design and digital growth consultancy, Doha', 'forgehype.qa'].join('\n') });
 }
 
 function doGet() { return out({ ok: true, service: 'ForgeHype leads' }); }

@@ -765,7 +765,7 @@ html.js .stack-text .answer:not(.open){display:-webkit-box;-webkit-line-clamp:1;
 .journey li.on .j-lbl{opacity:1;transform:none}
 html:not(.js) .journey li .j-lbl{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.journey .j-fill,.j-dot,.j-lbl{transition:none}}
-#bookForm button[type=submit],#auditForm button[type=submit]{justify-self:center}
+#bookForm button[type=submit],#auditForm button[type=submit],#checkForm button[type=submit]{justify-self:center}
 .book-side .journey{width:100%;max-width:34rem;justify-self:stretch}.j-lbl{max-width:11ch}
 .journey li{align-content:start}
 /* journey: slow glow passes 1 → 2 → 3 and loops, like the map pins */
@@ -959,15 +959,15 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .closing-cta{display:inline-block;margin-block-start:var(--s-5);font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,1.1rem + .9vw,1.8rem);letter-spacing:-.015em;color:var(--accent);text-decoration:none}
 .closing-cta:hover{text-decoration:underline;text-underline-offset:.2em}
 /* tighter booking form */
-#bookForm,#auditForm{padding:var(--s-5)}
-#bookForm .form-fields,#auditForm .form-fields{gap:var(--s-3)}
-#bookForm .field,#auditForm .field{gap:.3rem}
-#bookForm .input,#auditForm .input{padding:.7rem .95rem}
-#bookForm textarea.input,#auditForm textarea.input{min-height:3.4rem;height:3.4rem}
-#bookForm button[type=submit],#auditForm button[type=submit]{margin-block-start:var(--s-2)}
+#bookForm,#auditForm,#checkForm{padding:var(--s-5)}
+#bookForm .form-fields,#auditForm .form-fields,#checkForm .form-fields{gap:var(--s-3)}
+#bookForm .field,#auditForm .field,#checkForm .field{gap:.3rem}
+#bookForm .input,#auditForm .input,#checkForm .input{padding:.7rem .95rem}
+#bookForm textarea.input,#auditForm textarea.input,#checkForm textarea.input{min-height:3.4rem;height:3.4rem}
+#bookForm button[type=submit],#auditForm button[type=submit],#checkForm button[type=submit]{margin-block-start:var(--s-2)}
 .book-side .journey{margin-block:var(--s-5) 0}
 @media (max-width:900px){.book{gap:var(--s-6)}}
-#bookForm textarea.input,#auditForm textarea.input{min-height:2.9rem;height:2.9rem;resize:vertical}
+#bookForm textarea.input,#auditForm textarea.input,#checkForm textarea.input{min-height:2.9rem;height:2.9rem;resize:vertical}
 
 /* ===== desktop scale: everything ~20-25% smaller at 100% browser zoom ===== */
 @media (min-width:1024px){
@@ -1149,21 +1149,21 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 @media (max-width:1100px){.client-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-block:2px}.client-cards::-webkit-scrollbar{display:none}.cc{flex:0 0 min(72vw,280px);scroll-snap-align:start}}
 @media (max-width:1100px){.client-cards{scroll-padding-inline:var(--gutter)}.client-cards::after{content:"";flex:0 0 1px}}
 /* booking form: dark card */
-#bookForm.card-light,#auditForm.card-light{background:#0d0c0b;border-color:rgba(255,255,255,.08);box-shadow:0 30px 70px -30px rgba(0,0,0,.6);color:#f4efe9;--text-primary:#f4efe9;--text-secondary:#b8b0a8;--text-tertiary:#8d857e}
-#bookForm label,#auditForm label,#bookForm .lbl,#auditForm .lbl{color:#f4efe9}
-#bookForm .input,#auditForm .input{background:#181614;border-color:rgba(255,255,255,.12);color:#f4efe9}
-#bookForm .input::placeholder,#auditForm .input::placeholder{color:#7d756d}
-#bookForm select.input,#auditForm select.input{color:#f4efe9;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23b8b0a8' stroke-width='1.5'><path d='M4 6l4 4 4-4'/></svg>")}
-#bookForm select.input:invalid,#auditForm select.input:invalid,#bookForm select.input option[value=""],#auditForm select.input option[value=""]{color:#7d756d}
-#bookForm select.input option,#auditForm select.input option{background:#181614;color:#f4efe9}
-#bookForm .ms-btn,#auditForm .ms-btn{background-color:#181614}
-#bookForm .ms-sum,#auditForm .ms-sum{color:#7d756d}#bookForm .ms-sum.has{color:#f4efe9}
-#bookForm .ms-panel,#auditForm .ms-panel{background:#181614;border-color:rgba(255,255,255,.12)}
-#bookForm .ms-opt,#auditForm .ms-opt{color:#f4efe9}#bookForm .ms-opt:hover{background:#221f1c}
-#bookForm .ms-opt input,#auditForm .ms-opt input{background:#0d0c0b;border-color:#5a534d}
-#bookForm .input:focus,#auditForm .input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(217,104,46,.2)}
-#bookForm .form-success,#auditForm .form-success{color:#f4efe9}
-#bookForm select.input,#auditForm select.input,#bookForm .ms-btn,#auditForm .ms-btn{background-repeat:no-repeat;background-position:right 1rem center;background-size:16px 16px}#bookForm .ms-btn{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23b8b0a8' stroke-width='1.5'><path d='M4 6l4 4 4-4'/></svg>")}
+#bookForm.card-light,#auditForm.card-light,#checkForm.card-light{background:#0d0c0b;border-color:rgba(255,255,255,.08);box-shadow:0 30px 70px -30px rgba(0,0,0,.6);color:#f4efe9;--text-primary:#f4efe9;--text-secondary:#b8b0a8;--text-tertiary:#8d857e}
+#bookForm label,#auditForm label,#checkForm label,#bookForm .lbl,#auditForm .lbl,#checkForm .lbl{color:#f4efe9}
+#bookForm .input,#auditForm .input,#checkForm .input{background:#181614;border-color:rgba(255,255,255,.12);color:#f4efe9}
+#bookForm .input::placeholder,#auditForm .input::placeholder,#checkForm .input::placeholder{color:#7d756d}
+#bookForm select.input,#auditForm select.input,#checkForm select.input{color:#f4efe9;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23b8b0a8' stroke-width='1.5'><path d='M4 6l4 4 4-4'/></svg>")}
+#bookForm select.input:invalid,#auditForm select.input:invalid,#checkForm select.input:invalid,#bookForm select.input option[value=""],#auditForm select.input option[value=""],#checkForm select.input option[value=""]{color:#7d756d}
+#bookForm select.input option,#auditForm select.input option,#checkForm select.input option{background:#181614;color:#f4efe9}
+#bookForm .ms-btn,#auditForm .ms-btn,#checkForm .ms-btn{background-color:#181614}
+#bookForm .ms-sum,#auditForm .ms-sum,#checkForm .ms-sum{color:#7d756d}#bookForm .ms-sum.has{color:#f4efe9}
+#bookForm .ms-panel,#auditForm .ms-panel,#checkForm .ms-panel{background:#181614;border-color:rgba(255,255,255,.12)}
+#bookForm .ms-opt,#auditForm .ms-opt,#checkForm .ms-opt{color:#f4efe9}#bookForm .ms-opt:hover{background:#221f1c}
+#bookForm .ms-opt input,#auditForm .ms-opt input,#checkForm .ms-opt input{background:#0d0c0b;border-color:#5a534d}
+#bookForm .input:focus,#auditForm .input:focus,#checkForm .input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(217,104,46,.2)}
+#bookForm .form-success,#auditForm .form-success,#checkForm .form-success{color:#f4efe9}
+#bookForm select.input,#auditForm select.input,#checkForm select.input,#bookForm .ms-btn,#auditForm .ms-btn,#checkForm .ms-btn{background-repeat:no-repeat;background-position:right 1rem center;background-size:16px 16px}#bookForm .ms-btn{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23b8b0a8' stroke-width='1.5'><path d='M4 6l4 4 4-4'/></svg>")}
 .ms-pick{width:100%;border:0;background:none;text-align:start;font:inherit;font-size:var(--fs-sm);font-weight:500;cursor:pointer}.ms-pick[aria-selected="true"]{color:var(--accent)}#bookForm .ms-pick{color:#f4efe9}#bookForm .ms-pick[aria-selected="true"]{color:var(--accent)}
 /* mini navbar: only a floating, half-transparent menu button while scrolling */
 .nav.hide{transform:none}
@@ -1374,10 +1374,10 @@ html:not(.js) .deck-track>*{transform:none;opacity:1;filter:none}
 .consent-lbl input{width:20px;height:20px;flex:none;margin-top:.15rem;accent-color:var(--accent)}
 .field-consent.invalid .consent-lbl{color:#ff8a65}
 /* dark form: ticked boxes are orange with a white tick */
-#bookForm .ms-opt input:checked,#auditForm .ms-opt input:checked{background:var(--accent);border-color:var(--accent)}
-#bookForm .ms-opt input:checked::after,#auditForm .ms-opt input:checked::after{border-color:#fff}
-#bookForm .ms-opt input,#auditForm .ms-opt input{width:22px;height:22px;border-radius:6px}
-#bookForm .ms-opt input:checked::after,#auditForm .ms-opt input:checked::after{width:10px;height:5px;border-width:2.5px}
+#bookForm .ms-opt input:checked,#auditForm .ms-opt input:checked,#checkForm .ms-opt input:checked{background:var(--accent);border-color:var(--accent)}
+#bookForm .ms-opt input:checked::after,#auditForm .ms-opt input:checked::after,#checkForm .ms-opt input:checked::after{border-color:#fff}
+#bookForm .ms-opt input,#auditForm .ms-opt input,#checkForm .ms-opt input{width:22px;height:22px;border-radius:6px}
+#bookForm .ms-opt input:checked::after,#auditForm .ms-opt input:checked::after,#checkForm .ms-opt input:checked::after{width:10px;height:5px;border-width:2.5px}
 /* booking: choose first, then one of two forms */
 .book-choose{display:grid;gap:var(--s-3);align-content:start}
 .choice{display:grid;gap:.3rem;text-align:left;padding:var(--s-5);border-radius:18px;border:1.5px solid rgba(20,17,15,.14);background:#fff;cursor:pointer;font:inherit;color:#14110f;transition:border-color .25s,transform .25s,box-shadow .25s;box-shadow:0 20px 40px -30px rgba(40,20,6,.35)}
@@ -1400,8 +1400,8 @@ fieldset.field .field{margin-block-end:var(--s-3)}
 .field.invalid .err{display:block}
 @media (max-width:520px){.a-two{grid-template-columns:1fr}.book-choose.picked{grid-template-columns:1fr}}
 /* audit form: textareas a little taller, consent legible on dark, lbl spacing */
-#auditForm textarea.input{min-height:4.2rem;height:4.2rem;resize:vertical}
-#auditForm .a-note{color:#a39a91}
+#auditForm textarea.input,#checkForm textarea.input{min-height:4.2rem;height:4.2rem;resize:vertical}
+#auditForm .a-note,#checkForm .a-note{color:#a39a91}
 .form .consent-lbl{color:#c9c0b7}
 /* booking chooser: two cards side by side, like the Typical/ForgeHype pair */
 .book-choose,.book-choose.picked{grid-template-columns:1fr 1fr;gap:var(--s-3)}
@@ -1412,3 +1412,39 @@ fieldset.field .field{margin-block-end:var(--s-3)}
 .book-choose:not(.picked) .choice{opacity:1}
 .choice.on{transform:none}
 @media (max-width:480px){.choice .c-sub{display:none!important}.choice .c-title{font-size:1.05rem}}
+/* free check page */
+.check-wrap{display:grid;gap:var(--s-7);align-items:start}
+@media (min-width:900px){.check-wrap{grid-template-columns:1fr 1fr}}
+.check-side .steps-path{margin-inline:0}
+#checkForm.card-light{background:#0d0c0b}
+/* growth score quiz */
+.quiz{max-width:44rem;margin-inline:auto;padding:var(--s-6);border-radius:24px;background:#0d0c0b;border:1px solid rgba(255,255,255,.08);color:#f4efe9;box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
+.q-head{display:grid;gap:.6rem;margin-block-end:var(--s-5)}
+.q-head .mono-label{color:var(--accent)}
+.q-bar{height:4px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.q-bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .45s var(--ease)}
+.q-q{font-size:clamp(1.35rem,1.1rem + 1.2vw,2rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 var(--s-5);font-weight:700}
+.q-opts{display:grid;gap:var(--s-3)}
+.q-opt{font:inherit;font-weight:600;font-size:1.05rem;text-align:left;padding:1rem 1.2rem;border-radius:14px;border:1.5px solid rgba(255,255,255,.14);background:#181614;color:#f4efe9;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
+.q-opt:hover,.q-opt:focus-visible{border-color:var(--accent);transform:translateY(-1px)}
+.q-opt.on{border-color:var(--accent);background:rgba(217,104,46,.18)}
+.q-back{margin-top:var(--s-4);background:none;border:0;color:#a39a91;font:inherit;cursor:pointer}
+.q-in{animation:qIn .45s var(--ease) both}
+@keyframes qIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.q-score{display:flex;align-items:baseline;gap:.4rem;font-family:var(--font-display);font-weight:800;letter-spacing:-.04em}
+.q-num{font-size:clamp(4rem,3rem + 5vw,7rem);line-height:1;color:var(--accent)}
+.q-of{font-size:1.6rem;color:#a39a91}
+.q-band{font-size:1.6rem;font-weight:700;margin:.4rem 0 .2rem}
+.q-sum{color:#c9c0b7;margin:0 0 var(--s-5)}
+.q-tips-h{font-family:var(--font-display);font-size:1.1rem;margin:0 0 var(--s-3)}
+.q-tips{margin:0 0 var(--s-6);padding-left:1.3rem;display:grid;gap:.7rem;color:#e7e0d8;line-height:1.5}
+.q-form{display:grid;gap:var(--s-3);padding-top:var(--s-5);border-top:1px solid rgba(255,255,255,.1)}
+.q-form .input{background:#181614;border-color:rgba(255,255,255,.12);color:#f4efe9}
+.q-form label{color:#f4efe9}
+.q-cta{margin:0;font-weight:600}
+.q-thanks{padding:var(--s-4);border-radius:14px;background:rgba(46,204,113,.12);color:#c8f5d8;margin:var(--s-5) 0 0}
+.q-alt{color:#a39a91;margin:var(--s-4) 0 0;font-size:.95rem}
+.q-alt .link,.quiz .consent-lbl .link{color:var(--accent)}
+.problems-quiz{text-align:center;margin:var(--s-3) 0 0;color:#c9c0b7}
+.q-tips{list-style:decimal}.q-tips li::marker{color:var(--accent);font-weight:700}
+#qResult:focus{outline:none}
