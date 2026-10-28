@@ -794,7 +794,7 @@
   const layout = () => {
     cards.forEach((el, i) => {
       let d = (i - cur + n) % n; if (d > n / 2) d -= n;
-      el.dataset.pos = Math.max(-2, Math.min(2, d));
+      el.dataset.pos = Math.abs(d) <= 2 ? d : (d < 0 ? -3 : 3);
       el.setAttribute('aria-hidden', String(d !== 0));
     });
     dots.forEach((d, i) => d.classList.toggle('on', i === cur));

@@ -1495,6 +1495,8 @@ html.fm-lock,html.fm-lock body{overflow:hidden}
   .tcard[data-pos="2"],.tcard[data-pos="-2"],.deck.stacked[data-spread] .deck-track>[data-pos="2"],.deck.stacked[data-spread] .deck-track>[data-pos="-2"]{--r:0deg;--s:.7;opacity:.2;filter:saturate(.4) brightness(.65);z-index:1}
   .tcard[data-pos="2"],.deck.stacked[data-spread] .deck-track>[data-pos="2"]{--x:181%}
   .tcard[data-pos="-2"],.deck.stacked[data-spread] .deck-track>[data-pos="-2"]{--x:-181%}
+  .tcard[data-pos="3"],.deck.stacked[data-spread] .deck-track>[data-pos="3"]{--x:260%;--s:.6;opacity:0;pointer-events:none}
+  .tcard[data-pos="-3"],.deck.stacked[data-spread] .deck-track>[data-pos="-3"]{--x:-260%;--s:.6;opacity:0;pointer-events:none}
   .reel-stage{--cw:clamp(240px,20vw,340px)}
   .reel[data-pos="1"],.reel[data-pos="-1"]{--r:0deg;--s:.84;opacity:.4;filter:saturate(.5) brightness(.75)}
   .reel[data-pos="1"]{--x:98%}
