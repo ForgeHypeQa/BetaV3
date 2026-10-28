@@ -1484,3 +1484,19 @@ html.fm-lock,html.fm-lock body{overflow:hidden}
 /* bigger tap area for carousel dots without changing how they look */
 .reel-dot,.team-dot{position:relative}
 .reel-dot::after,.team-dot::after{content:"";position:absolute;inset:-12px -6px}
+/* desktop carousels: five across (team, services, stories), centre card full size, neighbours 84% at 40% opacity, outer pair 70% at 20%; equal gaps, all centred on the middle card. Reels (four items) stay three across with the same dimming. */
+@media (min-width:1024px){
+  .team-track{--cw:min(22vw,320px)}
+  .svc-deck{--cw:min(22vw,340px)}
+  .work-deck{--cw:min(22vw,320px)}
+  .tcard[data-pos="1"],.tcard[data-pos="-1"],.deck.stacked[data-spread] .deck-track>[data-pos="1"],.deck.stacked[data-spread] .deck-track>[data-pos="-1"]{--r:0deg;--s:.84;opacity:.4;filter:saturate(.5) brightness(.75);z-index:2}
+  .tcard[data-pos="1"],.deck.stacked[data-spread] .deck-track>[data-pos="1"]{--x:98%}
+  .tcard[data-pos="-1"],.deck.stacked[data-spread] .deck-track>[data-pos="-1"]{--x:-98%}
+  .tcard[data-pos="2"],.tcard[data-pos="-2"],.deck.stacked[data-spread] .deck-track>[data-pos="2"],.deck.stacked[data-spread] .deck-track>[data-pos="-2"]{--r:0deg;--s:.7;opacity:.2;filter:saturate(.4) brightness(.65);z-index:1}
+  .tcard[data-pos="2"],.deck.stacked[data-spread] .deck-track>[data-pos="2"]{--x:181%}
+  .tcard[data-pos="-2"],.deck.stacked[data-spread] .deck-track>[data-pos="-2"]{--x:-181%}
+  .reel-stage{--cw:clamp(240px,20vw,340px)}
+  .reel[data-pos="1"],.reel[data-pos="-1"]{--r:0deg;--s:.84;opacity:.4;filter:saturate(.5) brightness(.75)}
+  .reel[data-pos="1"]{--x:98%}
+  .reel[data-pos="-1"]{--x:-98%}
+}
