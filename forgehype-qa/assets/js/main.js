@@ -1094,3 +1094,35 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
     f.classList.add('sent');
   });
 })();
+
+/* "More about ForgeHype": opens the folded reels, team and Doha sections */
+(() => {
+  const btn = document.getElementById('moreToggle'), body = document.getElementById('moreBody');
+  if (!btn || !body) return;
+  const label = btn.querySelector('.more-label');
+  let timer = 0;
+  const set = (open, scrollBack) => {
+    clearTimeout(timer);
+    btn.setAttribute('aria-expanded', String(open));
+    if (label) label.textContent = open ? label.dataset.open : label.dataset.closed;
+    body.classList.remove('done');
+    if (open) { body.inert = false; body.classList.add('open'); timer = setTimeout(() => { body.classList.add('done'); dispatchEvent(new Event('resize')); }, 850); }
+    else {
+      body.classList.remove('open'); body.inert = true;
+      if (scrollBack) btn.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+      timer = setTimeout(() => dispatchEvent(new Event('resize')), 850);
+    }
+    dispatchEvent(new Event('resize'));
+  };
+  btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true', false));
+  body.querySelectorAll('[data-more-close]').forEach(b => b.addEventListener('click', () => set(false, true)));
+  /* links to #reels, #team or #qatar open the fold first */
+  const ids = ['reels', 'team', 'qatar'];
+  const openFor = id => { if (!ids.includes(id)) return false; set(true); setTimeout(() => { const t = document.getElementById(id); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 450); return true; };
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href*="#"]'); if (!a) return;
+    const u = new URL(a.href, location.href);
+    if (u.pathname === location.pathname && openFor(u.hash.slice(1))) e.preventDefault();
+  });
+  if (location.hash) openFor(location.hash.slice(1));
+})();

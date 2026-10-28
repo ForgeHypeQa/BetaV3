@@ -1502,3 +1502,41 @@ html.fm-lock,html.fm-lock body{overflow:hidden}
   .reel[data-pos="1"]{--x:98%}
   .reel[data-pos="-1"]{--x:-98%}
 }
+/* growth score: plain orange CTA under the fix cards */
+.fixes-quiz-cta{font-size:1.2rem;padding:1.15rem 2.1rem;letter-spacing:-.01em}
+@media (max-width:560px){.fixes-quiz-cta{font-size:1.1rem;padding:1.05rem 1.5rem;width:100%;max-width:26rem;white-space:normal;text-align:center}}
+/* "More about ForgeHype": reels, team and Doha section folded behind one bar */
+.more-sec{padding-block:0 var(--s-8);margin-block-start:calc(-1 * var(--s-6))}
+.more-toggle{width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:clamp(14px,2.4vw,28px);padding:clamp(14px,1.8vw,20px) clamp(16px,2.4vw,28px);border-radius:28px;border:1px solid rgba(20,17,15,.12);background:linear-gradient(120deg,#fff 0%,#fff6ef 60%,#fde9dc 100%);color:#14110f;text-align:left;cursor:pointer;box-shadow:0 20px 50px -30px rgba(80,35,8,.45);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}
+.more-toggle:hover{transform:translateY(-2px);border-color:rgba(217,104,46,.45);box-shadow:0 26px 60px -30px rgba(217,104,46,.45)}
+.more-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.more-peek{display:flex;align-items:center}
+.more-peek img,.more-count{width:clamp(40px,4vw,54px);height:clamp(40px,4vw,54px);border-radius:50%;border:3px solid #fff;object-fit:cover;background:#14110f;box-shadow:0 6px 14px -6px rgba(0,0,0,.35);transition:transform .45s var(--ease)}
+.more-peek>*+*{margin-inline-start:-14px}
+.more-count{display:grid;place-items:center;font-weight:700;font-size:.95rem;color:#fff;background:var(--accent)}
+.more-toggle:hover .more-peek>*:nth-child(1){transform:translateX(-4px) rotate(-6deg)}
+.more-toggle:hover .more-peek>*:nth-child(3){transform:translateX(4px) rotate(6deg)}
+.more-toggle:hover .more-peek>*:nth-child(4){transform:translateX(8px)}
+.more-txt{display:grid;gap:4px;min-width:0}
+.more-kicker{font-family:var(--font-mono);font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.more-title{font-family:var(--font-display);font-size:clamp(1.15rem,.9rem + 1vw,1.7rem);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.more-state{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1rem}
+.more-ico{position:relative;width:48px;height:48px;border-radius:50%;background:var(--accent);flex:none;transition:transform .5s var(--ease),background .3s}
+.more-ico::before,.more-ico::after{content:"";position:absolute;left:50%;top:50%;width:18px;height:2.5px;margin:-1.25px 0 0 -9px;border-radius:2px;background:#fff;transition:transform .5s var(--ease)}
+.more-ico::after{transform:rotate(90deg)}
+.more-toggle[aria-expanded="true"] .more-ico{transform:rotate(180deg);background:#14110f}
+.more-toggle[aria-expanded="true"] .more-ico::after{transform:rotate(0deg)}
+.more-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .8s cubic-bezier(.22,.61,.36,1)}
+.more-body.open{grid-template-rows:1fr}
+.more-inner{min-height:0;overflow:hidden;opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease) .1s,transform .8s var(--ease)}
+.more-body.open .more-inner{opacity:1;transform:none}
+.more-body.done .more-inner{overflow:visible}
+.more-end{display:flex;justify-content:center;padding-block:var(--s-6) var(--s-8)}
+.more-less{padding:.85rem 1.6rem;border-radius:999px;border:1px solid rgba(20,17,15,.2);background:transparent;color:#14110f;font:inherit;font-weight:700;font-size:1rem;cursor:pointer;transition:border-color .2s,color .2s}
+.more-less:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:640px){
+  .more-toggle{grid-template-columns:1fr auto;grid-template-areas:"peek state" "txt txt";row-gap:14px;border-radius:24px}
+  .more-peek{grid-area:peek}.more-state{grid-area:state}.more-txt{grid-area:txt}
+  .more-label{display:none}
+}
+@media (prefers-reduced-motion:reduce){.more-body,.more-inner,.more-ico,.more-ico::before,.more-ico::after{transition:none}}
