@@ -1,6 +1,6 @@
 /* ForgeHype · main.js
    1 hero scrub   2 nav + menu   3 reveals + living elements   4 theme mixer (dark ↔ light by scroll)
-   5 problem grid glow   6 the stack   7 service image cycling   8 about (words, marquee, clock)
+   5 problem grid glow   6 the stack   7 service image cycling   8 about (words, marquee)
    9 qatar video   10 phone stage   11 hold to forge   12 stories carousel   13 why rotator
    14 form → Web3Forms + WhatsApp   15 embers   16 reduced motion, live in both directions */
 (() => {
@@ -335,7 +335,7 @@
     if (!RM.matches) cycleTimer = setInterval(cycleTick, 1000);
   }
 
-  /* ================= 8. ABOUT: statement words, clock ================= */
+  /* ================= 8. ABOUT: statement words ================= */
   const statement = $('#statement');
   let words = [];
   if (statement) {
@@ -353,12 +353,6 @@
     const r = statement.getBoundingClientRect();
     const p = clamp((innerHeight * 0.85 - r.top) / (innerHeight * 0.55), 0, 1);
     if (Math.abs(p - stP) > 0.004 || (p === 1 && stP !== 1) || (p === 0 && stP !== 0)) { stP = p; statement.style.setProperty('--p', p.toFixed(3)); }
-  }
-  const clock = $('#dohaClock');
-  if (clock) {
-    const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Qatar', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
-    const tickClock = () => { if (!document.hidden) clock.textContent = 'DOH ' + fmt.format(new Date()); };
-    tickClock(); setInterval(tickClock, 1000);
   }
   // one line, flipping through everything we do
   const flipline = $('#flipline'), flipWord = $('#flipWord');
