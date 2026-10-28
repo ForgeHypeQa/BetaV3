@@ -1540,3 +1540,19 @@ html.fm-lock,html.fm-lock body{overflow:hidden}
   .more-label{display:none}
 }
 @media (prefers-reduced-motion:reduce){.more-body,.more-inner,.more-ico,.more-ico::before,.more-ico::after{transition:none}}
+/* industries + services: two crossing marquee bands (orange runs right to left, black runs left to right) */
+.trust.bands{position:relative;padding-block:clamp(48px,7vw,96px);overflow:hidden;overflow:clip;border:0;background:transparent}
+.mq-band{position:relative;width:110%;margin-inline-start:-5%;overflow:hidden;padding-block:clamp(14px,1.6vw,22px)}
+.mq-a{background:var(--accent);color:#fff;transform:rotate(-2.6deg);z-index:2;box-shadow:0 18px 40px -18px rgba(0,0,0,.6)}
+.mq-b{background:#16120f;color:var(--accent);transform:rotate(1.8deg);margin-block-start:clamp(-18px,-1.6vw,-10px);z-index:1;border-block:1px solid rgba(217,104,46,.28)}
+.mq-track{display:flex;width:max-content;will-change:transform}
+.mq-a .mq-track{animation:mqL 38s linear infinite}
+.mq-b .mq-track{animation:mqR 60s linear infinite}
+.mq-grp{display:flex;align-items:center;gap:clamp(18px,2.2vw,34px);margin:0;padding:0 clamp(9px,1.1vw,17px);list-style:none;flex:none}
+.mq-grp li{font-family:var(--font-display);font-weight:800;font-size:clamp(1.35rem,.9rem + 1.9vw,2.6rem);letter-spacing:-.02em;line-height:1.1;white-space:nowrap}
+.mq-grp li.sep{font-size:clamp(.9rem,.7rem + .8vw,1.4rem);opacity:.85}
+.mq-b .mq-grp li{font-weight:700}
+.mq-band:hover .mq-track{animation-play-state:paused}
+@keyframes mqL{from{transform:translateX(0)}to{transform:translateX(-33.3333%)}}
+@keyframes mqR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){.mq-track{animation:none!important}}
