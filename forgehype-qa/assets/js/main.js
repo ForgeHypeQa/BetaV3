@@ -708,97 +708,82 @@
   });
 })();
 
-/* reels: swipeable stack, sound on by default on the front video only.
-   Browsers block sound until the visitor's first tap, click or key press, so until then
-   the front reel plays muted and gets its sound on that first interaction.
-   Turning sound off is remembered on this device. */
+/* our work: one featured video plus tiles, grouped by category.
+   The featured video plays when the section is in view; sound comes on after the
+   visitor's first tap, click or key press (browsers block it before that).
+   Turning sound off is remembered on this device. Tiles preview silently on hover. */
 (() => {
-  const stage = document.getElementById('reelStage');
-  if (!stage) return;
-  const reels = [...stage.querySelectorAll('.reel')], n = reels.length;
-  const dots = [...document.querySelectorAll('#reels .reel-dot')];
-  const RM = matchMedia('(prefers-reduced-motion: reduce)');
-  let soundPref = true;
-  try { soundPref = localStorage.getItem('fhReelSound') !== 'off'; } catch (e) {}
-  let cur = 0, soundOn = soundPref, inView = false, blocked = false;
+  const v = document.getElementById('owVideo');
+  if (!v) return;
+  const sec = document.getElementById('reels'), panel = document.getElementById('owPanel');
+  const btn = sec.querySelector('.ow-feature .sound-toggle'), title = document.getElementById('owTitle');
+  const tabs = [...sec.querySelectorAll('.ow-tab')], tiles = [...sec.querySelectorAll('.ow-tile')];
+  const HOVER = matchMedia('(hover: hover) and (pointer: fine)');
+  let soundOn = true;
+  try { soundOn = localStorage.getItem('fhReelSound') !== 'off'; } catch (e) {}
+  let blocked = false, inView = false;
   const audible = () => soundOn && !blocked;
-
-  const layout = () => {
-    reels.forEach((el, i) => {
-      let d = (i - cur + n) % n; if (d > n / 2) d -= n;
-      el.dataset.pos = d;
-      const on = d === 0, v = el.querySelector('video'), b = el.querySelector('.sound-toggle');
-      el.classList.toggle('is-active', on);
-      b.tabIndex = on ? 0 : -1;
-      b.setAttribute('aria-pressed', String(on && audible()));
-      b.setAttribute('aria-label', audible() ? 'Turn sound off' : 'Turn sound on');
-      if (on) {
-        v.muted = !audible(); v.volume = 1;
-        if (inView && (!RM.matches || audible())) v.play().catch(() => {
-          /* sound not allowed yet: play muted and wait for the first interaction */
-          if (!v.muted) { blocked = true; v.muted = true; v.play().catch(() => {}); layout(); }
-        });
-      } else { v.muted = true; v.pause(); }
-    });
-    dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+  const sync = () => {
+    btn.setAttribute('aria-pressed', String(audible()));
+    btn.setAttribute('aria-label', audible() ? 'Turn sound off' : 'Turn sound on');
   };
-  const go = k => { cur = (cur + k + n) % n; layout(); };
-
-  reels.forEach((el, i) => {
-    el.querySelector('.sound-toggle').addEventListener('click', e => {
-      e.stopPropagation();
-      if (i !== cur) return;
-      if (blocked) { blocked = false; soundOn = true; }   /* first tap on the button: turn the waiting sound on */
-      else soundOn = !soundOn;
-      try { localStorage.setItem('fhReelSound', soundOn ? 'on' : 'off'); } catch (err) {}
-      const v = el.querySelector('video');
-      v.muted = !soundOn; v.volume = 1;
-      if (soundOn) v.play().catch(() => {});
-      layout();
-    });
-    el.addEventListener('click', () => {
-      if (moved) return;
-      if (i !== cur) { cur = i; layout(); }
-    });
-  });
-  dots.forEach((d, i) => d.addEventListener('click', () => { cur = i; layout(); }));
-  document.querySelectorAll('#reels .reel-arrow').forEach(b => b.addEventListener('click', () => go(+b.dataset.dir)));
-  stage.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
-  });
-
-  /* swipe: finger left shows the next reel, right the previous */
-  let sx = 0, sy = 0, down = false, moved = false;
-  stage.addEventListener('pointerdown', e => { down = true; moved = false; sx = e.clientX; sy = e.clientY; });
-  stage.addEventListener('pointermove', e => {
-    if (down && Math.abs(e.clientX - sx) > 8 && Math.abs(e.clientX - sx) > Math.abs(e.clientY - sy)) moved = true;
-  });
-  const end = e => {
-    if (!down) return; down = false;
-    const dx = e.clientX - sx, dy = e.clientY - sy;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
-    setTimeout(() => { moved = false; }, 0);
+  const play = () => {
+    if (!inView) return;
+    v.muted = !audible(); v.volume = 1;
+    v.play().catch(() => { if (!v.muted) { blocked = true; v.muted = true; sync(); v.play().catch(() => {}); } });
+    sync();
   };
-  stage.addEventListener('pointerup', end);
-  stage.addEventListener('pointercancel', () => { down = false; });
-
-  new IntersectionObserver(([en]) => {
-    inView = en.isIntersecting;
-    if (inView) layout(); else reels.forEach(el => el.querySelector('video').pause());
-  }, { threshold: .35 }).observe(stage);
-  document.addEventListener('visibilitychange', () => {
-    const v = reels[cur].querySelector('video');
-    if (document.hidden) v.pause(); else if (inView) layout();
+  const show = li => {
+    const b = li.querySelector('button');
+    tiles.forEach(t => t.classList.toggle('on', t === li));
+    tiles.forEach(t => t.querySelector('button').setAttribute('aria-pressed', String(t === li)));
+    if (v.getAttribute('src') !== b.dataset.src) { v.poster = b.dataset.poster; v.src = b.dataset.src; }
+    title.textContent = b.dataset.title;
+    play();
+  };
+  const pick = cat => {
+    tabs.forEach(t => { const on = t.dataset.cat === cat; t.classList.toggle('on', on); t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; if (on) panel.setAttribute('aria-labelledby', t.id); });
+    tiles.forEach(t => { t.hidden = t.dataset.cat !== cat; });
+    show(tiles.find(t => t.dataset.cat === cat));
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => pick(t.dataset.cat));
+    t.addEventListener('keydown', e => {
+      const k = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!k) return; e.preventDefault();
+      const n = tabs[(i + k + tabs.length) % tabs.length]; n.focus(); pick(n.dataset.cat);
+    });
   });
-  /* first tap, click or key press anywhere: let the waiting sound play */
+  tiles.forEach(li => {
+    const b = li.querySelector('button');
+    b.addEventListener('click', () => {
+      show(li);
+      if (!HOVER.matches) sec.querySelector('.ow-feature').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    /* silent preview while the pointer rests on a tile */
+    b.addEventListener('pointerenter', () => {
+      if (!HOVER.matches || li.classList.contains('on') || b.querySelector('video')) return;
+      const pv = document.createElement('video');
+      pv.muted = true; pv.loop = true; pv.playsInline = true; pv.src = b.dataset.src; pv.setAttribute('aria-hidden', 'true');
+      b.prepend(pv); pv.play().catch(() => {});
+    });
+    b.addEventListener('pointerleave', () => { const pv = b.querySelector('video'); if (pv) { pv.pause(); pv.remove(); } });
+  });
+  btn.addEventListener('click', () => {
+    if (blocked) { blocked = false; soundOn = true; } else soundOn = !soundOn;
+    try { localStorage.setItem('fhReelSound', soundOn ? 'on' : 'off'); } catch (e) {}
+    play();
+  });
+  new IntersectionObserver(([en]) => { inView = en.isIntersecting; if (inView) play(); else v.pause(); }, { threshold: .35 }).observe(v);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) v.pause(); else play(); });
   const unlock = e => {
-    if (e.target.closest && e.target.closest('.sound-toggle')) return;   /* the button handles its own tap */
+    if (e.target.closest && e.target.closest('.sound-toggle')) return;
     ['pointerdown', 'keydown', 'touchend'].forEach(t => document.removeEventListener(t, unlock, true));
-    if (blocked && soundOn) { blocked = false; layout(); }
+    if (blocked && soundOn) { blocked = false; play(); }
   };
   ['pointerdown', 'keydown', 'touchend'].forEach(t => document.addEventListener(t, unlock, true));
-  layout();
+  tiles[0].classList.add('on'); tiles.forEach((t, i) => t.querySelector('button').setAttribute('aria-pressed', String(i === 0)));
+  sync();
 })();
 
 /* team: centred stack, glides one card every 3 s, swipe to move, pauses while touched or hovered */
