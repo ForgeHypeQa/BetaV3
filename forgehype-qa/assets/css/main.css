@@ -1621,3 +1621,7 @@ html.fl-dim .wa-float:not(.hidden),html.fl-dim .scroll-arrows{opacity:.4}
 .wk-in .reel-nav{margin-block-start:var(--s-3)}
 @media (prefers-reduced-motion:reduce){.wk-panel,.wk-ic::before,.wk-ic::after{transition:none}}
 .wk-in .reel[data-pos="2"],.wk-in .reel[data-pos="-2"]{opacity:0;pointer-events:none}
+/* our works: cards 10% smaller so the group title and video name fit on screen */
+.wk-in .reel-stage{--cw:min(72vw,342px)}
+@media (min-width:900px){.wk-in .reel-stage{--cw:clamp(234px,21.6vw,324px)}}
+@media (min-width:1024px){.wk-in .reel-stage{--cw:clamp(216px,18vw,306px)}}

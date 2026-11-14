@@ -796,7 +796,7 @@
       if (open) setTimeout(() => {
         const r = btn.getBoundingClientRect();
         if (r.top < 100 || r.top > innerHeight * .4) window.scrollTo({ top: scrollY + r.top - 110, behavior: RM.matches ? 'auto' : 'smooth' });
-      }, 380);
+      }, 500);
     });
   });
 
