@@ -1625,3 +1625,5 @@ html.fl-dim .wa-float:not(.hidden),html.fl-dim .scroll-arrows{opacity:.4}
 .wk-in .reel-stage{--cw:min(72vw,342px)}
 @media (min-width:900px){.wk-in .reel-stage{--cw:clamp(234px,21.6vw,324px)}}
 @media (min-width:1024px){.wk-in .reel-stage{--cw:clamp(216px,18vw,306px)}}
+.wk-logo{display:block;height:clamp(2.4rem,4.6vw,3.9rem);width:auto;margin-block:-4px}
+.wk-btn:hover .wk-logo,.wk-item.is-open .wk-logo{opacity:1}
