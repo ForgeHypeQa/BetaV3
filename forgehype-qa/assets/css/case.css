@@ -96,3 +96,5 @@ html.cs-light .footer{--canvas:rgb(11,9,8);--canvas-rgb:11,9,8;--panel:rgb(20,17
   .cs-frame{grid-template-columns:repeat(3,auto);justify-content:center;gap:clamp(20px,3.5vw,56px)}
   .cs-tile .ph{height:clamp(420px,64vh,600px);width:auto}
 }
+.cs-cta .cs-h2 em{white-space:nowrap}
+.cs .nb{white-space:nowrap}
