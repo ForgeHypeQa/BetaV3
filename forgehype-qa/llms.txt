@@ -19,7 +19,7 @@
 - [Monthly digital growth advisory](https://forgehype.qa/services/monthly-support.html): monthly review, research, clear next steps and team training
 
 ## Work
-- [Veggify case study](https://forgehype.qa/work/veggify.html): Veggify (veggify.net), a Shopify-based online grocery store in Doha, rebuilt by ForgeHype with AI-powered search (type, speak or photo of a list) that cut a typical order from 40–60 minutes to about 5; one admin for costs, expenses and net profit; automatic supplier purchase orders on WhatsApp; lead insights and abandoned-cart follow-up; minimum order and quantity discounts; and a cleaned product catalogue.
+- [Veggify case study](https://forgehype.qa/work/veggify.html): Veggify (veggify.net), a Shopify-based online grocery store in Doha, rebuilt by ForgeHype with AI-powered search (type, speak or photo of a list) that cut a 12-item order from about 30 minutes to about 5; personal favourites lists and occasion and festive-season lists built from each customer’s history and what others bought; one admin for costs, expenses and net profit; automatic supplier purchase orders on WhatsApp; lead insights and abandoned-cart follow-up; minimum order and quantity discounts; and a cleaned product catalogue.
 
 ## More
 - [Key facts page](https://forgehype.qa/about-forgehype.html)
